@@ -4,7 +4,8 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { SlArrowLeft } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { postAnswer } from "../../redux/slice/companySlice";
+import { findingCompany } from "../../redux/slice/companySlice";
+import { findingTool } from "../../redux/slice/companySlice";
 
 
 import WOW from 'wow.js';
@@ -24,23 +25,23 @@ const firstQuestionData = [
 const advertisementStep1Data = [
   {
     id: "1",
-    text: "新規顧客を獲得したい",
+    text: "新規顧客を獲得",
   },
   {
     id: "2",
-    text: "サービス等の認知度を向上させたい",
+    text: "サービス等の認知度を向上",
   },
   {
     id: "3",
-    text: "WEBサイトを改善したい",
+    text: "WEBサイト改善",
   },
   {
     id: "4",
-    text: "自社でWEBマーケティング人材を育てたい",
+    text: "マーケティング人材育成",
   },
   {
     id: "5",
-    text: "WEBでの採用を強化したい",
+    text: "WEB採用強化",
   }
   ,
   {
@@ -247,6 +248,7 @@ const WebMaruTop = () => {
   const [disabledMaStep4, setDisabledMaStep4] = useState(true);
 
   const [disabledResultView, setDisabledResultView] = useState(true);
+  const [disabledToolResultView, setDisabledToolResultView] = useState(true);
 
 
   const [selectedValue, setSelectedValue] = useState('');
@@ -277,8 +279,10 @@ const WebMaruTop = () => {
   const [marketingStep3Value, setMarketingStep3Value] = useState("");
 
   const [resultValue, setResultValue] = useState([]);
+  const [resultToolValue, setResultToolValue] = useState([]);
 
   const [isCheckedResult, setisCheckedResult] = useState({})
+  const [isToolCheckedResult, setisToolCheckedResult] = useState({})
   const [isCheckedadvertisementStep1, setisCheckedadvertisementStep1] = useState({})
   const [isCheckedadvertisementStep2, setisCheckedadvertisementStep2] = useState({})
   const [isCheckedadvertisementStep3, setisCheckedadvertisementStep3] = useState({})
@@ -287,11 +291,22 @@ const WebMaruTop = () => {
 
 
   const [checked, setChecked] = useState(false);
+  const [toolChecked, setToolChecked] = useState(false);
   const [clientName, setClientName] = useState("");
   const [clientCompanyName, setClientCompanyName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhonenumber, setClientPhonenumber] = useState("");
   const [questionContent, setQuestionContent] = useState("");
+
+  const {matchCompanies, matchToolCompanies} = useSelector(state => state.companies);
+  
+  useEffect(() => {
+    console.log(matchCompanies);
+  }, [matchCompanies]);
+
+  useEffect(() => {
+    console.log(matchToolCompanies);
+  }, [matchToolCompanies]);
 
   useEffect(() => {
     const wow = new WOW({
@@ -393,14 +408,15 @@ const WebMaruTop = () => {
       startDate:advertisementStep4Value,
       budget:advertisementStep5Value,
       name:clientName,
+      clientName:clientCompanyName,
       email:clientEmail,
       phoneNumber:clientPhonenumber,
       questionContent:questionContent
     }
-    dispatch(postAnswer(payload));
-    // console.log(111, payload);
-    // setAdvertisementStep6("hidden");
-    // setResultView("block");
+    dispatch(findingCompany(payload));
+  
+    setAdvertisementStep6("hidden");
+    setResultView("block");
   }
 
   const marketingStep1Funtion = () => {
@@ -418,7 +434,18 @@ const WebMaruTop = () => {
     setMarketingStep4("block");
   }
   const marketingStep4Funtion = () => {
-    console.log(clientCompanyName);
+    const payload={
+      service:selectedValue,
+      findTool:marketingStep1Value,
+      startDate:marketingStep2Value,
+      budget:marketingStep3Value,
+      name:clientName,
+      companyName:clientCompanyName,
+      email:clientEmail,
+      phoneNumber:clientPhonenumber,
+      questionContent:questionContent
+    }
+    dispatch(findingTool(payload));
     setMarketingStep4("hidden");
     setResultMarketingView("block");
   }
@@ -547,18 +574,50 @@ const WebMaruTop = () => {
       setChecked(true);
       setResultValue([]);
       let tmp = {};
-      for (let i = 0; i < resultViewData.length; i++) {
-        resultValue[i] = resultViewData[i].id
+      for (let i = 0; i < matchCompanies.length; i++) {
+        resultValue[i] = matchCompanies[i].id
         tmp[i] = true;
       }
       setResultValue([...resultValue]);
-      setisCheckedResult(tmp)
+      setisCheckedResult(tmp);
     }
     // console.log(resultValue);
   };
   useEffect(() => {
-    setChecked(resultValue.length == resultViewData.length)
+    setChecked((resultValue.length == matchCompanies.length) && matchCompanies.length)
+    console.log(resultValue)
   }, [resultValue]);
+
+  const toggleHandlerToolResultView = (item) => () => {
+    let tmp = isToolCheckedResult;
+    tmp[item.id - 1] = isToolCheckedResult[item.id - 1] != undefined ? !isToolCheckedResult[item.id - 1] : true;
+    setisCheckedResult(tmp)
+    if (resultToolValue.includes(item.id))
+      setResultToolValue(resultToolValue.filter(ele => ele != item.id))
+    else setResultToolValue([...resultToolValue, item.id])
+  };
+  const toggleAllCheckedToolResultView = () => {
+    if (toolChecked) {
+      setToolChecked(false);
+      setResultToolValue([]);
+      setisToolCheckedResult({})
+    } else {
+      setToolChecked(true);
+      setResultToolValue([]);
+      let tmp = {};
+      for (let i = 0; i < matchToolCompanies.length; i++) {
+        resultToolValue[i] = matchToolCompanies[i].id
+        tmp[i] = true;
+      }
+      setResultToolValue([...resultToolValue]);
+      setisToolCheckedResult(tmp);
+    }
+    // console.log(resultValue);
+  };
+  useEffect(() => {
+    setToolChecked((resultToolValue.length == matchToolCompanies.length) && matchToolCompanies.length)
+    console.log(resultToolValue)
+  }, [resultToolValue]);
 
   useEffect(() => {
     // console.log(advertisementStep1Value);
@@ -600,7 +659,13 @@ const WebMaruTop = () => {
     } else {
       setDisabledResultView(true);
     }
-  }, [advertisementStep1Value, advertisementStep2Value, advertisementStep3Value, advertisementStep4Value, advertisementStep5Value, clientName, clientCompanyName, clientEmail, resultValue])
+
+    if (resultToolValue.length) {
+      setDisabledToolResultView(false);
+    } else {
+      setDisabledToolResultView(true);
+    }
+  }, [advertisementStep1Value, advertisementStep2Value, advertisementStep3Value, advertisementStep4Value, advertisementStep5Value, clientName, clientCompanyName, clientEmail, resultValue, resultToolValue])
 
   useEffect(() => {
     if (marketingStep1Value.length) {
@@ -623,30 +688,30 @@ const WebMaruTop = () => {
   }, [marketingStep1Value, marketingStep2Value, marketingStep3Value])
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center pt-40'>
-      <p className='text-white text-4xl mb-10'>最適なマーケティングパートナーを見つけるなら</p>
+    <div className='w-full h-full flex flex-col justify-center items-center pt-40 sp:pt-20'>
+      <p className='text-white text-4xl mb-10 sp:text-2xl sp:mx-10'>最適なマーケティングパートナーを見つけるなら</p>
       <div className='w-[300px] border-white border-t-2'></div>
-      <div ref={ref1}>
-        <div className='w-[900px] h-[300px] flex flex-col items-center rounded-md bg-white shadow-xl mt-10 px-5 py-10 '>
-          <div className='w-full h-1/2 bg-[#f4f8f9] rounded-full text-xl shadow flex flex-col justify-center items-center py-10'>
+      <div ref={ref1} className='sp:w-full'>
+        <div className='w-[900px] sp:w-[80%] h-[300px] flex flex-col justify-center items-center rounded-md bg-white shadow-xl mt-10 px-5 py-10 sp:mx-auto sp:py-5'>
+          <div className='w-full h-1/2 bg-[#f4f8f9] rounded-full sp:rounded-2xl text-xl shadow flex flex-col justify-center items-center py-10 sp:text-sm'>
             {/* <p>\カンタン3分でマッチング/</p> */}
-            <p>マーケティングに強みをもった企業やツールが見つかります。</p>
-            <p className='mt-5 text-sm'>アンケートに答えるだけで希望に合った企業ツールが見つかる!</p>
+            <p className='sp:mx-5'>マーケティングに強みをもった企業やツールが見つかります。</p>
+            <p className='mt-5 text-sm sp:text-[12px] sp:mx-5'>アンケートに答えるだけで希望に合った企業ツールが見つかる!</p>
           </div>
           <div className='w-[1px] h-[30px] border-black border-l-2'></div>
           {/* <p className='text-xl'>アンケートを始めますか?</p> */}
-          <button className='text-xl text-white border-2 rounded-full bg-[#FD6E6A] px-10 py-1 mt-2 hover:bg-white hover:text-[#FD6E6A]' onClick={() => showModal()}>希望はこちらから</button>
+          <button className='text-xl text-white border-2 rounded-full bg-[#FD6E6A] px-10 py-1 mt-2 hover:bg-white hover:text-[#FD6E6A] sp:text-sm' onClick={() => showModal()}>希望はこちらから</button>
         </div>
       </div>
       <div className={`w-full h-full z-40 bg-white bg-opacity-60 ${block ? 'block fixed' : 'hidden absolute'}`}>
         <div ref={ref2}>
-          <div className='w-[700px] h-[500px] bg-white rounded-md drop-shadow-md mx-auto my-[15%]'>
+          <div className='w-[700px] sp:w-[90%] h-[500px] bg-white rounded-md drop-shadow-md mx-auto my-[15%]'>
             <div className={`w-full h-full flex flex-col ${first}`}>
               <div className='w-full flex justify-end'>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='mx-10'>どのようなサービスを探していますか？</p>
+              <div className='w-full flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>どのようなサービスを探していますか？</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={0}
@@ -662,10 +727,10 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col mt-10 px-20'>
+              <div className='w-full flex flex-col mt-10 px-20 sp:px-5'>
                 {firstQuestionData.map((item) => {
                     return (
-                      <div key={item.id} className="flex items-center mr-4 mb-10 border border-[#FD6E6A] rounded-md py-2 px-5">
+                      <div key={item.id} className="flex items-center mb-10 border border-[#FD6E6A] rounded-md py-2 px-5">
                         <input id={`radio${item.id}`} type="radio" name="radio" className="hidden" value={item.text} onChange={handleRadioChange} />
                         <label htmlFor={`radio${item.id}`} className="flex items-center cursor-pointer">
                           <span className="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
@@ -684,8 +749,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='mx-10'>WEBマーケティングで達成したい目標をお答えください</p>
+              <div className='w-full flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>WEBマーケティングで達成したい目標をお答えください</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={14}
@@ -701,7 +766,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep1Data.map((item) => {
                     return (
@@ -734,8 +799,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='mx-10'>実施したいWEBマーケティング施策をお答えください</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>実施したいWEBマーケティング施策をお答えください</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={28}
@@ -751,7 +816,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep2Data.map((item) => {
                     return (
@@ -783,8 +848,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='mx-10'>現状、どのようなWEB施策を行っていますか？</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>現状、どのようなWEB施策を行っていますか？</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={43}
@@ -800,7 +865,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep3Data.map((item) => {
                     return (
@@ -832,8 +897,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='ml-10'>WEBマーケティングを行う場合、いつから開始を希望されますか？</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>WEBマーケティングを行う場合、いつから開始を希望されますか？</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={57}
@@ -849,7 +914,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep4Data.map((item) => {
                     return (
@@ -874,8 +939,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='ml-10'>想定しているご予算をお答えください</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>想定しているご予算をお答えください</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={71}
@@ -891,7 +956,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep5Data.map((item) => {
                     return (
@@ -916,8 +981,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='ml-10'>お客様情報入力</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>お客様情報入力</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={85}
@@ -933,34 +998,34 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
-                <div className='w-full h-[250px] text-sm flex flex-wrap mb-5 overflow-y-auto px-2'>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
+                <div className='w-full h-[250px] text-sm flex flex-wrap mb-5 overflow-y-auto px-2 sp:px-0'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <div className='w-full flex justify-between'>
                       <label>お名前</label>
                       <label className='bg-[#FB2407] text-white rounded px-1 mx-1'>必須</label>
                     </div>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={clientName} onChange={(e) => setClientName(e.target.value)} />
                   </div>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <div className='w-full flex justify-between'>
                       <label>会社名</label>
                       <label className='bg-[#FB2407] text-white rounded px-1 mx-1'>必須</label>
                     </div>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" value={clientCompanyName} onChange={(e) => setClientCompanyName(e.target.value)} />
                   </div>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <div className='w-full flex justify-between'>
                       <label>メールアドレス</label>
                       <label className='bg-[#FB2407] text-white rounded px-1 mx-1'>必須</label>
                     </div>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
                   </div>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <label>電話番号</label>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={clientPhonenumber} onChange={(e) => setClientPhonenumber(e.target.value)} />
                   </div>
-                  <div className='w-full flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-full flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-2'>
                     <label>その他お問い合わせ内容</label>
                     <textarea className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" value={questionContent} onChange={(e) => setQuestionContent(e.target.value)} />
                   </div>
@@ -978,10 +1043,10 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <div className='flex flex-col text-left'>
-                  <p className='ml-10'>マッチしたおすすめの企業はこちらです</p>
-                  <p className='ml-10 text-xs'>興味のある企業をチェックしてください。</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <div className='flex flex-col text-left sp:w-[250px]'>
+                  <p className='mx-10 sp:mx-5'>マッチしたおすすめの企業はこちらです</p>
+                  <p className='mx-10 sp:mx-5 text-xs'>興味のある企業をチェックしてください。</p>
                 </div>
                 <div className='w-[80px]'>
                   <CircularProgressbar
@@ -998,7 +1063,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full flex px-5' onClick={toggleAllCheckedResultView}>
                   <input
                     className='mx-2'
@@ -1009,22 +1074,28 @@ const WebMaruTop = () => {
                   <label className='mr-2'>すべて選択</label>
                 </div>
                 <div className='w-full h-[230px] flex flex-col mb-5 overflow-y-auto px-2'>
-                  {resultViewData.map((item) => {
+                  {matchCompanies.map((item) => {
                     return (
                       <div
                         key={item.id}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5'
+                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5 sp:text-sm'
                         onClick={toggleHandlerResultView(item)}
                       >
                         <input
-                          checked={isCheckedResult[parseInt(item.id - 1)] != undefined ? isCheckedResult[parseInt(item.id - 1)] : false}
+                          checked={isCheckedResult[parseInt(item.id -1)] != undefined ? isCheckedResult[parseInt(item.id-1)] : false}
                           className='mx-2'
                           type="checkbox"
                           readOnly
                         />
-                        <label className='mr-2'>| {item.name}</label>
-                        <label className='mr-2'>|ご予算: {item.budget}</label>
-                        <label className='mr-2'>|得意領域: {item.specialization}</label>
+                        <div className='flex flex-col text-left'>
+                          <label className='mr-2 font-bold'> {item.name}</label>
+                          <label className='mr-2 text-sm'>ご予算: {item.pricesence.text}</label>
+                          <label className='mr-2 text-sm'>得意領域: {item.expertises.map((text)=>{
+                            return(
+                              <span key={text.id}>{text.text}{text.id<item.expertises.length?", ":""}</span>
+                            );
+                          })}</label>
+                        </div>
                       </div>
                     );
                   })}
@@ -1042,7 +1113,7 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white py-1'></p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
                 <div className='flex flex-col text-left'>
                 </div>
                 <div className='w-[80px]'>
@@ -1060,7 +1131,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[230px] flex flex-col mb-5 px-2 pt-10'>
                   <p className='text-xl my-1'>お問い合わせありがとうございます!</p>
                   <p className='text-xl my-1'>内容確認後、ご連絡させていただきますので</p>
@@ -1078,8 +1149,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='mx-10'>どのようなツールをお探しですか？</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>どのようなツールをお探しですか？</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={20}
@@ -1095,7 +1166,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {marketingStep1Data.map((item) => {
                     return (
@@ -1127,8 +1198,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='ml-10'>ツールの使用はいつから開始を希望されますか？</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>ツールの使用はいつから開始を希望されますか？</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={40}
@@ -1144,7 +1215,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep4Data.map((item) => {
                     return (
@@ -1169,8 +1240,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='ml-10'>想定しているご予算をお答えください</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>想定しているご予算をお答えください</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={60}
@@ -1186,7 +1257,7 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep5Data.map((item) => {
                     return (
@@ -1211,8 +1282,8 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <p className='ml-10'>お客様情報入力</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <p className='mx-10 sp:w-[250px] sp:mx-5'>お客様情報入力</p>
                 <div className='w-[80px]'>
                   <CircularProgressbar
                     value={80}
@@ -1228,34 +1299,34 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
-                <div className='w-full h-[250px] text-sm flex flex-wrap mb-5 overflow-y-auto px-2'>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
+                <div className='w-full h-[250px] text-sm flex flex-wrap mb-5 overflow-y-auto px-2 sp:px-0'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <div className='w-full flex justify-between'>
                       <label>お名前</label>
                       <label className='bg-[#FB2407] text-white rounded px-1 mx-1'>必須</label>
                     </div>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={clientName} onChange={(e) => setClientName(e.target.value)} />
                   </div>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <div className='w-full flex justify-between'>
                       <label>会社名</label>
                       <label className='bg-[#FB2407] text-white rounded px-1 mx-1'>必須</label>
                     </div>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" value={clientCompanyName} onChange={(e) => setClientCompanyName(e.target.value)} />
                   </div>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <div className='w-full flex justify-between'>
                       <label>メールアドレス</label>
                       <label className='bg-[#FB2407] text-white rounded px-1 mx-1'>必須</label>
                     </div>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
                   </div>
-                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-1/2 flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <label>電話番号</label>
                     <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={clientPhonenumber} onChange={(e) => setClientPhonenumber(e.target.value)} />
                   </div>
-                  <div className='w-full flex flex-col items-start justify-center text-left rounded-md mt-1 px-5'>
+                  <div className='w-full flex flex-col items-start justify-center text-left rounded-md mt-1 px-5 sp:px-1'>
                     <label>その他お問い合わせ内容</label>
                     <textarea className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" value={questionContent} onChange={(e) => setQuestionContent(e.target.value)} />
                   </div>
@@ -1273,10 +1344,10 @@ const WebMaruTop = () => {
                 <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で5問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
-              <div className='w-full h-20 flex justify-between px-10 items-center my-5'>
-                <div className='flex flex-col text-left'>
-                  <p className='ml-10'>マッチしたおすすめの企業はこちらです</p>
-                  <p className='ml-10 text-xs'>興味のある企業をチェックしてください。</p>
+              <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
+                <div className='flex flex-col text-left sp:w-[250px]'>
+                  <p className='mx-10 sp:mx-5'>マッチしたおすすめの企業はこちらです</p>
+                  <p className='mx-10 sp:mx-5 text-xs'>興味のある企業をチェックしてください。</p>
                 </div>
                 <div className='w-[80px]'>
                   <CircularProgressbar
@@ -1293,40 +1364,46 @@ const WebMaruTop = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex flex-col px-10'>
-                <div className='w-full flex px-5' onClick={toggleAllCheckedResultView}>
+              <div className='w-full flex flex-col px-10 sp:px-5'>
+                <div className='w-full flex px-5' onClick={toggleAllCheckedToolResultView}>
                   <input
                     className='mx-2'
                     type="checkbox"
-                    checked={checked}
+                    checked={toolChecked}
                     readOnly
                   />
                   <label className='mr-2'>すべて選択</label>
                 </div>
                 <div className='w-full h-[230px] flex flex-col mb-5 overflow-y-auto px-2'>
-                  {resultViewData.map((item) => {
+                  {matchToolCompanies.map((item) => {
                     return (
                       <div
                         key={item.id}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5'
-                        onClick={toggleHandlerResultView(item)}
+                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5 sp:text-sm'
+                        onClick={toggleHandlerToolResultView(item)}
                       >
                         <input
-                          checked={isCheckedResult[parseInt(item.id - 1)] != undefined ? isCheckedResult[parseInt(item.id - 1)] : false}
+                          checked={isToolCheckedResult[parseInt(item.id - 1)] != undefined ? isToolCheckedResult[parseInt(item.id - 1)] : false}
                           className='mx-2'
                           type="checkbox"
                           readOnly
                         />
-                        <label className='mr-2'>| {item.name}</label>
-                        <label className='mr-2'>|ご予算: {item.budget}</label>
-                        <label className='mr-2'>|得意領域: {item.specialization}</label>
+                        <div className='flex flex-col text-left'>
+                          <label className='mr-2 font-bold'> {item.name}</label>
+                          <label className='mr-2 text-sm'>ご予算: {item.pricesence.text}</label>
+                          <label className='mr-2 text-sm'>得意領域: {item.tools.map((text)=>{
+                            return(
+                              <span key={text.id}>{text.text}{text.id<item.tools.length?", ":""}</span>
+                            );
+                          })}</label>
+                        </div>
                       </div>
                     );
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
                   <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => resultMarketingViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledResultView} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledResultView ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => resultMarketingViewFuntion()}>次へ</button>
+                  <button disabled={disabledToolResultView} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledToolResultView ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => resultMarketingViewFuntion()}>次へ</button>
                 </div>
               </div>
             </div>

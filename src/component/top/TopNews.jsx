@@ -35,25 +35,25 @@ const TopNews = () => {
 
   return (
     <div className='w-full bg-[#FD6E6A] pt-10'>
-      <div className='w-full bg-white rounded-t-[100px] flex flex-col justify-center items-center pb-10'>
-        <div ref={ref}>
-          <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407]'>ニュース</p>
+      <div className='w-full bg-white rounded-t-[100px] flex flex-col justify-center items-center pb-10 sp:rounded-t-[20px] sp:pb-0'>
+        <div ref={ref} className='sp:w-full sp:px-5'>
+          <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407] sp:text-2xl'>ニュース</p>
           <Link>
             <div className='flex flex-row justify-center border-b border-black mb-10 py-5'>
-              <p className='mx-5 text-2xl'>2024.4.1</p>
-              <p className='mx-5 text-2xl'>テキストテキストテキストテキスト</p>
+              <p className='mx-5 text-2xl sp:text-sm sp:mx-2'>2024.4.1</p>
+              <p className='mx-5 text-2xl sp:text-sm sp:mx-2'>テキストテキストテキストテキスト</p>
             </div>
           </Link>
           <Link>
             <div className='flex flex-row justify-center border-b border-black mb-10 py-5'>
-              <p className='mx-5 text-2xl'>2024.4.1</p>
-              <p className='mx-5 text-2xl'>テキストテキストテキストテキスト</p>
+              <p className='mx-5 text-2xl sp:text-sm sp:mx-2'>2024.4.1</p>
+              <p className='mx-5 text-2xl sp:text-sm sp:mx-2'>テキストテキストテキストテキスト</p>
             </div>
           </Link>
           <Link>
             <div className='flex flex-row justify-center border-b border-black mb-10 py-5'>
-              <p className='mx-5 text-2xl'>2024.4.1</p>
-              <p className='mx-5 text-2xl'>テキストテキストテキストテキスト</p>
+              <p className='mx-5 text-2xl sp:text-sm sp:mx-2'>2024.4.1</p>
+              <p className='mx-5 text-2xl sp:text-sm sp:mx-2'>テキストテキストテキストテキスト</p>
             </div>
           </Link>
         </div>

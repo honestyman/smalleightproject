@@ -26,9 +26,9 @@ const Top=()=>{
           <GrowingText/>
         </div>
       </div>
-      {/* <TopNews/>  */}
+      <TopNews/> 
       <TopService/>
-      {/* <TopColumn/> */}
+      <TopColumn/>
       <Footer/>
     </div>
   );
