@@ -1090,9 +1090,9 @@ const WebMaruTop = () => {
                         <div className='flex flex-col text-left'>
                           <label className='mr-2 font-bold'> {item.name}</label>
                           <label className='mr-2 text-sm'>ご予算: {item.pricesence.text}</label>
-                          <label className='mr-2 text-sm'>得意領域: {item.expertises.map((text)=>{
+                          <label className='mr-2 text-sm'>得意領域: {item.expertises.map((text, index)=>{
                             return(
-                              <span key={text.id}>{text.text}{text.id<item.expertises.length?", ":""}</span>
+                              <span key={index}>{text.text}{index<item.expertises.length-1?", ":""}</span>
                             );
                           })}</label>
                         </div>
@@ -1391,9 +1391,9 @@ const WebMaruTop = () => {
                         <div className='flex flex-col text-left'>
                           <label className='mr-2 font-bold'> {item.name}</label>
                           <label className='mr-2 text-sm'>ご予算: {item.pricesence.text}</label>
-                          <label className='mr-2 text-sm'>得意領域: {item.tools.map((text)=>{
+                          <label className='mr-2 text-sm'>得意領域: {item.tools.map((text, index)=>{
                             return(
-                              <span key={text.id}>{text.text}{text.id<item.tools.length?", ":""}</span>
+                              <span key={index}>{text.text}{index<item.tools.length-1?", ":""}</span>
                             );
                           })}</label>
                         </div>
