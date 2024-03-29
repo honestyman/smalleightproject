@@ -5,6 +5,7 @@ const initialState = {
   allCompanyList: [],
   matchCompanies: [],
   matchToolCompanies: [],
+  oneCompany: {},
 }
 
 export const getCompanyList = createAsyncThunk(
@@ -36,6 +37,19 @@ export const findingTool = createAsyncThunk(
     return res.data;
   }
 )
+export const getOneCompany = createAsyncThunk(
+  "one/company",
+  async (Id) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/onecompany`,{
+      params:{
+        id:Id
+      }
+    });
+    console.log(Id, res.data)
+    return res.data;
+  }
+)
+
 export const companySlice = createSlice({
   name: 'companies',
   initialState,
@@ -51,6 +65,9 @@ export const companySlice = createSlice({
       })
       .addCase(findingTool.fulfilled, (state, action) => {
         state.matchToolCompanies = [...action.payload];
+      })
+      .addCase(getOneCompany.fulfilled, (state, action) => {
+        state.oneCompany = {...action.payload};
       })
       // .addCase(updatePassword.fulfilled, (state, action) => {
       //   state.userInfo = { ...action.payload.user };

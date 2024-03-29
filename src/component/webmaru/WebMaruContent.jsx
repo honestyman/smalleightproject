@@ -6,7 +6,6 @@ import { getCompanyList } from "../../redux/slice/companySlice";
 import Pagination from '../Pagination';
 
 
-
 const WebMaruContnet = () => {
   const [currentPage, setCurrentPage]=useState(1)
   const [recordsPerPage]=useState(1);
@@ -23,7 +22,6 @@ const WebMaruContnet = () => {
     dispatch(getCompanyList());
   }, []);
   useEffect(() => {
-    console.log(allCompanyList);
     setData(allCompanyList)
   }, [allCompanyList]);
 
@@ -79,6 +77,7 @@ const WebMaruContnet = () => {
     }
   }
 
+
   return (
     <div className='w-full bg-[#f4f8f9] py-10 drop-shadow-sm'>
       <div className='w-full flex flex-col justify-center items-center mt-10 mb-20 sp:mb-10 sp:mt-0'>
@@ -130,14 +129,15 @@ const WebMaruContnet = () => {
                     );
                   })}</p>
                   <div className='w-[100%] flex justify-center items-center'>
-                    <button className='text-white border-2 rounded-2xl bg-[#FD6E6A] px-10 py-1 mt-3 hover:bg-white hover:text-[#FD6E6A] sp:text-sm'>お問い合わせ</button>
+                    <Link to={"/companyinquery/"+company.id}><button className='text-white border-2 rounded-2xl bg-[#FD6E6A] px-10 py-1 mt-3 hover:bg-white hover:text-[#FD6E6A] sp:text-sm'>お問い合わせ</button></Link>
                   </div>
                 </div>
               </div>      
             );
         })}       
       </div>
-      <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />  
+      
     </div>
   );
 };

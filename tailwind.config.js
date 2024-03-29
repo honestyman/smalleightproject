@@ -7,7 +7,10 @@ module.exports = {
     screens:{
       'sp':[
             {'min': '300px', 'max': '640px'},
-          ]
+          ],
+      'lg':[
+        {'min': '641px', 'max': '1024px'}
+      ]
     }
   },
   plugins: [],

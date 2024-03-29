@@ -6,12 +6,31 @@ const Footer = () => {
   const [responsiveFontSize, setResponsiveFontSize] = useState(20);
 
   useEffect(() => {
-    if(window.innerWidth < 648) {
+    if(window.innerWidth < 640) {
       setResponsiveFontSize(12);
     } else {
       setResponsiveFontSize(20);
     }
   },[responsiveFontSize])
+
+  useEffect(() => {
+    // Event listener callback function
+    const handleResize = () => {
+      if(window.innerWidth < 640) {
+        setResponsiveFontSize(12);
+      } else {
+        setResponsiveFontSize(20);
+      }
+    };
+
+    // Attach the event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const letters = ['小', 'さ', 'い', 'こ', 'と', 'の', '積', 'み', '重', 'ね', '。', ' ', '末', '広', 'が', 'る', '。'];
 

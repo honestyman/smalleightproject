@@ -10,6 +10,8 @@ import BusinessOverview from './pages/BusinessOverview';
 import Inquery from './pages/Inquery';
 import WebMaru from './pages/WebMaru';
 import DashBoard from './pages/DashBoard';
+import ColumnDetail from './pages/ColumnDetail.jsx';
+import CompanyInquery from './pages/CompanyInquery.jsx';
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
           <Route path='/column' element={<Column/>}/>
           <Route path='/business' element={<BusinessOverview/>}/>
           <Route path='/inquery' element={<Inquery/>}/>
+          <Route path='/companyinquery/:id' element={<CompanyInquery/>}/>
           <Route path='/webmaru' element={<WebMaru/>}/>
+          <Route path='/columndetail/:id' element={<ColumnDetail/>}/>
           <Route path='/dashboard' element={<DashBoard/>}/>
           {/* <Route path='/manage' element={<Admin/>}>
             <Route index element={<UserManage/>}/>
