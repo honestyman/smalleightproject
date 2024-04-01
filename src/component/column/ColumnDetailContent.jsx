@@ -11,7 +11,7 @@ const ColumnDetailContent = (props) => {
 
   const  {oneColumnData } = useSelector(state => state.columns);
   
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getOneColumn(props.columnId));
   },[]);
 

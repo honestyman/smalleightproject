@@ -6,6 +6,8 @@ const initialState = {
   matchCompanies: [],
   matchToolCompanies: [],
   oneCompany: {},
+  postSelectedOneCompanyResultMessage:"",
+  postSelectedCompanysResultMessage:"",
 }
 
 export const getCompanyList = createAsyncThunk(
@@ -18,17 +20,94 @@ export const getCompanyList = createAsyncThunk(
 export const findingCompany = createAsyncThunk(
   "post/answers",
   async (payload) => {
-    // const username = payload.name;
-    // const email = payload.email;
-    // const secretKey = 'smallEight'; 
-    // const token = jwt.sign({ username, email }, secretKey);
-    // const headers = {
-    //   'Authorization': `Bearer ${token}`
-    // };
-    const res = await axios.post(`${process.env.REACT_APP_API}/companys/answers`, payload);
+    const { name, email } = payload;
+    const secretKey = process.env.REACT_APP_SECRETKEY;
+
+    // Concatenate the username and email with a colon
+    const tokenPayload = `${name}:${email}`;
+
+    // Encode the token payload using Base64
+    const encodedTokenPayload = btoa(tokenPayload);
+
+    // Concatenate the encoded token payload with the secretKey
+    const token = `${encodedTokenPayload}.${secretKey}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    console.log(token);
+
+    const res = await axios.post(
+      `${process.env.REACT_APP_API}/companys/answers`,
+      payload,
+      { headers }
+    );
+
     return res.data;
   }
 )
+
+export const postSelectedCompanys = createAsyncThunk(
+  "post/selectedcompanies",
+  async (payload) => {
+    const { name, email } = payload;
+    const secretKey = process.env.REACT_APP_SECRETKEY;
+
+    // Concatenate the username and email with a colon
+    const tokenPayload = `${name}:${email}`;
+
+    // Encode the token payload using Base64
+    const encodedTokenPayload = btoa(tokenPayload);
+
+    // Concatenate the encoded token payload with the secretKey
+    const token = `${encodedTokenPayload}.${secretKey}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    console.log(token);
+
+    const res = await axios.post(
+      `${process.env.REACT_APP_API}/companys/selected_companise`,
+      payload,
+      { headers }
+    );
+    return res.data;
+  }
+)
+
+export const postSelectedOneCompany = createAsyncThunk(
+  "post/selectedonecompanies",
+  async (payload) => {
+    const { name, email } = payload;
+    const secretKey = process.env.REACT_APP_SECRETKEY;
+
+    // Concatenate the username and email with a colon
+    const tokenPayload = `${name}:${email}`;
+
+    // Encode the token payload using Base64
+    const encodedTokenPayload = btoa(tokenPayload);
+
+    // Concatenate the encoded token payload with the secretKey
+    const token = `${encodedTokenPayload}.${secretKey}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    console.log(token);
+
+    const res = await axios.post(
+      `${process.env.REACT_APP_API}/companys/post_selected_onecompany`,
+      payload,
+      { headers }
+    );
+    return res.data;
+  }
+)
+
 export const findingTool = createAsyncThunk(
   "post/answers_tool",
   async (payload) => {
@@ -68,6 +147,12 @@ export const companySlice = createSlice({
       })
       .addCase(getOneCompany.fulfilled, (state, action) => {
         state.oneCompany = {...action.payload};
+      })
+      .addCase(postSelectedOneCompany.fulfilled, (state, action) => {
+        state.postSelectedOneCompanyResultMessage = action.payload.message;
+      })
+      .addCase(postSelectedCompanys.fulfilled, (state, action) => {
+        state.postSelectedCompanysResultMessage = action.payload.message;
       })
       // .addCase(updatePassword.fulfilled, (state, action) => {
       //   state.userInfo = { ...action.payload.user };

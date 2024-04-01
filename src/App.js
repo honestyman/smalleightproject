@@ -9,9 +9,11 @@ import Column from './pages/Column';
 import BusinessOverview from './pages/BusinessOverview';
 import Inquery from './pages/Inquery';
 import WebMaru from './pages/WebMaru';
-import DashBoard from './pages/DashBoard';
 import ColumnDetail from './pages/ColumnDetail.jsx';
 import CompanyInquery from './pages/CompanyInquery.jsx';
+import Login from './admin/Login.jsx';
+import Manage from './admin/Manage.jsx';
+import ClientManage from './admin/admincomponent/clientmange/ClientManage.jsx';
 
 function App() {
   return (
@@ -26,10 +28,11 @@ function App() {
           <Route path='/companyinquery/:id' element={<CompanyInquery/>}/>
           <Route path='/webmaru' element={<WebMaru/>}/>
           <Route path='/columndetail/:id' element={<ColumnDetail/>}/>
-          <Route path='/dashboard' element={<DashBoard/>}/>
-          {/* <Route path='/manage' element={<Admin/>}>
-            <Route index element={<UserManage/>}/>
-            <Route path='user_detail/:id' element={<UserDetail/>}/>
+          <Route path='/admin' element={<Login/>}/>
+          <Route path='/manage' element={<Manage/>}>
+          {/* { <Route path='/manage' element={<Admin/>}> */}
+            <Route index element={<ClientManage/>}/>
+            {/* <Route path='user_detail/:id' element={<UserDetail/>}/>
             <Route path='subscription' element={<SubscriptionManage/>}/>
             <Route path='video' element={<VideoManage/>}/>
             <Route path='add_video' element={<AddVideo/>}/>
@@ -43,8 +46,8 @@ function App() {
             <Route path='update_tag/:id' element={<UpdateTag/>}/>
             <Route path='notification' element={<NotificationManage/>}/>
             <Route path='add_notification' element={<AddNotification/>}/>
-            <Route path='update_notification/:id' element={<UpdateNotification/>}/>
-          </Route> */}
+            <Route path='update_notification/:id' element={<UpdateNotification/>}/> */}
+          </Route> 
         </Routes>
       </Router>
     </div>

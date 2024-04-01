@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { SlArrowLeft } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { findingCompany } from "../../redux/slice/companySlice";
+import { findingCompany, postSelectedCompanys } from "../../redux/slice/companySlice";
 import { findingTool } from "../../redux/slice/companySlice";
 
 
@@ -298,15 +298,15 @@ const WebMaruTop = () => {
   const [clientPhonenumber, setClientPhonenumber] = useState("");
   const [questionContent, setQuestionContent] = useState("");
 
-  const {matchCompanies, matchToolCompanies} = useSelector(state => state.companies);
+  const {matchCompanies, matchToolCompanies, postSelectedCompanysResultMessage} = useSelector(state => state.companies);
   
   useEffect(() => {
     console.log(matchCompanies);
   }, [matchCompanies]);
 
   useEffect(() => {
-    console.log(matchToolCompanies);
-  }, [matchToolCompanies]);
+    console.log(postSelectedCompanysResultMessage);
+  }, [postSelectedCompanysResultMessage]);
 
   useEffect(() => {
     const wow = new WOW({
@@ -408,7 +408,7 @@ const WebMaruTop = () => {
       startDate:advertisementStep4Value,
       budget:advertisementStep5Value,
       name:clientName,
-      clientName:clientCompanyName,
+      companyName:clientCompanyName,
       email:clientEmail,
       phoneNumber:clientPhonenumber,
       questionContent:questionContent
@@ -451,14 +451,29 @@ const WebMaruTop = () => {
   }
 
   const resultViewFuntion = () => {
-    setResultView("hidden");
-    setResultMessage("block");
-    console.log(resultValue);
+    const payload={
+      name:clientName,
+      email:clientEmail,
+      selectedCompanise:resultValue
+    }
+    dispatch(postSelectedCompanys(payload));
+    if(postSelectedCompanysResultMessage==="success"){
+      setResultView("hidden");
+      setResultMessage("block");
+    } 
   }
   const resultMarketingViewFuntion = () => {
-    setResultMarketingView("hidden");
-    setResultMessage("block");
-    console.log(resultValue);
+    const payload={
+      name:clientName,
+      email:clientEmail,
+      selectedCompanise:resultToolValue
+    }
+    dispatch(postSelectedCompanys(payload));
+    if(postSelectedCompanysResultMessage==="success"){
+      setResultMarketingView("hidden");
+      setResultMessage("block");
+    } 
+    
   }
 
   const advertisementStep1BackFuntion = () => {
@@ -557,9 +572,9 @@ const WebMaruTop = () => {
     setMarketingStep3Value(event.target.value);
   };
 
-  const toggleHandlerResultView = (item) => () => {
+  const toggleHandlerResultView = (item, index) => () => {
     let tmp = isCheckedResult;
-    tmp[item.id - 1] = isCheckedResult[item.id - 1] != undefined ? !isCheckedResult[item.id - 1] : true;
+    tmp[index] = isCheckedResult[index] != undefined ? !isCheckedResult[index] : true;
     setisCheckedResult(tmp)
     if (resultValue.includes(item.id))
       setResultValue(resultValue.filter(ele => ele != item.id))
@@ -588,9 +603,9 @@ const WebMaruTop = () => {
     console.log(resultValue)
   }, [resultValue]);
 
-  const toggleHandlerToolResultView = (item) => () => {
+  const toggleHandlerToolResultView = (item, index) => () => {
     let tmp = isToolCheckedResult;
-    tmp[item.id - 1] = isToolCheckedResult[item.id - 1] != undefined ? !isToolCheckedResult[item.id - 1] : true;
+    tmp[index] = isToolCheckedResult[index] != undefined ? !isToolCheckedResult[index] : true;
     setisCheckedResult(tmp)
     if (resultToolValue.includes(item.id))
       setResultToolValue(resultToolValue.filter(ele => ele != item.id))
@@ -604,12 +619,13 @@ const WebMaruTop = () => {
     } else {
       setToolChecked(true);
       setResultToolValue([]);
-      let tmp = {};
+      let tmp = [];
       for (let i = 0; i < matchToolCompanies.length; i++) {
         resultToolValue[i] = matchToolCompanies[i].id
         tmp[i] = true;
       }
       setResultToolValue([...resultToolValue]);
+      console.log(tmp);
       setisToolCheckedResult(tmp);
     }
     // console.log(resultValue);
@@ -1074,15 +1090,15 @@ const WebMaruTop = () => {
                   <label className='mr-2'>すべて選択</label>
                 </div>
                 <div className='w-full h-[230px] flex flex-col mb-5 overflow-y-auto px-2'>
-                  {matchCompanies.map((item) => {
+                  {matchCompanies.map((item, index) => {
                     return (
                       <div
-                        key={item.id}
+                        key={index}
                         className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5 sp:text-sm'
-                        onClick={toggleHandlerResultView(item)}
+                        onClick={toggleHandlerResultView(item, index)}
                       >
                         <input
-                          checked={isCheckedResult[parseInt(item.id -1)] != undefined ? isCheckedResult[parseInt(item.id-1)] : false}
+                          checked={isCheckedResult[parseInt(index)] != undefined ? isCheckedResult[parseInt(index)] : false}
                           className='mx-2'
                           type="checkbox"
                           readOnly
@@ -1375,15 +1391,15 @@ const WebMaruTop = () => {
                   <label className='mr-2'>すべて選択</label>
                 </div>
                 <div className='w-full h-[230px] flex flex-col mb-5 overflow-y-auto px-2'>
-                  {matchToolCompanies.map((item) => {
+                  {matchToolCompanies.map((item, index) => {
                     return (
                       <div
-                        key={item.id}
+                        key={index}
                         className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5 sp:text-sm'
-                        onClick={toggleHandlerToolResultView(item)}
+                        onClick={toggleHandlerToolResultView(item, index)}
                       >
                         <input
-                          checked={isToolCheckedResult[parseInt(item.id - 1)] != undefined ? isToolCheckedResult[parseInt(item.id - 1)] : false}
+                          checked={isToolCheckedResult[parseInt(index)] != undefined ? isToolCheckedResult[parseInt(index)] : false}
                           className='mx-2'
                           type="checkbox"
                           readOnly

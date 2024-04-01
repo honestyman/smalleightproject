@@ -90,7 +90,7 @@ const TopColumn = () => {
           <div className='w-full flex justify-center my-10 sp:my-5'>
             {currentRecords && currentRecords.map((column, index)=>{
               return(
-                <div className='flex flex-col justify-center items-center mx-10 sp:w-[50%]'>
+                <div key={index} className='flex flex-col justify-center items-center mx-10 sp:w-[50%]'>
                   <div className='w-[250px] h-[250px] bg-white sp:w-200px sp:h-[200px]'></div>
                   <p className='text-white mt-3'>{column.createdAt.slice(0,10)}</p>
                   <p className='w-[300px] text-white mt-3'>{column.title}</p>
