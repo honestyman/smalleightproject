@@ -27,7 +27,7 @@ const ColumnContent = () => {
       setData(allColumnList);
     }
     // console.log("allColumnList", allColumnList)
-  },[allColumnList, allColumnCategoryList]);
+  },[allColumnList]);
   
   const indexOfLastRecord = currentPage*recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord-recordsPerPage;

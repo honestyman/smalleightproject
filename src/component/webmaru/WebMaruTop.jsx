@@ -405,23 +405,28 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
     setAdvertisementStep6("block");
   }
   const advertisementStep6Funtion = () => {
-    const payload={
-      service:selectedValue,
-      purpose:advertisementStep1Value,
-      measures:advertisementStep2Value,
-      currentMeasures:advertisementStep3Value,
-      startDate:advertisementStep4Value,
-      budget:advertisementStep5Value,
-      name:clientName,
-      companyName:clientCompanyName,
-      email:clientEmail,
-      phoneNumber:clientPhonenumber,
-      questionContent:questionContent
+    let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+    if(!emailRegex.test(clientEmail)){
+       alert("正確なメール形式ではありません。"); 
+    }else{
+      const payload={
+        service:selectedValue,
+        purpose:advertisementStep1Value,
+        measures:advertisementStep2Value,
+        currentMeasures:advertisementStep3Value,
+        startDate:advertisementStep4Value,
+        budget:advertisementStep5Value,
+        name:clientName,
+        companyName:clientCompanyName,
+        email:clientEmail,
+        phoneNumber:clientPhonenumber,
+        questionContent:questionContent
+      }
+      dispatch(findingCompany(payload));
+    
+      setAdvertisementStep6("hidden");
+      setResultView("block");
     }
-    dispatch(findingCompany(payload));
-  
-    setAdvertisementStep6("hidden");
-    setResultView("block");
   }
 
   const marketingStep1Funtion = () => {
@@ -439,20 +444,25 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
     setMarketingStep4("block");
   }
   const marketingStep4Funtion = () => {
-    const payload={
-      service:selectedValue,
-      findTool:marketingStep1Value,
-      startDate:marketingStep2Value,
-      budget:marketingStep3Value,
-      name:clientName,
-      companyName:clientCompanyName,
-      email:clientEmail,
-      phoneNumber:clientPhonenumber,
-      questionContent:questionContent
+    let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+    if(!emailRegex.test(clientEmail)){
+       alert("正確なメール形式ではありません。"); 
+    }else{
+      const payload={
+        service:selectedValue,
+        findTool:marketingStep1Value,
+        startDate:marketingStep2Value,
+        budget:marketingStep3Value,
+        name:clientName,
+        companyName:clientCompanyName,
+        email:clientEmail,
+        phoneNumber:clientPhonenumber,
+        questionContent:questionContent
+      }
+      dispatch(findingTool(payload));
+      setMarketingStep4("hidden");
+      setResultMarketingView("block");
     }
-    dispatch(findingTool(payload));
-    setMarketingStep4("hidden");
-    setResultMarketingView("block");
   }
 
   const resultViewFuntion = () => {

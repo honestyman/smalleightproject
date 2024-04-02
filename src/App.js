@@ -17,6 +17,7 @@ import ClientManage from './admin/admincomponent/clientmange/ClientManage.jsx';
 import MultifuleCompanysInquery from './pages/MultifuleCompanysInquery.jsx';
 import Policy from './pages/Policy.jsx';
 import Terms from './pages/Terms.jsx';
+import NewsDetail from './pages/NewsDetail.jsx';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path='/multiful_companyinquery/:ids' element={<MultifuleCompanysInquery/>}/>
           <Route path='/webmaru' element={<WebMaru/>}/>
           <Route path='/columndetail/:id' element={<ColumnDetail/>}/>
+          <Route path='/newsdetail/:id' element={<NewsDetail/>}/>
           <Route path='/admin' element={<Login/>}/>
           <Route path='/manage' element={<Manage/>}>
           {/* { <Route path='/manage' element={<Admin/>}> */}

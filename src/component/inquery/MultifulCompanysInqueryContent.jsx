@@ -18,6 +18,7 @@ const MultifulCompanysInqueryContent = (props) => {
   const [clientPhonenumber, setClientPhonenumber] = useState("");
   const [questionContent, setQuestionContent] = useState("");
 
+
   const { selectedCompany, postSelectedMultifulCompanyResultMessage } = useSelector(state=>state.companies)
 
   useEffect(()=>{
@@ -37,15 +38,20 @@ const MultifulCompanysInqueryContent = (props) => {
   },[selectedCompany]);
 
   const clickQueryHandler=()=>{
-    const payload={
-      name:clientName,
-      companyName:clientCompanyName,
-      email:clientEmail,
-      phoneNumber:clientPhonenumber,
-      questionContent:questionContent,
-      companyIds:props.companyIds
+    let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+    if(!emailRegex.test(clientEmail)){
+       alert("正確なメール形式ではありません。"); 
+    }else{
+      const payload={
+        name:clientName,
+        companyName:clientCompanyName,
+        email:clientEmail,
+        phoneNumber:clientPhonenumber,
+        questionContent:questionContent,
+        companyIds:props.companyIds
+      }
+      dispatch(postSelectedMultifulCompany(payload));
     }
-    dispatch(postSelectedMultifulCompany(payload));
   }
   
   useEffect(()=>{
