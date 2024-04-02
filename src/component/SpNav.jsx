@@ -27,6 +27,8 @@ const Nav=()=>{
       <Link to={"/news"} className="mx-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">ニュース</Link>
       <Link to={"/column"} className="mx-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">コラム</Link>
       <Link to={"/business"} className="mx-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">事業概要</Link>
+      <Link to={"/policy"} className="mx-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">プライバシーポリシー</Link>
+      <Link to={"/terms"} className="mx-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">利用規約</Link>
       <Link to={"/inquery"} className="mx-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-white hover:px-2 hover:rounded"> お問い合わせ</Link>
     </div>
   );

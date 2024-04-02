@@ -14,6 +14,8 @@ import CompanyInquery from './pages/CompanyInquery.jsx';
 import Login from './admin/Login.jsx';
 import Manage from './admin/Manage.jsx';
 import ClientManage from './admin/admincomponent/clientmange/ClientManage.jsx';
+import MultifuleCompanysInquery from './pages/MultifuleCompanysInquery.jsx';
+import Policy from './pages/Policy.jsx';
 
 function App() {
   return (
@@ -24,8 +26,10 @@ function App() {
           <Route path='/news' element={<News/>}/>
           <Route path='/column' element={<Column/>}/>
           <Route path='/business' element={<BusinessOverview/>}/>
+          <Route path='/policy' element={<Policy/>}/>
           <Route path='/inquery' element={<Inquery/>}/>
           <Route path='/companyinquery/:id' element={<CompanyInquery/>}/>
+          <Route path='/multiful_companyinquery/:ids' element={<MultifuleCompanysInquery/>}/>
           <Route path='/webmaru' element={<WebMaru/>}/>
           <Route path='/columndetail/:id' element={<ColumnDetail/>}/>
           <Route path='/admin' element={<Login/>}/>

@@ -227,7 +227,7 @@ const resultViewData = [
 ];
 
 
-const WebMaruTop = () => {
+const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
 
   const dispatch = useDispatch();
   const [block, setBlock] = useState(false);
@@ -473,7 +473,6 @@ const WebMaruTop = () => {
       setResultMarketingView("hidden");
       setResultMessage("block");
     } 
-    
   }
 
   const advertisementStep1BackFuntion = () => {
@@ -704,22 +703,85 @@ const WebMaruTop = () => {
   }, [marketingStep1Value, marketingStep2Value, marketingStep3Value])
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center pt-40 sp:pt-20'>
-      <p className='text-white text-4xl mb-10 sp:text-2xl sp:mx-10'>最適なマーケティングパートナーを見つけるなら</p>
-      <div className='w-[300px] border-white border-t-2'></div>
-      <div ref={ref1} className='sp:w-full'>
-        <div className='w-[900px] sp:w-[80%] h-[300px] flex flex-col justify-center items-center rounded-md bg-white shadow-xl mt-10 px-5 py-10 sp:mx-auto sp:py-5'>
-          <div className='w-full h-1/2 bg-[#f4f8f9] rounded-full sp:rounded-2xl text-xl shadow flex flex-col justify-center items-center py-10 sp:text-sm'>
-            {/* <p>\カンタン3分でマッチング/</p> */}
-            <p className='sp:mx-5'>マーケティングに強みをもった企業やツールが見つかります。</p>
-            <p className='mt-5 text-sm sp:text-[12px] sp:mx-5'>アンケートに答えるだけで希望に合った企業ツールが見つかる!</p>
+    <div className='w-full h-full flex flex-col justify-center items-center pt-40 pb-20 sp:pt-20'>
+      <div className='w-full flex justify-center sp:flex-wrap'>
+        <div className='w-[70%] sp:w-full flex flex-col justify-center items-center'>
+          <p className='text-white text-4xl mb-10 sp:text-2xl sp:mx-10 sp:mt-10'>最適なマーケティングパートナーを見つけるなら</p>
+          <div className='w-[300px] border-white border-t-2'></div>
+          <p className='text-white text-6xl mt-10 sp:text-2xl sp:mx-10'>Mitsuke (ミツケ)</p>
+          <div ref={ref1} className='w-[80%] sp:w-full'>
+            <div className='w-full sp:w-[80%] flex flex-col justify-center items-center rounded-md bg-white shadow-xl mt-10 px-5 py-10 sp:mx-auto sp:py-5'>
+              <div className='w-full flex pb-5 border-b justify-center sp:flex-wrap'>
+                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>新規顧客獲得</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>認知拡大</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>WEBサイト制作</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>マーケティングツール</span>
+              </div>
+              <p className='py-5 text-red-500'>など</p>
+              <div className='w-full sp:rounded-2xl text-red-500 text-2xl font-bold flex flex-col justify-center items-center mb-5 sp:text-sm'>
+                {/* <p>\カンタン3分でマッチング/</p> */}
+                <p className='sp:mx-5'>マーケティングに強みをもった企業やツールが見つかります!</p>
+              </div>
+              {/* <p className='text-xl'>アンケートを始めますか?</p> */}
+              <button className='w-[250px] text-white border-2 rounded-full bg-[#FD6E6A] px-5 py-2 my-2 hover:bg-white hover:text-[#FD6E6A] sp:text-sm' onClick={() => showModal()}>さっそく見つけて</button>
+              <button className='w-[250px] text-[#FD6E6A] border-2 rounded-full bg-white px-5 py-2 my-2 hover:bg-[#FD6E6A] hover:text-white sp:text-sm'>ご掲載希望はこちらから</button>
+            </div>
           </div>
-          <div className='w-[1px] h-[30px] border-black border-l-2'></div>
-          {/* <p className='text-xl'>アンケートを始めますか?</p> */}
-          <button className='text-xl text-white border-2 rounded-full bg-[#FD6E6A] px-10 py-1 mt-2 hover:bg-white hover:text-[#FD6E6A] sp:text-sm' onClick={() => showModal()}>希望はこちらから</button>
+        </div>
+        <div className='w-[30%] sp:w-full flex flex-wrap justify-start items-center sp:justify-center sp:pt-5'>
+          <Link onClick={() => showModal()} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+            <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
+            <span className='text-red-500 font-bold sp:text-sm'>カンタンな質問に答えて</span>
+            <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
+          </Link>
+          <Link onClick={scrollToWebMaruContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+            <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
+            <span className='font-bold sp:text-sm'>課題 目的から</span>
+            <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
+          </Link>
+          <Link onClick={scrollToWebMaruContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+            <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
+            <span className='font-bold sp:text-sm'>検討している施策から</span>
+            <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
+          </Link>
+          <Link onClick={scrollToWebMaruContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+            <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
+            <span className='font-bold'>ご予算規模から</span>
+            <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
+          </Link>
         </div>
       </div>
-      <div className={`w-full h-full z-40 bg-white bg-opacity-60 ${block ? 'block fixed' : 'hidden absolute'}`}>
+
+      <div className='w-full flex flex-col items-center py-10 mt-20 bg-[#f4f8f9] sp:px-3'>
+        <p className='text-2xl font-bold py-5 sp:text-xl'>Mitsukeで最適なパートナーの見つけ方</p>
+        <div className='w-[60%] sp:w-full flex justify-center py-3 my-1 -ml-40 border bg-white rounded-md px-5 shadow sp:ml-0 sp:flex-wrap'>
+          <div className='w-[100px] h-[100px] bg-red-500 mr-5'></div>
+          <div className='w-[calc(100%-100px)] sp:w-full flex flex-col justify-center items-center'>
+            <span className='font-bold mb-2 sp:my-3'>探しているサービスや解決したい課題、ご予算イメージなどを基に検索</span>
+            <span className='text-left sp:mb-3'>「新規顧客を増やしたい」 「サービスの認知度を上げたい」 「顧客分析ツールが欲しい」など。 質問に回答するともっとカンタンに希望に合う企業が見つかります。</span>
+            <button className='px-5 py-1 bg-[#FD6E6A] border border-[#FD6E6A] text-white rounded hover:text-[#FD6E6A] hover:bg-white' onClick={() => showModal()}>質問に回答する</button>
+          </div>
+        </div>
+
+        <div className='w-[60%] sp:w-full sp:w-full flex justify-center py-3 my-1 border bg-white rounded-md px-5 shadow sp:flex-wrap'>
+          <div className='w-[100px] h-[100px] bg-red-500 mr-5'></div>
+          <div className='w-[calc(100%-100px)] sp:w-full flex flex-col justify-center items-center'>
+            <span className='font-bold mb-2 sp:my-3'>気になる企業が見つかったらお問い合わせ!</span>
+            <span className='text-left sp:mb-3'>記入いただいた情報を基にマッチングを行います。</span>
+          </div>
+        </div>
+
+        <div className='w-[60%] sp:w-full flex justify-center py-3 my-1 ml-40 border bg-white rounded-md px-5 shadow sp:ml-0 sp:flex-wrap'>
+          <div className='w-[100px] h-[100px] bg-red-500 mr-5'></div>
+          <div className='w-[calc(100%-100px)] sp:w-full flex flex-col justify-center items-center '>
+            <span className='font-bold mb-2 sp:my-3'>気になる企業の担当者から直接ご連絡させていただきます。</span>
+            <span className='text-left sp:mb-3'>マッチング可能の場合、いただいたご連絡先へ企業担当者から直接連絡いたします。 マッチング企業が複数の場合は、各社の提案を開いた上での選定が可能です。</span>
+          </div>
+        </div>
+
+      </div>
+      
+      <div className={`w-full h-full z-40 bg-white bg-opacity-60 top-0 ${block ? 'block fixed' : 'hidden absolute'}`}>
         <div ref={ref2}>
           <div className='w-[700px] sp:w-[90%] h-[500px] bg-white rounded-md drop-shadow-md mx-auto my-[15%]'>
             <div className={`w-full h-full flex flex-col ${first}`}>
@@ -1094,7 +1156,7 @@ const WebMaruTop = () => {
                     return (
                       <div
                         key={index}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5 sp:text-sm'
+                        className='w-full flex border border-[#FD6E6A] items-center rounded-md my-1 py-2 px-5 sp:text-sm'
                         onClick={toggleHandlerResultView(item, index)}
                       >
                         <input
@@ -1104,13 +1166,26 @@ const WebMaruTop = () => {
                           readOnly
                         />
                         <div className='flex flex-col text-left'>
-                          <label className='mr-2 font-bold'> {item.name}</label>
-                          <label className='mr-2 text-sm'>ご予算: {item.pricesence.text}</label>
-                          <label className='mr-2 text-sm'>得意領域: {item.expertises.map((text, index)=>{
+                          <label className='mr-2 mb-1 font-bold text-center'> {item.name}</label>
+                          <label className='mr-2 mb-0.5 font-bold text-sm'>PRタイトル: {item.title}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>紹介文: {item.description}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>ご予算: {item.pricesence.text}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>得意領域: {item.expertises.map((text, index)=>{
                             return(
                               <span key={index}>{text.text}{index<item.expertises.length-1?", ":""}</span>
                             );
                           })}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>解決できる課題: {item.solvedissues.map((text, index)=>{
+                            return(
+                              <span key={index}>{text.text}{index<item.solvedissues.length-1?", ":""}</span>
+                            );
+                          })}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>業界実績: {item.industryexperiences.map((text, index)=>{
+                            return(
+                              <span key={index}>{text.text}{index<item.industryexperiences.length-1?", ":""}</span>
+                            );
+                          })}</label>
+                          
                         </div>
                       </div>
                     );

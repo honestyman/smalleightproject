@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { useState, useEffect } from "react";
 import Header from "../component/Header";
 
@@ -13,17 +13,21 @@ import WebMaruContnet from "../component/webmaru/WebMaruContent";
 const WebMaru=()=>{
 
   const navigate= useNavigate();
+  const companyContentRef =useRef(null);
 
+  const scrollToWebMaruContnet = () => {
+    companyContentRef.current.scrollIntoView({ behavior: 'smooth'} )
+  }
 
   return(
     <div className="w-100">
       <Header/>
-      <div className="w-full h-[700px] bg-gradient-to-br from-[#FB2407] to-[#FD6E6A] rounded-sm">
+      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#FD6E6A] rounded-sm">
         <div className="w-full h-full bg-gradient-to-t from-[#FD6E6A] to-red-700">
-          <WebMaruTop/>
+          <WebMaruTop scrollToWebMaruContnet={scrollToWebMaruContnet}/>
         </div>
       </div>
-      <WebMaruContnet/>
+      <WebMaruContnet companyContentRef={companyContentRef}/>
       <Footer/>
     </div>
   );

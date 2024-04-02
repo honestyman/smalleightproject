@@ -6,8 +6,9 @@ const initialState = {
   matchCompanies: [],
   matchToolCompanies: [],
   oneCompany: {},
+  selectedCompany: [],
   postSelectedOneCompanyResultMessage:"",
-  postSelectedCompanysResultMessage:"",
+  postSelectedMultifulCompanyResultMessage:"",
 }
 
 export const getCompanyList = createAsyncThunk(
@@ -97,10 +98,36 @@ export const postSelectedOneCompany = createAsyncThunk(
       Authorization: `Bearer ${token}`,
     };
 
-    console.log(token);
+    const res = await axios.post(
+      `${process.env.REACT_APP_API}/companys/add_selected_onecompany`,
+      payload,
+      { headers }
+    );
+    return res.data;
+  }
+)
+
+export const postSelectedMultifulCompany = createAsyncThunk(
+  "post/selectedmultifulcompanies",
+  async (payload) => {
+    const { name, email } = payload;
+    const secretKey = process.env.REACT_APP_SECRETKEY;
+
+    // Concatenate the username and email with a colon
+    const tokenPayload = `${name}:${email}`;
+
+    // Encode the token payload using Base64
+    const encodedTokenPayload = btoa(tokenPayload);
+
+    // Concatenate the encoded token payload with the secretKey
+    const token = `${encodedTokenPayload}.${secretKey}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
     const res = await axios.post(
-      `${process.env.REACT_APP_API}/companys/post_selected_onecompany`,
+      `${process.env.REACT_APP_API}/companys/add_selected_multifulcompany`,
       payload,
       { headers }
     );
@@ -124,7 +151,17 @@ export const getOneCompany = createAsyncThunk(
         id:Id
       }
     });
-    console.log(Id, res.data)
+    return res.data;
+  }
+)
+export const getSelectedCompany = createAsyncThunk(
+  "one/selected_company",
+  async (Ids) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/selected_company`,{
+      params:{
+        ids:Ids
+      }
+    });
     return res.data;
   }
 )
@@ -148,11 +185,14 @@ export const companySlice = createSlice({
       .addCase(getOneCompany.fulfilled, (state, action) => {
         state.oneCompany = {...action.payload};
       })
+      .addCase(getSelectedCompany.fulfilled, (state, action) => {
+        state.selectedCompany = [...action.payload];
+      })
       .addCase(postSelectedOneCompany.fulfilled, (state, action) => {
         state.postSelectedOneCompanyResultMessage = action.payload.message;
       })
-      .addCase(postSelectedCompanys.fulfilled, (state, action) => {
-        state.postSelectedCompanysResultMessage = action.payload.message;
+      .addCase(postSelectedMultifulCompany.fulfilled, (state, action) => {
+        state.postSelectedMultifulCompanyResultMessage = action.payload.message;
       })
       // .addCase(updatePassword.fulfilled, (state, action) => {
       //   state.userInfo = { ...action.payload.user };
