@@ -305,7 +305,12 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
   }, [matchCompanies]);
 
   useEffect(() => {
-    console.log(postSelectedCompanysResultMessage);
+    console.log("=======>",postSelectedCompanysResultMessage);
+    if(postSelectedCompanysResultMessage==="success"){
+      setResultView("hidden");
+      setResultMarketingView("hidden");
+      setResultMessage("block");
+    } 
   }, [postSelectedCompanysResultMessage]);
 
   useEffect(() => {
@@ -457,10 +462,6 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
       selectedCompanise:resultValue
     }
     dispatch(postSelectedCompanys(payload));
-    if(postSelectedCompanysResultMessage==="success"){
-      setResultView("hidden");
-      setResultMessage("block");
-    } 
   }
   const resultMarketingViewFuntion = () => {
     const payload={
@@ -469,10 +470,10 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
       selectedCompanise:resultToolValue
     }
     dispatch(postSelectedCompanys(payload));
-    if(postSelectedCompanysResultMessage==="success"){
-      setResultMarketingView("hidden");
-      setResultMessage("block");
-    } 
+    // if(postSelectedCompanysResultMessage==="success"){
+    //   setResultMarketingView("hidden");
+    //   setResultMessage("block");
+    // } 
   }
 
   const advertisementStep1BackFuntion = () => {
@@ -1185,6 +1186,11 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
                               <span key={index}>{text.text}{index<item.industryexperiences.length-1?", ":""}</span>
                             );
                           })}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>特典キャンペーン: {item.campaigns.map((text, index)=>{
+                            return(
+                              <span key={index}>{text.text}{index<item.campaigns.length-1?", ":""}</span>
+                            );
+                          })}</label>
                           
                         </div>
                       </div>
@@ -1228,9 +1234,9 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
                   <p className='text-xl my-1'>内容確認後、ご連絡させていただきますので</p>
                   <p className='text-xl my-1'>今しばらくお待ちください!</p>
                 </div>
-                <div className='w-full flex px-5 justify-between'>
+                {/* <div className='w-full flex px-5 justify-between'>
                   <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => resultViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -1480,11 +1486,28 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
                           readOnly
                         />
                         <div className='flex flex-col text-left'>
-                          <label className='mr-2 font-bold'> {item.name}</label>
+                          <label className='mr-2 font-bold text-center'> {item.name}</label>
+                          <label className='mr-2 mb-0.5 font-bold text-sm'>PRタイトル: {item.title}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>紹介文: {item.description}</label>
                           <label className='mr-2 text-sm'>ご予算: {item.pricesence.text}</label>
                           <label className='mr-2 text-sm'>得意領域: {item.tools.map((text, index)=>{
                             return(
                               <span key={index}>{text.text}{index<item.tools.length-1?", ":""}</span>
+                            );
+                          })}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>解決できる課題: {item.solvedissues.map((text, index)=>{
+                            return(
+                              <span key={index}>{text.text}{index<item.solvedissues.length-1?", ":""}</span>
+                            );
+                          })}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>業界実績: {item.industryexperiences.map((text, index)=>{
+                            return(
+                              <span key={index}>{text.text}{index<item.industryexperiences.length-1?", ":""}</span>
+                            );
+                          })}</label>
+                          <label className='mr-2 mb-0.5 text-sm'>特典キャンペーン: {item.campaigns.map((text, index)=>{
+                            return(
+                              <span key={index}>{text.text}{index<item.campaigns.length-1?", ":""}</span>
                             );
                           })}</label>
                         </div>

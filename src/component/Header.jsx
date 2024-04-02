@@ -50,6 +50,8 @@ const Header=()=>{
           <Link to={"/news"} className="py-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-[#FD6E6A] hover:text-white hover:px-2">ニュース</Link>
           <Link to={"/column"} className="py-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-[#FD6E6A] hover:text-white hover:px-2">コラム</Link>
           <Link to={"/business"} className="py-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-[#FD6E6A] hover:text-white hover:px-2">事業概要</Link>
+          <Link to={"/policy"} className="py-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-[#FD6E6A] hover:text-white hover:px-2">プライバシーポリシー</Link>
+          <Link to={"/terms"} className="py-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-[#FD6E6A] hover:text-white hover:px-2">利用規約</Link>
           <Link to={"/inquery"} className="py-3 hover:text-[#FD6E6A] hover:transition-colors hover:bg-[#FD6E6A] hover:text-white hover:px-2"> お問い合わせ</Link>
         </div>
     </div>

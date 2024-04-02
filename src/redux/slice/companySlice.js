@@ -8,6 +8,7 @@ const initialState = {
   oneCompany: {},
   selectedCompany: [],
   postSelectedOneCompanyResultMessage:"",
+  postSelectedCompanysResultMessage:"",
   postSelectedMultifulCompanyResultMessage:"",
 }
 
@@ -52,6 +53,7 @@ export const findingCompany = createAsyncThunk(
 export const postSelectedCompanys = createAsyncThunk(
   "post/selectedcompanies",
   async (payload) => {
+    console.log(payload)
     const { name, email } = payload;
     const secretKey = process.env.REACT_APP_SECRETKEY;
 
@@ -68,7 +70,7 @@ export const postSelectedCompanys = createAsyncThunk(
       Authorization: `Bearer ${token}`,
     };
 
-    console.log(token);
+    // console.log(token);
 
     const res = await axios.post(
       `${process.env.REACT_APP_API}/companys/selected_companise`,
@@ -190,6 +192,9 @@ export const companySlice = createSlice({
       })
       .addCase(postSelectedOneCompany.fulfilled, (state, action) => {
         state.postSelectedOneCompanyResultMessage = action.payload.message;
+      })
+      .addCase(postSelectedCompanys.fulfilled, (state, action) => {
+        state.postSelectedCompanysResultMessage = action.payload.message;
       })
       .addCase(postSelectedMultifulCompany.fulfilled, (state, action) => {
         state.postSelectedMultifulCompanyResultMessage = action.payload.message;
