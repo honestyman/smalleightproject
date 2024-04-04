@@ -12,15 +12,16 @@ import AdminNav from "./admincomponent/AdminNav";
 
 
 const Manage=()=>{
-
+  
   const dispatch = useDispatch();
-  // const {allCompanyList} = useSelector(state => state.companies);
-  // useEffect(() => {
-  //   dispatch(getCompanyList());
-  // }, []);
-  // useEffect(() => {
-  //   console.log(allCompanyList);
-  // }, [allCompanyList]);
+  const navigate= useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(!token){
+      navigate("/admin");
+    }
+  }, []);
 
   return(
     <div className="w-full bg-gray-200">

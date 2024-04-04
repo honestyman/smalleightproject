@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import blackLogo from '../img/black_logo.png';
+import blackLogo from '../img/black_logo.webp';
 
 const Footer = () => {
   const [responsiveFontSize, setResponsiveFontSize] = useState(20);
@@ -59,7 +59,7 @@ const Footer = () => {
           <div className='w-[30%]'>
             <div className='flex flex-col float-left text-black sp:text-sm'>
               <Link className="my-3 hover:text-[#FD6E6A] hover:transition-colors">サービス</Link>
-              <Link className="my-3 hover:text-[#FD6E6A] hover:transition-colors">ウェブマる!</Link>
+              <Link className="my-3 hover:text-[#FD6E6A] hover:transition-colors">Mitsuke</Link>
               <Link className="my-3 hover:text-[#FD6E6A] hover:transition-colors">ニュース</Link>
               <Link className="my-3 hover:text-[#FD6E6A] hover:transition-colors">コラム</Link>
               <Link className="my-3 hover:text-[#FD6E6A] hover:transition-colors">事業概要</Link>

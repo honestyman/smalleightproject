@@ -1,9 +1,9 @@
-import logo from '../../img/black_logo.png';
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaRegUserCircle, FaHome, FaNewspaper, FaTasks, FaTools  } from "react-icons/fa";
+import { FaRegUserCircle, FaHome, FaNewspaper, FaTasks, FaTools, FaRegQuestionCircle  } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { IoIosPricetags, IoMdTime } from "react-icons/io";
 import { MdFeaturedPlayList } from "react-icons/md";
@@ -13,6 +13,16 @@ import { BiCategory } from "react-icons/bi";
 
 const AdminNav=()=>{
   const navigate= useNavigate();
+
+  const [change, setChange] = useState("");
+  const [style, setStyle] = useState("");
+  
+  useEffect(() => {
+    // var url = window.location.href;
+    var pathname = window.location.pathname;
+    setStyle(pathname);
+    console.log(pathname);
+  }, [change]);
 
   const [companyblock, setCompanyBlock] = useState('block');
   const [columnblock, setColumnBlock] = useState('block');
@@ -25,11 +35,11 @@ const AdminNav=()=>{
   }
 
   return(
-    <div className={`min-w-[300px] h-[980px] flex flex-col bg-white shadow-md items-start py-5`}>
-      <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><FaRegUserCircle className='mr-1'/>クライアント管理</Link>
+    <div className="min-w-[300px] h-[900px] flex flex-col bg-white shadow-md items-start py-5">
+      <Link to={"/manage"} className={`w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white ${style==="/manage"?'bg-[#FD6E6A] text-white':'none'}`} onClick={()=>{setChange("clientmanage")}}><FaRegUserCircle className='mr-1'/>クライアント管理</Link>
       <button onClick={changeCompanyBlock} className='w-full flex items-center px-5 py-2'><FaHome className='mr-1'/>会社管理</button>
       <div className={`w-full pl-5 ${companyblock}`} >
-        <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><FaHome className='mr-1'/>会社管理</Link>
+        <Link to="companymanage" className={`w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white ${style==="/manage/companymanage"?'bg-[#FD6E6A] text-white':'none'}`} onClick={()=>{setChange("companymanage")}}><FaHome className='mr-1'/>会社管理</Link>
         <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><IoIosPricetags className='mr-1'/>価格感管理</Link>  
         <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><FaTasks className='mr-1'/>解決できる課題管理</Link>  
         <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><MdFeaturedPlayList className='mr-1'/>得意な領域管理</Link>  
@@ -43,6 +53,7 @@ const AdminNav=()=>{
         <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><BiCategory className='mr-1'/>カテゴリー管理</Link>  
       </div>
       <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><FaNewspaper className='mr-1'/>ニュース管理</Link>
+      <Link className='w-full flex items-center px-5 py-2 rounded hover:bg-[#FD6E6A] hover:text-white'><FaRegQuestionCircle className='mr-1'/>質問管理</Link>
     </div>
   );
   

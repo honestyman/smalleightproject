@@ -99,7 +99,7 @@ const CompanyInqueryContent = (props) => {
                     <textarea className="shadow appearance-none border border-red-500 rounded w-full h-20 mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" value={questionContent} onChange={(e) => setQuestionContent(e.target.value)} />
                   </div>
                   <div className='w-full h-10 flex px-5 mt-10 justify-center sp:px-0 sp:text-sm'>
-                    <Link to={"/webmaru"}><button className='flex items-center border-2 rounded-full px-10 py-1 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 text-[#FD6E6A] hover:text-black'><SlArrowLeft className='mx-1' /> 前に戻る</button></Link>
+                    <Link to={"/Mitsuke"}><button className='flex items-center border-2 rounded-full px-10 py-1 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 text-[#FD6E6A] hover:text-black'><SlArrowLeft className='mx-1' /> 前に戻る</button></Link>
                      <button disabled={disabled} className={`text-white border-2 rounded-full px-10 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={clickQueryHandler}>お問い合わせ</button>
                   </div>
                 </div>

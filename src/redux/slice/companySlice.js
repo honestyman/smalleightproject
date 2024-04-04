@@ -7,6 +7,13 @@ const initialState = {
   matchToolCompanies: [],
   oneCompany: {},
   selectedCompany: [],
+  allCampaignList: [],
+  allExpertiseList: [],
+  allToolsList: [],
+  allSolvedissueList: [],
+  allPricesenceList: [],
+  allStartDateList: [],
+  allIndustryExperienceList: [],
   postSelectedOneCompanyResultMessage:"",
   postSelectedCompanysResultMessage:"",
   postSelectedMultifulCompanyResultMessage:"",
@@ -46,6 +53,15 @@ export const findingCompany = createAsyncThunk(
       { headers }
     );
 
+    return res.data;
+  }
+)
+
+export const deleteOneCompany = createAsyncThunk(
+  "onedelete/companies",
+  async (Id) => {
+    const res = await axios.delete(process.env.REACT_APP_API+"/companys/deleteonecompany?id="+Id);
+    // console.log("--------",res.data);
     return res.data;
   }
 )
@@ -168,6 +184,56 @@ export const getSelectedCompany = createAsyncThunk(
   }
 )
 
+export const getCampaignList = createAsyncThunk(
+  "get_allcampaign/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/allcampaign`);
+    return res.data;
+  }
+)
+export const getExpertiseList = createAsyncThunk(
+  "get_allexpertise/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/allexpertise`);
+    return res.data;
+  }
+)
+export const getToolsList = createAsyncThunk(
+  "get_alltools/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/alltools`);
+    return res.data;
+  }
+)
+export const getSolvedissueList = createAsyncThunk(
+  "get_allsolvedissue/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/allsolvedissue`);
+    return res.data;
+  }
+)
+export const getPricesenceList = createAsyncThunk(
+  "get_allpricesence/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/allpricesence`);
+    return res.data;
+  }
+)
+export const getStartDateList = createAsyncThunk(
+  "get_allstartdate/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/allstartdate`);
+    return res.data;
+  }
+)
+export const getIndustryExperienceList = createAsyncThunk(
+  "get_allindustryexperience/companies",
+  async (payload) => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/companys/allindustryexperience`);
+    return res.data;
+  }
+)
+
 export const companySlice = createSlice({
   name: 'companies',
   initialState,
@@ -199,21 +265,27 @@ export const companySlice = createSlice({
       .addCase(postSelectedMultifulCompany.fulfilled, (state, action) => {
         state.postSelectedMultifulCompanyResultMessage = action.payload.message;
       })
-      // .addCase(updatePassword.fulfilled, (state, action) => {
-      //   state.userInfo = { ...action.payload.user };
-      //   state.message.status = 200;
-      //   state.message.content = action.payload.message;
-      // })
-      // .addCase(updatePassword.rejected, (state, action) => {
-      //   state.message.status = 401;
-      //   state.message.content = action.error.message;
-      //   state.updatePasswordErrorMessage = 'パスワードが正しくありません。';
-      // })
-      // .addCase(loginWithToken.fulfilled, (state, action) => {
-      //   state.userInfo = { ...action.payload.payload.user };
-      //   state.token = action.payload.payload.token;
-      //   localStorage.setItem("token", action.payload.payload.token);
-      // })
+      .addCase(getCampaignList.fulfilled, (state, action) => {
+        state.allCampaignList = [...action.payload];
+      })
+      .addCase(getExpertiseList.fulfilled, (state, action) => {
+        state.allExpertiseList = [...action.payload];
+      })
+      .addCase(getToolsList.fulfilled, (state, action) => {
+        state.allToolsList = [...action.payload];
+      })
+      .addCase(getSolvedissueList.fulfilled, (state, action) => {
+        state.allSolvedissueList = [...action.payload];
+      })
+      .addCase(getPricesenceList.fulfilled, (state, action) => {
+        state.allPricesenceList = [...action.payload];
+      })
+      .addCase(getStartDateList.fulfilled, (state, action) => {
+        state.allStartDateList = [...action.payload];
+      })
+      .addCase(getIndustryExperienceList.fulfilled, (state, action) => {
+        state.allIndustryExperienceList = [...action.payload];
+      })
   }
 });
 

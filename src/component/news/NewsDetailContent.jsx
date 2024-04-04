@@ -70,7 +70,7 @@ const NewsDetailContent = (props) => {
               <div className='w-[100px] h-[100px] bg-red-500'></div>
               <span className='my-5 lg:text-sm sp:text-sm'>マーケティングに関する質問に答えるだけで条件に合った企業が見つかります</span>
               <div ref={ref} className='w-full flex flex-col items-center'>
-                <Link to="/webmaru" className='px-5 py-2 bg-[#FD6E6A] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#FD6E6A] hover:bg-white'>質問に答える(無料)</Link>
+                <Link to="/Mitsuke" className='px-5 py-2 bg-[#FD6E6A] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#FD6E6A] hover:bg-white'>質問に答える(無料)</Link>
                 <Link className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#FD6E6A] my-5 hover:bg-[#FD6E6A] hover:text-white'>ご掲載希望はこちら</Link>
               </div>
             </div>

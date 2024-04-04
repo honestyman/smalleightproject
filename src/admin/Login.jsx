@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import logo from '../img/black_logo.png';
+import logo from '../img/black_logo.webp';
 
 // import Header from "../../component/Header";
 

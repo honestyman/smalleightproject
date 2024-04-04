@@ -227,7 +227,7 @@ const resultViewData = [
 ];
 
 
-const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
+const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
 
   const dispatch = useDispatch();
   const [block, setBlock] = useState(false);
@@ -734,8 +734,8 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
                 <p className='sp:mx-5'>マーケティングに強みをもった企業やツールが見つかります!</p>
               </div>
               {/* <p className='text-xl'>アンケートを始めますか?</p> */}
-              <button className='w-[250px] text-white border-2 rounded-full bg-[#FD6E6A] px-5 py-2 my-2 hover:bg-white hover:text-[#FD6E6A] sp:text-sm' onClick={() => showModal()}>さっそく見つけて</button>
-              <button className='w-[250px] text-[#FD6E6A] border-2 rounded-full bg-white px-5 py-2 my-2 hover:bg-[#FD6E6A] hover:text-white sp:text-sm'>ご掲載希望はこちらから</button>
+              <Link className='w-[250px] text-white border-2 rounded-full bg-[#FD6E6A] px-5 py-2 my-2 hover:bg-white hover:text-[#FD6E6A] sp:text-sm' onClick={() => showModal()}>さっそく見つけて</Link>
+              <Link to="/mitsuke/partner" className='w-[250px] text-[#FD6E6A] border-2 rounded-full bg-white px-5 py-2 my-2 hover:bg-[#FD6E6A] hover:text-white sp:text-sm'>ご掲載希望はこちらから</Link>
             </div>
           </div>
         </div>
@@ -745,17 +745,17 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
             <span className='text-red-500 font-bold sp:text-sm'>カンタンな質問に答えて</span>
             <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
           </Link>
-          <Link onClick={scrollToWebMaruContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+          <Link onClick={scrollToMitsukeContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
             <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
             <span className='font-bold sp:text-sm'>課題 目的から</span>
             <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
           </Link>
-          <Link onClick={scrollToWebMaruContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+          <Link onClick={scrollToMitsukeContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
             <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
             <span className='font-bold sp:text-sm'>検討している施策から</span>
             <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
           </Link>
-          <Link onClick={scrollToWebMaruContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
+          <Link onClick={scrollToMitsukeContnet} className='w-[200px] h-[200px] sp:w-[170px] sp:h-[170px] bg-[#f4f8f9] flex flex-col itmes-center justify-between rounded-md shadow-md text-sm px-2 py-5 mx-2 sp:my-3 hover:shadow-2xl'>
             <div className='w-[100px] h-[100px] bg-red-500 mx-auto'></div>
             <span className='font-bold'>ご予算規模から</span>
             <span className='sp:text-[10px]'>最適な企業ツールを見つける</span>
@@ -1541,4 +1541,4 @@ const WebMaruTop = ( {scrollToWebMaruContnet} ) => {
   );
 };
 
-export default WebMaruTop;
+export default MitsukeTop;

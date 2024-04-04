@@ -8,7 +8,7 @@ import { getCompanyList } from "../../redux/slice/companySlice";
 import Pagination from '../Pagination';
 
 
-const WebMaruContnet = ( {companyContentRef} ) => {
+const MitsukeContnet = ( {companyContentRef} ) => {
   const navigate= useNavigate();
   const [currentPage, setCurrentPage]=useState(1)
   const [recordsPerPage, setRecordPerPage]=useState(2);
@@ -234,4 +234,4 @@ const WebMaruContnet = ( {companyContentRef} ) => {
   );
 };
 
-export default WebMaruContnet;
+export default MitsukeContnet;

@@ -1,10 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, ReducerType } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
   clientList: [],
-  postQueryResultMessage: ""
-
+  postQueryResultMessage: "",
+  deletedResultMessage: "",
+  oneClientData: {}
 }
 
 export const getClientList = createAsyncThunk(
@@ -43,6 +44,56 @@ export const postQuery = createAsyncThunk(
   }
 )
 
+export const getOneClient = createAsyncThunk(
+  "one/client",
+  async (Id) => {
+    console.log("--------",Id);
+    const res = await axios.get(`${process.env.REACT_APP_API}/clients/getoneclient`,{
+      params:{
+        id:Id
+      }
+    });
+    return res.data;
+  }
+)
+
+export const deleteOneClient = createAsyncThunk(
+  "onedelete/client",
+  async (Id) => {
+    const res = await axios.delete(process.env.REACT_APP_API+"/clients/deleteoneclient?id="+Id);
+    // console.log("--------",res.data);
+    return res.data;
+  }
+)
+
+export const postWanted = createAsyncThunk(
+  "postwanted/clients",
+  async (payload) => {
+    const { name, email } = payload;
+    const secretKey = process.env.REACT_APP_SECRETKEY;
+
+    // Concatenate the username and email with a colon
+    const tokenPayload = `${name}:${email}`;
+
+    // Encode the token payload using Base64
+    const encodedTokenPayload = btoa(tokenPayload);
+
+    // Concatenate the encoded token payload with the secretKey
+    const token = `${encodedTokenPayload}.${secretKey}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    const res = await axios.post(
+      `${process.env.REACT_APP_API}/clients/postwanted`,
+      payload,
+      { headers }
+    );
+    return res.data;
+  }
+)
+
 export const clientSlice = createSlice({
   name: 'clients',
   initialState,
@@ -56,11 +107,12 @@ export const clientSlice = createSlice({
       .addCase(postQuery.fulfilled, (state, action) => {
         state.postQueryResultMessage = action.payload.message;
       })
-      // .addCase(updatePassword.fulfilled, (state, action) => {
-      //   state.userInfo = { ...action.payload.user };
-      //   state.message.status = 200;
-      //   state.message.content = action.payload.message;
-      // })
+      .addCase(getOneClient.fulfilled, (state, action) => {
+        state.oneClientData = {...action.payload};
+      })
+      .addCase(deleteOneClient.fulfilled, (state, action) => {
+        state.deletedResultMessage = action.payload.message;
+      })
       // .addCase(updatePassword.rejected, (state, action) => {
       //   state.message.status = 401;
       //   state.message.content = action.error.message;

@@ -1,4 +1,4 @@
-import logo from '../../img/black_logo.png';
+import logo from '../../img/black_logo.webp';
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
