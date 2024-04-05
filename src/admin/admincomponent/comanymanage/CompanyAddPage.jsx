@@ -153,41 +153,63 @@ const CompanyAddPage=()=>{
 
   },[logo]);
   
-  const getLogoImage = (e) => {
-    setLogo(e.target.files[0]);
+  const getLogoImage = async(e) => {
+    // setLogo(e.target.files[0]);
+    var file=e.target.files[0]
     
-    // const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    // const maxPixels = 500 * 500; // Maximum number of pixels
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/webp';
+    const maxPixels = 500 * 500; // Maximum number of pixels
 
-    // if (!isJpgOrPng) {
-    //   message.error('アップロードできる画像はJPG/PNGのみです！');
-    //   setFileFlag(false);
-    // }
+    if (!isJpgOrPng) {
+      message.error('アップロードできる画像はJPG/PNG/WEBPのみです！');
+      // setFileFlag(false);
+    }
 
-    // // Calculate image dimensions using createImageBitmap
-    // const image = await createImageBitmap(file);
-    // const width = image.width;
-    // const height = image.height;
-    // const pixels = width * height;
+    // Calculate image dimensions using createImageBitmap
+    const image = await createImageBitmap(file);
+    const width = image.width;
+    const height = image.height;
+    const pixels = width * height;
 
-    // if (pixels > maxPixels) {
-    //   message.error(`画像のサイズは500x500ピクセルを超えないこと！`);
-    //   setFileFlag(false);
-    // }
+    if (pixels > maxPixels) {
+      message.error(`画像のサイズは500x500ピクセルを超えないこと！`);
+      // setFileFlag(false);
+    }
+    if(isJpgOrPng && (pixels <= maxPixels)){
+      setLogo(file);
+    }
     
     // return isJpgOrPng && pixels <= maxPixels;
   };
 
+  const handleClickAddCompany =()=>{
+    const payload={
+      title: title,
+      description: description,
+      campaigns: campaigns,
+      expertise: expertise,
+      tools: tools,
+      solvedissues: solvedissues,
+      pricesence: pricesence,
+      startdate: startdate,
+      industryExperiences: industryExperiences,
+      representativeName: representativeName,
+      address: address,
+      establishedYear: establishedYear,
+      memberCount: memberCount,
+      sales: sales,
+      publishForm: publishForm
+    }
+  }
+
   return(
     <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-10 overflow-y-auto`}>
       <div className="flex w-full justify-center items-center">
-        {/* <div className="w-[60px] h-[60px] bg-red-500"></div> */}
         <p className="text-2xl font-bold mx-5">会社情報登録</p>
       </div>
       <div className="w-[700px] flex flex-col text-left mx-auto px-20 py-5">
         <div className="flex flex-col items-start py-2">
           <label className="font-bold mb-1">【PRタイトル】</label>
-          {/* <p>{oneCompany.title}</p> */}
           <Input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}/>
         </div>
         <div className="flex flex-col items-start py-2">
@@ -327,7 +349,7 @@ const CompanyAddPage=()=>{
       </div>
       <div className="w-full flex justify-center items-center">
        <Link to="/manage/companymanage" className="flex items-center text-sm border px-2 py-1 mx-5 rounded-md hover:bg-[#FD6E6A] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
-       <Link to={"company_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-5 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />登録</Link>
+       <Link className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-5 px-10 py-1 hover:bg-white hover:text-black hover:border' onClick={handleClickAddCompany}><IoAddCircleOutline className="font-bold mr-2" />登録</Link>
       </div>
     </div>
   );

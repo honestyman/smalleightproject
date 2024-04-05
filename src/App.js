@@ -24,12 +24,14 @@ import CompanyManage from './admin/admincomponent/comanymanage/CompanyManage.jsx
 import CompanyDetail from './admin/admincomponent/comanymanage/CompanyDetail.jsx';
 import CompanyAddPage from './admin/admincomponent/comanymanage/CompanyAddPage.jsx';
 import MitsukePartner from './pages/MitsukePartner.jsx';
+import MitsukePartnerThanks from './pages/MitsukePartnerThanks.jsx';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+          <Route path='/:service' element={<Top/>}/>
           <Route path='/' element={<Top/>}/>
           <Route path='/news' element={<News/>}/>
           <Route path='/column' element={<Column/>}/>
@@ -42,6 +44,7 @@ function App() {
           <Route path='/multiful_companyinquery/:ids' element={<MultifuleCompanysInquery/>}/>
           <Route path='/mitsuke' element={<Mitsuke/>}/>
           <Route path='/mitsuke/partner' element={<MitsukePartner/>}/>
+          <Route path='/mitsukepartnerthanks' element={<MitsukePartnerThanks/>}/>
           <Route path='/columndetail/:id' element={<ColumnDetail/>}/>
           <Route path='/newsdetail/:id' element={<NewsDetail/>}/>
           <Route path='/admin' element={<Login/>}/>

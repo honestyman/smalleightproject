@@ -198,16 +198,18 @@ const MitsukeContnet = ( {companyContentRef} ) => {
                       <span key={index}>{text.text}{(index < company.industryexperiences.length-1)?", ":""}</span>
                     );
                   })}</p>
-                  <div className='w-full flex justify-center items-center mt-3'>
-                    <button className='flex items-center text-white border-2 rounded-2xl bg-[#FD6E6A] px-10 py-1 sp:text-sm' onClick={toggleHandlerCompanies(company)}>
+                  <div className='w-full flex justify-center items-center mt-3'> 
+                    <button disabled={company.publishForm==="掲載+リード"?false:true} className={`flex items-center border-2 rounded-2xl  px-10 py-1 sp:text-sm ${company.publishForm==="掲載+リード" ? 'bg-[#FD6E6A] text-white' : 'bg-gray-300'}`} onClick={toggleHandlerCompanies(company)}>
                       <input
                         checked={isCheckedCompany[parseInt(company.id)] != undefined ? isCheckedCompany[parseInt(company.id)] : false}
                         className='w-4 h-4 mr-3'
                         type="checkbox"
                         readOnly
+                        disabled={company.publishForm==="掲載+リード"? undefined : disabled }
+                        // {company.publishForm==="掲載+リード"?disabled:""}
                       />
                       この企業を選択
-                      </button>
+                    </button>
                     {/* <div className='ml-10 flex items-center' onClick={toggleHandlerCompanies(company, index)}>
                       <input
                         checked={isCheckedCompany[parseInt(index)] != undefined ? isCheckedCompany[parseInt(index)] : false}

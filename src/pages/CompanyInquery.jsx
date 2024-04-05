@@ -8,6 +8,10 @@ import CompanyInqueryContent from "../component/inquery/CompanyInqueryContent";
 
 const CompanyInquery=()=>{
   const Id=useParams().id;
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   
   const navigate= useNavigate();
 

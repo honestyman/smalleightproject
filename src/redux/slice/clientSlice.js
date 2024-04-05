@@ -5,6 +5,7 @@ const initialState = {
   clientList: [],
   postQueryResultMessage: "",
   deletedResultMessage: "",
+  postWantedResultMessage: "",
   oneClientData: {}
 }
 
@@ -112,6 +113,9 @@ export const clientSlice = createSlice({
       })
       .addCase(deleteOneClient.fulfilled, (state, action) => {
         state.deletedResultMessage = action.payload.message;
+      })
+      .addCase(postWanted.fulfilled, (state, action) => {
+        state.postWantedResultMessage = action.payload.message;
       })
       // .addCase(updatePassword.rejected, (state, action) => {
       //   state.message.status = 401;

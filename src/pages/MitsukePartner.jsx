@@ -24,6 +24,10 @@ const MitsukePartner=()=>{
   const [publishForm, setPublishForm] = useState("掲載のみ");
   const [phoneNumber, setPhonenumber] = useState("");
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const clickQueryHandler =()=>{
     let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
     if(!emailRegex.test(companyEmail)){
@@ -37,7 +41,7 @@ const MitsukePartner=()=>{
         publishForm:publishForm
       }
       dispatch(postWanted(payload));
-      // navigate("/inquerythanks");
+      navigate("/mitsukepartnerthanks");
     }
   }
  

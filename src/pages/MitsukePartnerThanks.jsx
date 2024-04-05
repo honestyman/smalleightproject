@@ -4,22 +4,19 @@ import Header from "../component/Header";
 
 import { useNavigate } from "react-router-dom";
 import Footer from "../component/Footer";
-import InqueryContent from "../component/inquery/InqueryContent";
+import MitsukePartnerThanksContent from "../component/mitsukepartner/MitsukePartnerThanksContent";
 
-const Inquery=()=>{
+const MitsukePartnerThanks=()=>{
 
   const navigate= useNavigate();
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   return(
     <div className="w-100">
       <Header/>
-      <InqueryContent/>
+      <MitsukePartnerThanksContent/>
       <Footer/>
     </div>
   );
   
 };
-export default Inquery;
+export default MitsukePartnerThanks;
