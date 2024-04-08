@@ -10,6 +10,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import { getClientList, deleteOneClient } from "../../../redux/slice/clientSlice";
 import Pagination from '../../../component/Pagination';
+import { Select } from "antd";
 
 
 const ClientManage=()=>{
@@ -67,7 +68,7 @@ const ClientManage=()=>{
                       return(
                         <tr key={index} className="border-b border-neutral-200 text-center bg-gray-100 dark:border-white/10">
                           <td className="whitespace-nowrap border px-6 py-4"><Link to={"client_detail/"+client.id} className="flex justify-center text-green-500 items-center hover:text-black"><CiCircleMore className="mr-2" />詳細</Link></td>
-                          <td className="whitespace-nowrap border px-6 py-4 ">{index+1}</td>
+                          <td className="whitespace-nowrap border px-6 py-4 ">{(currentPage-1)*recordsPerPage+index+1}</td>
                           <td className="whitespace-nowrap border px-6 py-4">{client.name}</td>
                           <td className="whitespace-nowrap border px-6 py-4">{client.email}</td>
                           <td className="whitespace-nowrap border px-6 py-4">{client.company}</td>
@@ -83,6 +84,33 @@ const ClientManage=()=>{
             </div>
           </div>
           <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+          <div className="w-full flex py-3 mx-auto items-center justify-center">
+            <span className="text-red-500 text-sm mr-3">表示する個数 :</span>
+            <Select className="w-20" 
+              value={recordsPerPage}
+              onChange={ (value) => setRecordPerPage(value)}
+              options={
+                [
+                  {
+                    value:"5",
+                    label:"5"
+                  },
+                  {
+                    value:"10",
+                    label:"10"
+                  },
+                  {
+                    value:"15",
+                    label:"15"
+                  },
+                  {
+                    value:"20",
+                    label:"20"
+                  }
+                ]
+              }
+            />
+          </div>
     </div>
   );
   

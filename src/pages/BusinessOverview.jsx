@@ -14,7 +14,9 @@ const BusinessOverview=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <BusinessContent/>
+      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100]">
+        <BusinessContent/>
+      </div>
       <Footer/>
     </div>
   );

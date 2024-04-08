@@ -4,228 +4,12 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { SlArrowLeft } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { findingCompany, postSelectedCompanys } from "../../redux/slice/companySlice";
+import { findingCompany, postSelectedCompanys, getExpertiseList, getToolsList, getSolvedissueList, getPricesenceList, getStartDateList} from "../../redux/slice/companySlice";
 import { findingTool } from "../../redux/slice/companySlice";
 
 
 import WOW from 'wow.js';
 import 'animate.css';
-// import 'intersection-observer';
-const firstQuestionData = [
-  {
-    id: "1",
-    text: "広告代理店／コンサル会社を探している",
-  },
-  {
-    id: "2",
-    text: "マーケティングツールを探している",
-  }
-];
-
-const advertisementStep1Data = [
-  {
-    id: "1",
-    text: "新規顧客を獲得",
-  },
-  {
-    id: "2",
-    text: "サービス等の認知度を向上",
-  },
-  {
-    id: "3",
-    text: "WEBサイト改善",
-  },
-  {
-    id: "4",
-    text: "マーケティング人材育成",
-  },
-  {
-    id: "5",
-    text: "WEB採用強化",
-  }
-  ,
-  {
-    id: "6",
-    text: "その他・相談したい",
-  }
-];
-const advertisementStep2Data = [
-  {
-    id: "1",
-    text: "リスティング広告",
-  },
-  {
-    id: "2",
-    text: "ディスプレイ広告",
-  },
-  {
-    id: "3",
-    text: "動画広告（YOUTUBE含む）",
-  },
-  {
-    id: "4",
-    text: "SNS運用（広告運用含む）",
-  },
-  {
-    id: "5",
-    text: "アフィリエイト広告",
-  },
-  {
-    id: "6",
-    text: "ネイティブ広告",
-  },
-  {
-    id: "7",
-    text: "記事広告",
-  },
-  {
-    id: "8",
-    text: "SEO（検索エンジン最適化）・MEO（マップ検索エンジン最適化）",
-  },
-  {
-    id: "9",
-    text: "LPO（ランディングページ最適化）",
-  },
-  {
-    id: "10",
-    text: "EFO（エントリーフォーム最適化）",
-  },
-  {
-    id: "11",
-    text: "その他・相談したい",
-  }
-];
-const advertisementStep3Data = [
-  {
-    id: "1",
-    text: "WEB広告",
-  },
-  {
-    id: "2",
-    text: "SEO／オウンドメディア運用",
-  },
-  {
-    id: "3",
-    text: "SNS運用",
-  },
-  {
-    id: "4",
-    text: "行っていない",
-  },
-  {
-    id: "5",
-    text: "その他",
-  }
-];
-const advertisementStep4Data = [
-  {
-    id: "1",
-    text: "1か月以内",
-  },
-  {
-    id: "2",
-    text: "2～3か月以内",
-  },
-  {
-    id: "3",
-    text: "6か月以内",
-  },
-  {
-    id: "4",
-    text: "1年以内",
-  },
-  {
-    id: "5",
-    text: "検討中・良い提案があれば",
-  }
-];
-const advertisementStep5Data = [
-  {
-    id: "1",
-    text: "～50万円／月",
-  },
-  {
-    id: "2",
-    text: "50万円～／月",
-  },
-  {
-    id: "3",
-    text: "100万円～／月",
-  },
-  {
-    id: "4",
-    text: "300万円～／月",
-  },
-  {
-    id: "5",
-    text: "500万円～／月",
-  },
-  {
-    id: "6",
-    text: "1,000万円～／月",
-  },
-  {
-    id: "7",
-    text: "検討中・良い提案があれば",
-  }
-];
-
-const marketingStep1Data = [
-  {
-    id: "1",
-    text: "MA（マーケティングオートメーション）ツール",
-  },
-  {
-    id: "2",
-    text: "SFA（営業支援）ツール",
-  },
-  {
-    id: "3",
-    text: "CRM（顧客関係管理）ツール",
-  },
-  {
-    id: "4",
-    text: "アクセス解析ツール",
-  },
-  {
-    id: "5",
-    text: "SEOツール",
-  },
-  {
-    id: "6",
-    text: "LPOツール",
-  },
-  {
-    id: "7",
-    text: "広告効果測定ツール",
-  },
-  {
-    id: "8",
-    text: "SNS運用ツール",
-  }
-];
-
-const resultViewData = [
-  {
-    id: "1",
-    name: "株式会社○○",
-    budget: "～50万円／月",
-    specialization: "WEB広告",
-  },
-  {
-    id: "2",
-    name: "株式会社○○",
-    budget: "～50万円／月",
-    specialization: "WEB広告",
-  },
-  {
-    id: "3",
-    name: "株式会社○○",
-    budget: "～50万円／月",
-    specialization: "WEB広告",
-  }
-];
-
 
 const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
 
@@ -250,7 +34,46 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
   const [disabledResultView, setDisabledResultView] = useState(true);
   const [disabledToolResultView, setDisabledToolResultView] = useState(true);
 
+  const [advertisementStep1Data, setAdvertisementStep1Data] =useState([])
+  const [advertisementStep2Data, setAdvertisementStep2Data] =useState([])
+  const [advertisementStep4Data, setAdvertisementStep4Data] =useState([])
+  const [advertisementStep5Data, setAdvertisementStep5Data] =useState([])
+  const [marketingStep1Data, setMarketingStep1Data] =useState([])
 
+  const firstQuestionData = [
+    {
+      id: "1",
+      text: "広告代理店／コンサル会社を探している",
+    },
+    {
+      id: "2",
+      text: "マーケティングツールを探している",
+    }
+  ];
+  
+  const advertisementStep3Data = [
+    {
+      id: "1",
+      text: "WEB広告",
+    },
+    {
+      id: "2",
+      text: "SEO／オウンドメディア運用",
+    },
+    {
+      id: "3",
+      text: "SNS運用",
+    },
+    {
+      id: "4",
+      text: "行っていない",
+    },
+    {
+      id: "5",
+      text: "その他",
+    }
+  ];
+  
   const [selectedValue, setSelectedValue] = useState('');
   const [advertisementStep1, setAdvertisementStep1] = useState('hidden');
   const [advertisementStep2, setAdvertisementStep2] = useState('hidden');
@@ -298,20 +121,43 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
   const [clientPhonenumber, setClientPhonenumber] = useState("");
   const [questionContent, setQuestionContent] = useState("");
 
-  const {matchCompanies, matchToolCompanies, postSelectedCompanysResultMessage} = useSelector(state => state.companies);
+  const {matchCompanies, matchToolCompanies, postSelectedCompanysResultMessage, allExpertiseList, allToolsList, allSolvedissueList, allPricesenceList, allStartDateList} = useSelector(state => state.companies);
   
   useEffect(() => {
-    console.log(matchCompanies);
-  }, [matchCompanies]);
+    dispatch(getExpertiseList());
+    dispatch(getToolsList());
+    dispatch(getSolvedissueList());
+    dispatch(getPricesenceList());
+    dispatch(getStartDateList());
+  },[])
 
   useEffect(() => {
-    console.log("=======>",postSelectedCompanysResultMessage);
-    if(postSelectedCompanysResultMessage==="success"){
-      setResultView("hidden");
-      setResultMarketingView("hidden");
-      setResultMessage("block");
-    } 
-  }, [postSelectedCompanysResultMessage]);
+    if(allSolvedissueList.length){
+      setAdvertisementStep1Data([...allSolvedissueList , {id:allSolvedissueList[allSolvedissueList.length-1].id+1, text: "その他・相談したい"}]);
+    }
+    if(allExpertiseList.length){
+      setAdvertisementStep2Data([...allExpertiseList , {id:allExpertiseList[allExpertiseList.length-1].id+1, text: "その他・相談したい"}]);
+    }
+    if(allStartDateList.length){
+      setAdvertisementStep4Data([...allStartDateList , {id:allStartDateList[allStartDateList.length-1].id+1, text: "検討中・良い提案があれば"}]);
+    }
+    if(allPricesenceList.length){
+      setAdvertisementStep5Data([...allPricesenceList , {id:allPricesenceList[allPricesenceList.length-1].id+1, text: "検討中・良い提案があれば"}]);
+    }
+    if(allToolsList.length){
+      setMarketingStep1Data(allToolsList);
+    }
+    // if()
+  }, [allSolvedissueList, allExpertiseList, allStartDateList, allPricesenceList, allToolsList]);
+  
+  // useEffect(() => {
+  //   console.log("=======>",postSelectedCompanysResultMessage);
+  //   if(postSelectedCompanysResultMessage==="success"){
+  //     setResultView("hidden");
+  //     setResultMarketingView("hidden");
+  //     setResultMessage("block");
+  //   } 
+  // }, [postSelectedCompanysResultMessage]);
 
   useEffect(() => {
     const wow = new WOW({
@@ -471,7 +317,11 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
       email:clientEmail,
       selectedCompanise:resultValue
     }
-    dispatch(postSelectedCompanys(payload));
+    dispatch(postSelectedCompanys(payload)).then(()=>{
+      setResultView("hidden");
+      setResultMarketingView("hidden");
+      setResultMessage("block");
+    });
   }
   const resultMarketingViewFuntion = () => {
     const payload={
@@ -479,11 +329,10 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
       email:clientEmail,
       selectedCompanise:resultToolValue
     }
-    dispatch(postSelectedCompanys(payload));
-    // if(postSelectedCompanysResultMessage==="success"){
-    //   setResultMarketingView("hidden");
-    //   setResultMessage("block");
-    // } 
+    dispatch(postSelectedCompanys(payload)).then(()=>{
+      setResultMarketingView("hidden");
+      setResultMessage("block");
+    });
   }
 
   const advertisementStep1BackFuntion = () => {
@@ -723,10 +572,10 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
           <div ref={ref1} className='w-[80%] sp:w-full'>
             <div className='w-full sp:w-[80%] flex flex-col justify-center items-center rounded-md bg-white shadow-xl mt-10 px-5 py-10 sp:mx-auto sp:py-5'>
               <div className='w-full flex pb-5 border-b justify-center sp:flex-wrap'>
-                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>新規顧客獲得</span>
-                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>認知拡大</span>
-                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>WEBサイト制作</span>
-                <span className='text-white mx-3 px-3 py-2 bg-[#FD6E6A] rounded-md sp:w-full sp:my-1'>マーケティングツール</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#B40100] rounded-md sp:w-full sp:my-1'>新規顧客獲得</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#B40100] rounded-md sp:w-full sp:my-1'>認知拡大</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#B40100] rounded-md sp:w-full sp:my-1'>WEBサイト制作</span>
+                <span className='text-white mx-3 px-3 py-2 bg-[#B40100] rounded-md sp:w-full sp:my-1'>マーケティングツール</span>
               </div>
               <p className='py-5 text-red-500'>など</p>
               <div className='w-full sp:rounded-2xl text-red-500 text-2xl font-bold flex flex-col justify-center items-center mb-5 sp:text-sm'>
@@ -734,8 +583,8 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                 <p className='sp:mx-5'>マーケティングに強みをもった企業やツールが見つかります!</p>
               </div>
               {/* <p className='text-xl'>アンケートを始めますか?</p> */}
-              <Link className='w-[250px] text-white border-2 rounded-full bg-[#FD6E6A] px-5 py-2 my-2 hover:bg-white hover:text-[#FD6E6A] sp:text-sm' onClick={() => showModal()}>さっそく見つけて</Link>
-              <Link to="/mitsuke/partner" className='w-[250px] text-[#FD6E6A] border-2 rounded-full bg-white px-5 py-2 my-2 hover:bg-[#FD6E6A] hover:text-white sp:text-sm'>ご掲載希望はこちらから</Link>
+              <Link className='w-[250px] text-white border-2 rounded-full bg-[#B40100] px-5 py-2 my-2 hover:bg-white hover:text-[#B40100] sp:text-sm' onClick={() => showModal()}>さっそく見つけて</Link>
+              <Link to="/mitsuke/partner" className='w-[250px] text-[#B40100] border-2 rounded-full bg-white px-5 py-2 my-2 hover:bg-[#B40100] hover:text-white sp:text-sm'>ご掲載希望はこちらから</Link>
             </div>
           </div>
         </div>
@@ -770,7 +619,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
           <div className='w-[calc(100%-100px)] sp:w-full flex flex-col justify-center items-center'>
             <span className='font-bold mb-2 sp:my-3'>探しているサービスや解決したい課題、ご予算イメージなどを基に検索</span>
             <span className='text-left sp:mb-3'>「新規顧客を増やしたい」 「サービスの認知度を上げたい」 「顧客分析ツールが欲しい」など。 質問に回答するともっとカンタンに希望に合う企業が見つかります。</span>
-            <button className='px-5 py-1 bg-[#FD6E6A] border border-[#FD6E6A] text-white rounded hover:text-[#FD6E6A] hover:bg-white' onClick={() => showModal()}>質問に回答する</button>
+            <button className='px-5 py-1 bg-[#B40100] border border-[#B40100] text-white rounded hover:text-[#B40100] hover:bg-white' onClick={() => showModal()}>質問に回答する</button>
           </div>
         </div>
 
@@ -808,7 +657,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -819,7 +668,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
               <div className='w-full flex flex-col mt-10 px-20 sp:px-5'>
                 {firstQuestionData.map((item) => {
                     return (
-                      <div key={item.id} className="flex items-center mb-10 border border-[#FD6E6A] rounded-md py-2 px-5">
+                      <div key={item.id} className="flex items-center mb-10 border border-[#B40100] rounded-md py-2 px-5">
                         <input id={`radio${item.id}`} type="radio" name="radio" className="hidden" value={item.text} onChange={handleRadioChange} />
                         <label htmlFor={`radio${item.id}`} className="flex items-center cursor-pointer">
                           <span className="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
@@ -828,14 +677,14 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     );
                   })}
                 <div className='w-full px-5'>
-                  <button disabled={disabled} className={`text-white float-right border-2 rounded-full px-10 py-1 ${!disabled ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => nextFuntion1()}>次へ</button>
+                  <button disabled={disabled} className={`text-white float-right border-2 rounded-full px-10 py-1 ${!disabled ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => nextFuntion1()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* advertisment   Step1 */}
             <div className={`w-full h-full flex flex-col ${advertisementStep1}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -847,7 +696,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -857,11 +706,11 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
               </div>
               <div className='w-full flex flex-col px-10 sp:px-5'>
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
-                  {advertisementStep1Data.map((item) => {
+                  {advertisementStep1Data && advertisementStep1Data.map((item) => {
                     return (
                       <div
                         key={item.id}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5'
+                        className='w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5'
                         onClick={toggleHandlerAdvertisementStep1(item)}
                       >
                         <input
@@ -876,8 +725,8 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => advertisementStep1BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep1} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep1 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => advertisementStep1Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => advertisementStep1BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep1} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep1 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => advertisementStep1Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
@@ -885,7 +734,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
             {/* advertisment   Step2 */}
             <div className={`w-full h-full flex flex-col ${advertisementStep2}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -897,7 +746,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -911,7 +760,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     return (
                       <div
                         key={item.id}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5'
+                        className='w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5'
                         onClick={toggleHandlerAdvertisementStep2(item)}
                       >
                         <input
@@ -926,15 +775,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => advertisementStep2BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep2} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep2 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => advertisementStep2Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => advertisementStep2BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep2} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep2 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => advertisementStep2Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* advertisment   Step3 */}
             <div className={`w-full h-full flex flex-col ${advertisementStep3}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -946,7 +795,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -960,7 +809,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     return (
                       <div
                         key={item.id}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5'
+                        className='w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5'
                         onClick={toggleHandlerAdvertisementStep3(item)}
                       >
                         <input
@@ -975,15 +824,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => advertisementStep3BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep3} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep3 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => advertisementStep3Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => advertisementStep3BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep3} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep3 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => advertisementStep3Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* advertisment   Step4 */}
             <div className={`w-full h-full flex flex-col ${advertisementStep4}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -995,7 +844,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1007,7 +856,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep4Data.map((item) => {
                     return (
-                      <div key={item.id} className="w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5">
+                      <div key={item.id} className="w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5">
                         <input id={`radioadvertisementstep4_${item.id}`} type="radio" name={"radioadvertisementstep4"} className="hidden" value={item.text} onChange={toggleHandlerAdvertisementStep4} />
                         <label htmlFor={`radioadvertisementstep4_${item.id}`} className="flex items-center cursor-pointer">
                           <span className="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
@@ -1017,15 +866,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => advertisementStep4BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep4} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep4 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => advertisementStep4Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => advertisementStep4BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep4} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep4 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => advertisementStep4Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* advertisment   Step5 */}
             <div className={`w-full h-full flex flex-col ${advertisementStep5}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1037,7 +886,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1049,7 +898,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep5Data.map((item) => {
                     return (
-                      <div key={item.id} className="w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5">
+                      <div key={item.id} className="w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5">
                         <input id={`radioadvertisementstep5_${item.id}`} type="radio" name="radioadvertisementstep5" className="hidden" value={item.text} onChange={toggleHandlerAdvertisementStep5} />
                         <label htmlFor={`radioadvertisementstep5_${item.id}`} className="flex items-center cursor-pointer">
                           <span className="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
@@ -1059,15 +908,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => advertisementStep5BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep5} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep5 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => advertisementStep5Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => advertisementStep5BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep5} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep5 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => advertisementStep5Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* advertisment   Step6 */}
             <div className={`w-full h-full flex flex-col ${advertisementStep6}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1079,7 +928,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1121,15 +970,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
 
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => advertisementStep6BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep6} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep6 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => advertisementStep6Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => advertisementStep6BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep6} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep6 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => advertisementStep6Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* view result */}
             <div className={`w-full h-full flex flex-col ${resultView}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で6問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で6問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1144,7 +993,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1167,7 +1016,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     return (
                       <div
                         key={index}
-                        className='w-full flex border border-[#FD6E6A] items-center rounded-md my-1 py-2 px-5 sp:text-sm'
+                        className='w-full flex border border-[#B40100] items-center rounded-md my-1 py-2 px-5 sp:text-sm'
                         onClick={toggleHandlerResultView(item, index)}
                       >
                         <input
@@ -1208,8 +1057,8 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => resultViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledResultView} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledResultView ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => resultViewFuntion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => resultViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledResultView} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledResultView ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => resultViewFuntion()}>次へ</button>
                 </div>
               </div>
             </div>
@@ -1217,7 +1066,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
             {/* view message */}
             <div className={`w-full h-full flex flex-col ${resultMessage}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white py-1'></p>
+                <p className='bg-[#B40100] text-white py-1'></p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1230,7 +1079,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1245,7 +1094,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   <p className='text-xl my-1'>今しばらくお待ちください!</p>
                 </div>
                 {/* <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => resultViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => resultViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
                 </div> */}
               </div>
             </div>
@@ -1253,7 +1102,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
             {/* marketing   Step1 */}
             <div className={`w-full h-full flex flex-col ${marketingStep1}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1265,7 +1114,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1279,7 +1128,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     return (
                       <div
                         key={item.id}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5'
+                        className='w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5'
                         onClick={toggleHandlerMarketingStep1(item)}
                       >
                         <input
@@ -1294,15 +1143,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => marketingStep1BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledMaStep1} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledMaStep1 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => marketingStep1Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => marketingStep1BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledMaStep1} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledMaStep1 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => marketingStep1Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* marketing   Step2 */}
             <div className={`w-full h-full flex flex-col ${marketingStep2}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1314,7 +1163,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1326,7 +1175,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep4Data.map((item) => {
                     return (
-                      <div key={item.id} className="w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5">
+                      <div key={item.id} className="w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5">
                         <input id={`radiomarketingtstep2_${item.id}`} type="radio" name={"radiomarketingtstep2"} className="hidden" value={item.text} onChange={toggleHandlerMarketingStep2} />
                         <label htmlFor={`radiomarketingtstep2_${item.id}`} className="flex items-center cursor-pointer">
                           <span className="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
@@ -1336,15 +1185,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => marketingStep2BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledMaStep2} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledMaStep2 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => marketingStep2Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => marketingStep2BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledMaStep2} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledMaStep2 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => marketingStep2Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* marketing   Step3 */}
             <div className={`w-full h-full flex flex-col ${marketingStep3}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1356,7 +1205,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1368,7 +1217,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                 <div className='w-full h-[250px] flex flex-col mb-5 overflow-y-auto px-2'>
                   {advertisementStep5Data.map((item) => {
                     return (
-                      <div key={item.id} className="w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5">
+                      <div key={item.id} className="w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5">
                         <input id={`radiomarketingtstep3_${item.id}`} type="radio" name={"radiomarketingtstep3"} className="hidden" value={item.text} onChange={toggleHandlerMarketingStep3} />
                         <label htmlFor={`radiomarketingtstep3_${item.id}`} className="flex items-center cursor-pointer">
                           <span className="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
@@ -1378,15 +1227,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => marketingStep3BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledMaStep3} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledMaStep3 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => marketingStep3Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => marketingStep3BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledMaStep3} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledMaStep3 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => marketingStep3Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* marketing   Step4 */}
             <div className={`w-full h-full flex flex-col ${marketingStep4}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で4問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で4問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1398,7 +1247,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1440,15 +1289,15 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
 
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => marketingStep4BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledAdStep6} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep6 ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => marketingStep4Funtion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => marketingStep4BackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledAdStep6} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledAdStep6 ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => marketingStep4Funtion()}>次へ</button>
                 </div>
               </div>
             </div>
             {/* view result */}
             <div className={`w-full h-full flex flex-col ${resultMarketingView}`}>
               <div className='w-full flex justify-between'>
-                <p className='bg-[#FD6E6A] text-white px-2 py-1'>全部で5問</p>
+                <p className='bg-[#B40100] text-white px-2 py-1'>全部で5問</p>
                 <Link onClick={() => closeModal()}><span className='text-black text-2xl mx-3 mt-3 hover:text-[#FB2407]'>&times;</span></Link>
               </div>
               <div className='w-full h-20 flex justify-between px-10 items-center my-5 sp:px-5'>
@@ -1463,7 +1312,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     background
                     backgroundPadding={6}
                     styles={buildStyles({
-                      backgroundColor: "#FD6E6A",
+                      backgroundColor: "#B40100",
                       textColor: "white",
                       pathColor: "white",
                       trailColor: "transparent"
@@ -1486,7 +1335,7 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                     return (
                       <div
                         key={index}
-                        className='w-full flex border border-[#FD6E6A] rounded-md my-1 py-2 px-5 sp:text-sm'
+                        className='w-full flex border border-[#B40100] rounded-md my-1 py-2 px-5 sp:text-sm'
                         onClick={toggleHandlerToolResultView(item, index)}
                       >
                         <input
@@ -1526,8 +1375,8 @@ const MitsukeTop = ( {scrollToMitsukeContnet} ) => {
                   })}
                 </div>
                 <div className='w-full flex px-5 justify-between'>
-                  <button className='flex justify-center items-center hover:text-[#FD6E6A]' onClick={() => resultMarketingViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
-                  <button disabled={disabledToolResultView} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledToolResultView ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={() => resultMarketingViewFuntion()}>次へ</button>
+                  <button className='flex justify-center items-center hover:text-[#B40100]' onClick={() => resultMarketingViewBackFuntion()}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                  <button disabled={disabledToolResultView} className={`text-white border-2 rounded-full px-10 py-1 ${!disabledToolResultView ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={() => resultMarketingViewFuntion()}>次へ</button>
                 </div>
               </div>
             </div>

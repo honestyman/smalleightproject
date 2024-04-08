@@ -56,8 +56,8 @@ const MitsukePartner=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#FD6E6A] rounded-sm sp:pb-10">
-        <div className="w-full h-full bg-gradient-to-t from-[#FD6E6A] to-red-700">
+      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100] rounded-sm sp:pb-10">
+        <div className="w-full h-full bg-gradient-to-t from-[#B40100] to-red-700">
           <MitsukePartnerTop/>
         </div>
         <div className="w-[20%] sp:w-full h-[1100px] sp:h-[1000px] absolute top-40 right-5 bg-[#f4f8f9] rounded-xl shadow-md sp:relative sp:right-0 sp:top-0">
@@ -106,7 +106,7 @@ const MitsukePartner=()=>{
                   <p>「お問い合わせ」 をクリックすることで、当社の<span className="font-bold mx-1 underline"><Link to="/terms">利用規約</Link></span>および<span className="font-bold mx-1 underline"><Link to="/policy">プライバシーポリシー</Link></span>に同意したものとみ なします。</p>
                 </div>
                 <div className='w-full h-10 flex mt-10 justify-center sp:px-0 sp:text-sm'>
-                  <button disabled={disabled} className={`text-white border-2 rounded-full px-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={clickQueryHandler}>お問い合わせ</button>
+                  <button disabled={disabled} className={`text-white border-2 rounded-full px-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={clickQueryHandler}>お問い合わせ</button>
                 </div>
               </div>
           </div>

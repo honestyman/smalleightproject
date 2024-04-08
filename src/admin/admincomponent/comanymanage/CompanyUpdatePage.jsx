@@ -11,13 +11,15 @@ import { Input, Select, Upload, Button, message } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getCampaignList, getExpertiseList, getToolsList, getSolvedissueList, getPricesenceList, getStartDateList, getIndustryExperienceList, addCompany, addCompanyLogo } from "../../../redux/slice/companySlice";
+import { getCampaignList, getExpertiseList, getToolsList, getSolvedissueList, getPricesenceList, getStartDateList, getIndustryExperienceList, addCompany, addCompanyLogo, getOneCompany, updateCompany } from "../../../redux/slice/companySlice";
 import TextArea from "antd/es/input/TextArea";
 
 
-const CompanyAddPage=()=>{
+const CompanyUpdatePage=()=>{
   const dispatch = useDispatch();
   const Id=useParams().id;
+
+  const  { oneCompany } = useSelector(state => state.companies);
 
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
@@ -37,6 +39,7 @@ const CompanyAddPage=()=>{
   const [sales, setSales] = useState();
   const [logo, setLogo] = useState();
   const [imagePreview, setImagePreview] = useState(null);
+  const [currentLogo, setCurrentLogo] =useState("")
 
   const [validName, setValidName] = useState("");
   const [validLogo, setValidLogo] = useState("");
@@ -55,6 +58,8 @@ const CompanyAddPage=()=>{
   const  { allCampaignList, allExpertiseList, allToolsList, allSolvedissueList, allPricesenceList, allStartDateList, allIndustryExperienceList } = useSelector(state => state.companies);
 
   useEffect(() => {
+    dispatch(getOneCompany(Id));
+
     dispatch(getCampaignList());
     dispatch(getExpertiseList());
     dispatch(getToolsList());
@@ -65,8 +70,71 @@ const CompanyAddPage=()=>{
   },[]);
 
   useEffect(() => {
-    console.log(allToolsList);
-  },[allToolsList]);
+    if(oneCompany){
+      console.log(oneCompany);
+      setName(oneCompany.name)
+      setTitle(oneCompany.title)
+      setDescription(oneCompany.description)
+      setCurrentLogo(oneCompany.logo)
+      setRepresentativeName(oneCompany.representativeName)
+      setAddress(oneCompany.address)
+      setEstablishedYear(oneCompany.establishedYear)
+      setMemberCount(oneCompany.memberCount)
+      setSales(oneCompany.sales)
+      // setCampaigns(...oneCompany.campaigns.text)
+      if(oneCompany.campaigns){
+        let temp=[];
+        // console.log()
+        for(let i=0; i<oneCompany.campaigns.length; i++){
+          temp.push(oneCompany.campaigns[i].text);
+        }
+        setCampaigns(temp);
+      }
+      if(oneCompany.expertises){
+        let temp=[];
+        // console.log()
+        for(let i=0; i<oneCompany.expertises.length; i++){
+          temp.push(oneCompany.expertises[i].text);
+        }
+        setExpertise(temp);
+      }
+      if(oneCompany.tools){
+        let temp=[];
+        // console.log()
+        for(let i=0; i<oneCompany.tools.length; i++){
+          temp.push(oneCompany.tools[i].text);
+        }
+        setTools(temp);
+      }
+      if(oneCompany.solvedissues){
+        let temp=[];
+        // console.log()
+        for(let i=0; i<oneCompany.solvedissues.length; i++){
+          temp.push(oneCompany.solvedissues[i].text);
+        }
+        setSolvedissues(temp);
+      }
+      if(oneCompany.pricesence){
+        setPricesence(oneCompany.pricesence.text);
+      }
+      if(oneCompany.startdate){
+        setStartDate(oneCompany.startdate.text);
+      }
+      if(oneCompany.industryexperiences){
+        let temp=[];
+        // console.log()
+        for(let i=0; i<oneCompany.industryexperiences.length; i++){
+          temp.push(oneCompany.industryexperiences[i].text);
+        }
+        setIndustryExperiences(temp);
+      }
+      setPublishForm(oneCompany.publishForm)
+    }
+  },[oneCompany]);
+
+  useEffect(()=>{
+    console.log(campaigns);
+  },[campaigns])
 
   const campaignData = () =>{
     const result=[];
@@ -200,11 +268,6 @@ const CompanyAddPage=()=>{
     }else{
       setValidName("")
     }
-    if(!logo){
-      setValidLogo("※この項目は必須入力項目です。")
-    }else{
-      setValidLogo("")
-    }
     if(!title){
       setValidTitle("※この項目は必須入力項目です。")
     }else{
@@ -250,10 +313,10 @@ const CompanyAddPage=()=>{
     }else{
       setValidPublishForm("")
     }
-    if(name && logo && title && description && startdate && pricesence && expertise && tools && solvedissues && industryExperiences && publishForm){
+    if(name && currentLogo && title && description && startdate && pricesence && expertise && tools && solvedissues && industryExperiences && publishForm){
       const payload={
+        id:Id,
         name: name,
-        logo:logo.name,
         title: title,
         description: description,
         campaigns: campaigns,
@@ -270,20 +333,23 @@ const CompanyAddPage=()=>{
         sales: sales,
         publishForm: publishForm
       }
-      dispatch(addCompany(payload)).then(() => {
-        dispatch(addCompanyLogo(logo)).then(()=>{
-          alert("正確に登録されています！");          
-        });
-        // setCurrentPage(1);
+      if(logo){
+        payload.logo=logo.name;
+      }
+      dispatch(updateCompany(payload)).then(() => {
+        if(logo){
+          dispatch(addCompanyLogo(logo));
+        }
+        alert("正確に変更されました！");
       })
     }
   }
 
   return(
-    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center px-10 py-10 `}>
+    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center px-10 py-10`}>
       <div className="w-full h-full pb-10 overflow-y-auto">
         <div className="flex w-full justify-center items-center">
-          <p className="text-2xl font-bold mx-5">会社情報登録</p>
+          <p className="text-2xl font-bold mx-5">会社情報の変更</p>
         </div>
         <div className="w-[700px] flex flex-col text-left mx-auto px-20 py-5">
           <div className="flex flex-col items-start py-2">
@@ -437,6 +503,12 @@ const CompanyAddPage=()=>{
                   <span className="mx-2">{logo.name}</span>
                 </div>
               )}
+              { !imagePreview && currentLogo && (
+                <div className="w-full flex border rounded-md p-1 mt-2 items-center">
+                  <img className="rounded" src={`${process.env.REACT_APP_BASE_URL}/img/${currentLogo}`} style={{ maxWidth: '50px' }} />
+                  <span className="mx-2">{currentLogo}</span>
+                </div>
+              )}
           </div>
           
         </div>
@@ -449,4 +521,4 @@ const CompanyAddPage=()=>{
   );
   
 };
-export default CompanyAddPage;
+export default CompanyUpdatePage;

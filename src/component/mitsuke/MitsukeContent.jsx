@@ -164,7 +164,7 @@ const MitsukeContnet = ( {companyContentRef} ) => {
                 <div className='w-full sp:w-full flex flex-col text-left px-5 sp:pt-5 sp:px-1'>
                   <div className='w-full flex justify-center items-center sp:flex-wrap'>
                     <div className='sp:w-full flex justify-center items-center px-10'>
-                      <div className='w-[100px] h-[100px] sp:w-[100px] sp:h-[100px] bg-[#FD6E6A]'></div>
+                      <div className='w-[100px] h-[100px] sp:w-[100px] sp:h-[100px] bg-[#B40100]'></div>
                     </div>
                     <p className='text-2xl font-bold sp:text-xl sp:text-center sp:mt-3'>{company.name}</p>
                   </div>
@@ -199,7 +199,7 @@ const MitsukeContnet = ( {companyContentRef} ) => {
                     );
                   })}</p>
                   <div className='w-full flex justify-center items-center mt-3'> 
-                    <button disabled={company.publishForm==="掲載+リード"?false:true} className={`flex items-center border-2 rounded-2xl  px-10 py-1 sp:text-sm ${company.publishForm==="掲載+リード" ? 'bg-[#FD6E6A] text-white' : 'bg-gray-300'}`} onClick={toggleHandlerCompanies(company)}>
+                    <button disabled={company.publishForm==="掲載+リード"?false:true} className={`flex items-center border-2 rounded-2xl  px-10 py-1 sp:text-sm ${company.publishForm==="掲載+リード" ? 'bg-[#B40100] text-white' : 'bg-gray-300'}`} onClick={toggleHandlerCompanies(company)}>
                       <input
                         checked={isCheckedCompany[parseInt(company.id)] != undefined ? isCheckedCompany[parseInt(company.id)] : false}
                         className='w-4 h-4 mr-3'
@@ -228,7 +228,7 @@ const MitsukeContnet = ( {companyContentRef} ) => {
       <div className='flex justify-center items-center py-3'>
         <span className='px-5'>選択した企業</span>
         <span className='mr-5'>{checkedCompanyCount}件</span>
-        <button onClick={multifulClick} disabled={disabled} className={`border-2 rounded-2xl px-5 py-1 sp:text-sm ${!disabled ? 'bg-[#FD6E6A] text-white hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `}>お問い合わせ</button>
+        <button onClick={multifulClick} disabled={disabled} className={`border-2 rounded-2xl px-5 py-1 sp:text-sm ${!disabled ? 'bg-[#B40100] text-white hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `}>お問い合わせ</button>
       </div>
       <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />  
       

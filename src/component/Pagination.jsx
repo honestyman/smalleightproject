@@ -15,19 +15,19 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     }
     return (
         <div className='flex justify-center items-center mt-5'>
-          <button className='w-[40px] h-[40px] mx-1 p-3 bg-white rounded border border:white shadow text-[#FD6E6A] hover:bg-[#FD6E6A] hover:text-white' onClick={goToPrevPage}>
+          <button className='w-[40px] h-[40px] mx-1 p-3 bg-white rounded border border:white shadow text-[#B40100] hover:bg-[#B40100] hover:text-white' onClick={goToPrevPage}>
             <SlArrowLeft />
           </button>
-          <div className='max-w-[50%] sp:overflow-x-auto'>
+          <div className='max-w-[50%] overflow-x-auto'>
             <div className='flex items-center justify-between w-max sp:mt-[5px]'>
                 {pageNumbers.map(pgNumber => (
-                    <button key={pgNumber} className= {`w-[40px] h-[40px] rounded mx-1 border border:white shadow ${currentPage == pgNumber ? 'active bg-[#FD6E6A] text-white' : 'bg-white text-[#FD6E6A]'} hover:bg-[#FD6E6A] hover:text-white`} onClick={() => setCurrentPage(pgNumber)}>
+                    <button key={pgNumber} className= {`w-[40px] h-[40px] rounded mx-1 border border:white shadow ${currentPage == pgNumber ? 'active bg-[#B40100] text-white' : 'bg-white text-[#B40100]'} hover:bg-[#B40100] hover:text-white`} onClick={() => setCurrentPage(pgNumber)}>
                       {pgNumber}
                     </button>
                 ))}
             </div>
           </div>
-          <button className='w-[40px] h-[40px] mx-1 p-3 bg-white rounded border border:white shadow text-[#FD6E6A] hover:bg-[#FD6E6A] hover:text-white' onClick={goToNextPage}>
+          <button className='w-[40px] h-[40px] mx-1 p-3 bg-white rounded border border:white shadow text-[#B40100] hover:bg-[#B40100] hover:text-white' onClick={goToNextPage}>
             <SlArrowRight />
           </button>
         </div>

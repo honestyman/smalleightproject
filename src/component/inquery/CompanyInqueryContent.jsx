@@ -62,7 +62,7 @@ const CompanyInqueryContent = (props) => {
   }
 
   return (
-    <div className='w-full bg-gradient-to-t from-[#FD6E6A] to-red-500 pt-40 pb-20'>
+    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-500 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] flex flex-col justify-center items-center pb-10 sp:rounded-[20px]'>
           <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407] sp:text-xl'>{`お問い合わせ(${oneCompany.name})`}</p>
           <div className="w-full h-full items-center flex">
@@ -99,8 +99,8 @@ const CompanyInqueryContent = (props) => {
                     <textarea className="shadow appearance-none border border-red-500 rounded w-full h-20 mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" value={questionContent} onChange={(e) => setQuestionContent(e.target.value)} />
                   </div>
                   <div className='w-full h-10 flex px-5 mt-10 justify-center sp:px-0 sp:text-sm'>
-                    <Link to={"/Mitsuke"}><button className='flex items-center border-2 rounded-full px-10 py-1 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 text-[#FD6E6A] hover:text-black'><SlArrowLeft className='mx-1' /> 前に戻る</button></Link>
-                     <button disabled={disabled} className={`text-white border-2 rounded-full px-10 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} `} onClick={clickQueryHandler}>お問い合わせ</button>
+                    <Link to={"/Mitsuke"}><button className='flex items-center border-2 rounded-full px-10 py-1 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 text-[#B40100] hover:text-black'><SlArrowLeft className='mx-1' /> 前に戻る</button></Link>
+                     <button disabled={disabled} className={`text-white border-2 rounded-full px-10 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} `} onClick={clickQueryHandler}>お問い合わせ</button>
                   </div>
                 </div>
                 {/* ------------message--------- */}
@@ -110,7 +110,7 @@ const CompanyInqueryContent = (props) => {
                       <p className='my-1'>内容確認後、ご連絡させていただきますので</p>
                       <p className='my-1'>今しばらくお待ちください!</p>
                     </div>
-                    <button className='flex items-center border-2 rounded-full px-10 py-1 mx-10 lg:mx-2 sp:mx-2 sp:px-2 text-[#FD6E6A] hover:text-black' onClick={backClick}><SlArrowLeft className='mx-1' /> 前に戻る</button>
+                    <button className='flex items-center border-2 rounded-full px-10 py-1 mx-10 lg:mx-2 sp:mx-2 sp:px-2 text-[#B40100] hover:text-black' onClick={backClick}><SlArrowLeft className='mx-1' /> 前に戻る</button>
                 </div>
                 
               </div>
@@ -119,7 +119,7 @@ const CompanyInqueryContent = (props) => {
                 <div className='w-full bg-white rounded-2xl shadow px-3 py-5'>
                   <div className='w-full sp:w-full flex flex-col text-left px-5 sp:pt-5'>
                     <div className='flex items-center'>
-                      <div className='w-[100px] h-[100px] bg-[#FD6E6A]'></div>
+                      <div className='w-[100px] h-[100px] bg-[#B40100]'></div>
                       <p className='text-xl font-bold mx-3 sp:text-xl sp:text-center'>{oneCompany.name}</p>
                     </div>
                     <p className='text-xs font-bold mt-5 sp:text-[12px]'>【PRタイトル】</p>

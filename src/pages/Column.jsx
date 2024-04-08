@@ -18,7 +18,9 @@ const Column=()=>{
     <div className="w-100">
       <Header/>
       {/* <NewsContent/>  */}
-      <ColumnContent/>
+      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100]">
+        <ColumnContent/>
+      </div>
       <Footer/>
     </div>
   );

@@ -16,7 +16,7 @@ const initialState = {
   allIndustryExperienceList: [],
   postSelectedOneCompanyResultMessage:"",
   postSelectedCompanysResultMessage:"",
-  postSelectedMultifulCompanyResultMessage:"",
+  postSelectedMultifulCompanyResultMessage:""
 }
 
 export const getCompanyList = createAsyncThunk(
@@ -233,6 +233,80 @@ export const getIndustryExperienceList = createAsyncThunk(
     return res.data;
   }
 )
+
+export const addCompany = createAsyncThunk(
+  "post/addcompanies",
+  async (payload) => {
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API}/companys/addcompany`,payload);
+      console.log("======>",res);
+      // return res.data;  
+    } catch (error) {
+      alert(error.response.data.message)
+      // console.error(error.response.data);
+    }
+    
+  }
+)
+export const updateCompany = createAsyncThunk(
+  "post/updatecompanies",
+  async (payload) => {
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API}/companys/updatecompany`,payload);
+      console.log("======>",res);
+      return res.data;  
+    } catch (error) {
+      // console.error(error.response.data);
+    }
+    
+  }
+)
+
+export const addCompanyLogo = createAsyncThunk(
+  "logo/addcompanies",
+  async (logo) => {
+      const formData=new FormData();
+      formData.append('file',logo);
+      formData.append('fileName',logo.name);
+      // console.log("111", formData)
+      const config={
+        headers:{
+          'content-type':'multipart/form-data',
+        },
+      };  
+      axios.post(process.env.REACT_APP_API+"/upload/add_logoimage", formData, config)
+      .then((response) => {
+        return response.data;
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error uploading files: ", error);
+      });
+  }
+)
+
+// export const addCompanyLogo = createAsyncThunk(
+//   "logo/addcompanies",
+//   async (logo) => {
+//       const formData=new FormData();
+//       formData.append('file',logo);
+//       formData.append('fileName',logo.name);
+//       // console.log("111", formData)
+//       const config={
+//         headers:{
+//           'content-type':'multipart/form-data',
+//         },
+//       };  
+//       axios.post(process.env.REACT_APP_API+"/upload/add_logoimage", formData, config)
+//       .then((response) => {
+//         console.log(response.data);
+//       })
+//       .catch((error) => {
+//         console.error("Error uploading files: ", error);
+//       });
+//   }
+// )
+
 
 export const companySlice = createSlice({
   name: 'companies',

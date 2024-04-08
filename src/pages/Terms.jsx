@@ -13,7 +13,9 @@ const Terms=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <TermsContent/>
+      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100]">
+        <TermsContent/>
+      </div>
       <Footer/>
     </div>
   );

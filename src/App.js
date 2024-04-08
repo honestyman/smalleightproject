@@ -25,6 +25,8 @@ import CompanyDetail from './admin/admincomponent/comanymanage/CompanyDetail.jsx
 import CompanyAddPage from './admin/admincomponent/comanymanage/CompanyAddPage.jsx';
 import MitsukePartner from './pages/MitsukePartner.jsx';
 import MitsukePartnerThanks from './pages/MitsukePartnerThanks.jsx';
+import CompanyUpdatePage from './admin/admincomponent/comanymanage/CompanyUpdatePage.jsx';
+import ColumnManage from './admin/admincomponent/columnmanage/ColumnManage.jsx';
 
 function App() {
   return (
@@ -54,6 +56,8 @@ function App() {
             <Route path='companymanage' element={<CompanyManage/>}/>
             <Route path='companymanage/company_detail/:id' element={<CompanyDetail/>}/>
             <Route path='companymanage/company_add' element={<CompanyAddPage/>}/>
+            <Route path='companymanage/company_update/:id' element={<CompanyUpdatePage/>}/>
+            <Route path='columnmanage' element={<ColumnManage/>}/>
 
             {/* <Route path='subscription' element={<SubscriptionManage/>}/>
             <Route path='video' element={<VideoManage/>}/>

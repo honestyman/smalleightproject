@@ -10,6 +10,9 @@ module.exports = {
           ],
       'lg':[
         {'min': '641px', 'max': '1024px'}
+      ],
+      'md':[
+        {'min': '1025px', 'max': '1440px'}
       ]
     }
   },

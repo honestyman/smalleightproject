@@ -100,7 +100,7 @@ const ColumnContent = () => {
 
 
   return (
-    <div className='w-full bg-gradient-to-t from-[#FD6E6A] to-red-500 pt-40 pb-10'>
+    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-10'>
       <div className='w-full bg-[#f4f8f9] rounded-[100px] sp:rounded-[20px] flex flex-col justify-center items-center pb-20 '>
           <div className='w-full flex sp:flex-wrap-reverse'>
             <div className='w-[75%] sp:w-full flex flex-col'>
@@ -111,7 +111,7 @@ const ColumnContent = () => {
                   return(
                     <Link key={index} to={"/columndetail/"+column.id}>
                       <div className='flex flex-col justify-center items-center mx-10 mt-10'>
-                          <div className='w-[250px] h-[250px] bg-[#FD6E6A]'></div>
+                          <div className='w-[250px] h-[250px] bg-[#B40100]'></div>
                           <p className='mt-3'>{column.createdAt.slice(0,10)}</p>
                           <p className='mt-3 w-[300px]'>{column.title}</p>
                       </div>  
@@ -124,10 +124,10 @@ const ColumnContent = () => {
             <div className='w-[25%] sp:w-full flex flex-col px-10 justify-center'>
               <div className='w-full h-[30%] overflow-y-auto my-10'>
                 <div className='flex flex-wrap justify-between'>
-                  <button onClick={setReset} className='w-[45%] text-[#FD6E6A] border-2 text-sm mb-1 px-2 py-1 rounded hover:bg-[#FD6E6A] hover:text-white'>すべて見る</button>
+                  <button onClick={setReset} className='w-[45%] text-[#B40100] border-2 text-sm mb-1 px-2 py-1 rounded hover:bg-[#B40100] hover:text-white'>すべて見る</button>
                   {allColumnCategoryList && allColumnCategoryList.map((category, index) =>{
                     return(
-                      <button onClick={() => categoryFilterFunction(category.text)} className='w-[45%] bg-[#FD6E6A] text-sm mb-1 px-2 py-1 rounded text-white hover:text-[#FD6E6A] hover:bg-white hover:border lg:text-sm sp:text-sm' key={index}>{category.text}</button>
+                      <button onClick={() => categoryFilterFunction(category.text)} className='w-[45%] bg-[#B40100] text-sm mb-1 px-2 py-1 rounded text-white hover:text-[#B40100] hover:bg-white hover:border lg:text-sm sp:text-sm' key={index}>{category.text}</button>
                     );
                   })}
                 </div>
@@ -136,8 +136,8 @@ const ColumnContent = () => {
                 <div className='w-[100px] h-[100px] bg-red-500'></div>
                 <span className='my-5 lg:text-sm sp:text-sm'>マーケティングに関する質問に答えるだけで条件に合った企業が見つかります</span>
                 <div ref={ref} className='w-full flex flex-col items-center'>
-                  <Link to="/mitsuke" className='px-5 py-2 bg-[#FD6E6A] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#FD6E6A] hover:bg-white'>質問に答える(無料)</Link>
-                  <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#FD6E6A] my-5 hover:bg-[#FD6E6A] hover:text-white'>ご掲載希望はこちら</Link>
+                  <Link to="/mitsuke" className='px-5 py-2 bg-[#B40100] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#B40100] hover:bg-white'>質問に答える(無料)</Link>
+                  <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#B40100] my-5 hover:bg-[#B40100] hover:text-white'>ご掲載希望はこちら</Link>
                 </div>
               </div>
             </div>

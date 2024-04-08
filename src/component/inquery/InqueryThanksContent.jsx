@@ -10,7 +10,7 @@ const InqueryThanksContent = () => {
   const dispatch = useDispatch();
  
   return (
-    <div className='w-full bg-gradient-to-t from-[#FD6E6A] to-red-500 pt-40 pb-20'>
+    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-500 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] sp:rounded-[20px] flex flex-col justify-center items-center pb-10'>
           <p className='text-4xl sp:text-3xl font-bold mt-20 mb-10 text-[#FB2407]'>お問い合わせ</p>
           <div className="w-[50%] sp:w-full flex flex-col mx-auto">

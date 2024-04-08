@@ -83,14 +83,14 @@ const TopColumn = () => {
   }, []);
 
   return (
-    <div className='w-full bg-[#FD6E6A] pb-10'>
+    <div className='w-full bg-[#B40100] pb-10'>
       <div className='w-full flex flex-col justify-center items-center pb-10 sp:pb-0'>
         <div ref={ref} className='sp:w-full'>
           <p className='text-4xl font-bold mt-10 mb-10 text-white sp:text-2xl sp:mt-0'>コラム</p>
           <div className='w-full flex justify-center my-10 sp:my-5'>
             {currentRecords && currentRecords.map((column, index)=>{
               return(
-                <div key={index} className='flex flex-col justify-center items-center mx-10 sp:w-[50%]'>
+                <div key={index} className='flex flex-col justify-center items-center mx-10 lg:mx-5 sp:w-[50%]'>
                   <div className='w-[250px] h-[250px] bg-white sp:w-200px sp:h-[200px]'></div>
                   <p className='text-white mt-3'>{column.createdAt.slice(0,10)}</p>
                   <p className='w-[300px] text-white mt-3'>{column.title}</p>
@@ -99,7 +99,7 @@ const TopColumn = () => {
             })}
           </div>
           <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-          <button className='text-xl bg-white text-[#FD6E6A] border-2 rounded-md px-5 py-1 mt-10 hover:bg-[#FD6E6A] hover:text-white sp:text-sm'>もっと見る</button>
+          <button className='text-xl bg-white text-[#B40100] border-2 rounded-md px-5 py-1 mt-10 hover:bg-[#B40100] hover:text-white sp:text-sm'>もっと見る</button>
         </div>
         
       </div>

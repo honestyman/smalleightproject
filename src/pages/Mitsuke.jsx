@@ -26,8 +26,8 @@ const Mitsuke=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#FD6E6A] rounded-sm">
-        <div className="w-full h-full bg-gradient-to-t from-[#FD6E6A] to-red-700">
+      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100] rounded-sm">
+        <div className="w-full h-full bg-gradient-to-t from-[#B40100] to-red-700">
           <MitsukeTop scrollToMitsukeContnet={scrollToMitsukeContnet}/>
         </div>
       </div>

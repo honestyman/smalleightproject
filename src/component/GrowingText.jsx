@@ -52,7 +52,7 @@ const GrowingText = () => {
   return (
     <div>
       {spText.map((el, i) => (
-        <motion.span className='text-white px-6 mb-10 -mt-10 text-3xl hidden sp:block'
+        <motion.span className='text-[#FB2407] px-6 mb-10 -mt-10 text-3xl sp:pt-10 hidden sp:block'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -64,16 +64,16 @@ const GrowingText = () => {
           {el}{" "}
         </motion.span>
       ))}
-      <div className='w-full mb-20 sp:hidden'>
+      <div className='w-full mb-50 sp:hidden'>
       {characters.map((character, index) => (
-        <span key={index} className={`text-white opacity-100`} style={{ fontSize: `${fontSizes[index]}px` }}>
+        <span key={index} className={`text-[#FB2407] opacity-100`} style={{ fontSize: `${fontSizes[index]}px` }}>
           {character}
         </span>
       ))}
       </div>
       {/* <br/> */}
-      {showFinal && text1.map((el, i) => (
-        <motion.span className='text-white text-3xl sp:text-[20px]'
+      {/* {showFinal && text1.map((el, i) => (
+        <motion.span className='text-[#B40100] text-3xl sp:text-[20px]'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -85,9 +85,9 @@ const GrowingText = () => {
           {el}{" "}
         </motion.span>
       ))}
-      <br/>
-      {showFinal && text2.map((el, i) => (
-        <motion.span className='text-white text-8xl sp:text-5xl'
+      <br/> */}
+      {/* {showFinal && text2.map((el, i) => (
+        <motion.span className='text[#B40100] text-8xl sp:text-5xl'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -98,7 +98,7 @@ const GrowingText = () => {
         >
           {el}{" "}
         </motion.span>
-      ))}
+      ))} */}
       {/* <div className='w-full mt-28 px-10'>
         {showFinalSmall && text3.map((el, i) => (
           <motion.span className='text-white text-4xl'
@@ -116,7 +116,7 @@ const GrowingText = () => {
       </div> */}
       <div className='w-full mt-10 px-10'>
         {showFinalSmall && text4.map((el, i) => (
-          <motion.span className='text-white text-4xl lg:text-3xl sp:text-xl'
+          <motion.span className='text-black text-2xl lg:text-2xl sp:text-xl'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -129,9 +129,9 @@ const GrowingText = () => {
           </motion.span>
         ))}
       </div>
-      <div className='w-full mt-10 -mb-28 px-10'>
+      <div className='w-full mt-10 -mb-28 px-10 sp:mt-5'>
         {showFinalSmall && text5.map((el, i) => (
-          <motion.span className='text-white text-4xl lg:text-3xl sp:text-xl'
+          <motion.span className='text-black text-2xl lg:text-2xl sp:text-xl'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{

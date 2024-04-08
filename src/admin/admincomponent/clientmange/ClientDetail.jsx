@@ -123,7 +123,7 @@ const ClientDetail=()=>{
         }
       </div>
       <div className="w-full flex justify-center items-center">
-       <Link to="/manage" className="flex items-center px-3 py-1 text-sm border rounded-md hover:bg-[#FD6E6A] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
+       <Link to="/manage" className="flex items-center px-3 py-1 text-sm border rounded-md hover:bg-[#B40100] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
       </div>
     </div>
   );

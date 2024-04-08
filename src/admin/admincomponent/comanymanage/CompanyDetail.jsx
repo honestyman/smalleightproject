@@ -116,7 +116,7 @@ const CompanyDetail=()=>{
         
       </div>
       <div className="w-full flex justify-center items-center">
-       <Link to="/manage/companymanage" className="flex items-center border text-sm px-3 py-1 rounded-md hover:bg-[#FD6E6A] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
+       <Link to="/manage/companymanage" className="flex items-center border text-sm px-3 py-1 rounded-md hover:bg-[#B40100] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
       </div>
     </div>
   );

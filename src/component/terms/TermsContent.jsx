@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const TermsContent = () => {
 
   return (
-    <div className='w-full bg-gradient-to-t from-[#FD6E6A] to-red-500 pt-40 pb-20'>
+    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] sp:rounded-[20px] flex flex-col justify-center items-center px-10 pb-10 sp:px-5'>
         <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407] sp:text-2xl sp:mb-5'>利用規約</p>
         <div className='w-full rounded-md px-10 py-20 sp:py-5 sp:px-5'>

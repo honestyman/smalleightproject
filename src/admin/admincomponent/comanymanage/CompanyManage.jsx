@@ -12,7 +12,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCompanyList, deleteOneCompany } from "../../../redux/slice/companySlice";
 import Pagination from '../../../component/Pagination';
-
+import { Select } from "antd";
 
 const CompanyManage=()=>{
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const CompanyManage=()=>{
   const  { allCompanyList } = useSelector(state => state.companies);
   
   const [currentPage, setCurrentPage]=useState(1)
-  const [recordsPerPage, setRecordPerPage]=useState(1);
+  const [recordsPerPage, setRecordPerPage]=useState(3);
   const [data, setData]=useState([]);
   const [deleted, setDeleted]=useState("");
 
@@ -52,7 +52,7 @@ const CompanyManage=()=>{
       <div className="w-full flex justify-end items-end px-20 pt-10">
         <Link to={"company_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
       </div>
-      <div className="flex flex-col mx-10 h-[75%] overflow-y-auto">
+      <div className="flex flex-col mx-10 h-[70%] overflow-y-auto">
         <div className="inline-block min-w-full px-10">
         {currentRecords && currentRecords.map((company, index)=>{
             return(
@@ -99,7 +99,7 @@ const CompanyManage=()=>{
                   })}</p>
                   <div className='w-full flex justify-center items-center mt-3'>
                     <Link to={"company_detail/"+company.id} className='flex items-center text-sm text-white rounded-md bg-green-500 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><CiCircleMore className="font-bold mr-2" />詳細</Link>
-                    <Link className='flex items-center text-sm text-white rounded-md bg-yellow-300 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><RxUpdate className="font-bold mr-2" />更新</Link>
+                    <Link to={"company_update/"+company.id} className='flex items-center text-sm text-white rounded-md bg-yellow-300 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><RxUpdate className="font-bold mr-2" />変更</Link>
                     <Link className='flex items-center text-sm text-white rounded-md bg-red-500 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border' onClick={()=>deleteFunction(company.id)}><RiDeleteBin6Line className="font-bold mr-2" />削除</Link>
                   </div>
                 </div>
@@ -109,6 +109,29 @@ const CompanyManage=()=>{
         </div>
       </div>
           <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+          <div className="w-full flex py-3 mx-auto items-center justify-center">
+            <span className="text-red-500 text-sm mr-3">表示する個数 :</span>
+            <Select className="w-20" 
+              value={recordsPerPage}
+              onChange={ (value) => setRecordPerPage(value)}
+              options={
+                [
+                  {
+                    value:"1",
+                    label:"1"
+                  },
+                  {
+                    value:"3",
+                    label:"3"
+                  },
+                  {
+                    value:"5",
+                    label:"5"
+                  }
+                ]
+              }
+            />
+          </div>
     </div>
   );
   

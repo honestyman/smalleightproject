@@ -45,9 +45,9 @@ const ColumnDetailContent = (props) => {
   }, []);
     
   return (
-    <div className='w-full bg-gradient-to-t from-[#FD6E6A] to-red-500 pt-40 pb-20'>
+    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] sp:rounded-[20px]'>
-        <p className='mx-10 pt-10 text-left ml-40 sp:mx-10'><Link to="/" className='bg-[#FD6E6A] py-1 px-2 rounded text-white'>Top</Link> / <Link className='bg-[#FD6E6A] py-1 px-2 rounded text-white' to="/column">コラム</Link> / {oneColumnData.title}</p>
+        <p className='mx-10 pt-10 text-left ml-40 sp:mx-10'><Link to="/" className='bg-[#B40100] py-1 px-2 rounded text-white'>Top</Link> / <Link className='bg-[#B40100] py-1 px-2 rounded text-white' to="/column">コラム</Link> / {oneColumnData.title}</p>
         <div className='w-[full] flex justify-center pb-10 sp:rounded-[20px] sp:flex-wrap-reverse'>
           <div className='w-[75%] flex flex-col px-40 text-left sp:px-5 sp:w-full'>
             <h1 className='text-5xl font-bold mt-20 text-center sp:text-xl sp:mt-10'><span>{oneColumnData.title}</span></h1>
@@ -92,8 +92,8 @@ const ColumnDetailContent = (props) => {
               <div className='w-[100px] h-[100px] bg-red-500'></div>
               <span className='my-5 lg:text-sm sp:text-sm'>マーケティングに関する質問に答えるだけで条件に合った企業が見つかります</span>
               <div ref={ref} className='w-full flex flex-col items-center'>
-                <Link to="/mitsuke" className='px-5 py-2 bg-[#FD6E6A] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#FD6E6A] hover:bg-white'>質問に答える(無料)</Link>
-                <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#FD6E6A] my-5 hover:bg-[#FD6E6A] hover:text-white'>ご掲載希望はこちら</Link>
+                <Link to="/mitsuke" className='px-5 py-2 bg-[#B40100] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#B40100] hover:bg-white'>質問に答える(無料)</Link>
+                <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#B40100] my-5 hover:bg-[#B40100] hover:text-white'>ご掲載希望はこちら</Link>
               </div>
             </div>
           </div>

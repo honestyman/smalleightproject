@@ -75,7 +75,7 @@ const Login=()=>{
             <input className="shadow appearance-none border border-red-500 rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={password} id="password" type="password" onChange={(e)=>setPassword(e.target.value)}/>
           </div>
           <div className="w-full flex justify-center pt-5">
-            <button disabled={disabled} className={`flex items-center text-white border-2 rounded-md px-10 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#FD6E6A] hover:bg-white hover:text-[#FD6E6A]' : 'bg-gray-300'} ` } onClick={handleClick}><SlLogin className="mx-1"/>ログイン</button>
+            <button disabled={disabled} className={`flex items-center text-white border-2 rounded-md px-10 mx-10 lg:mx-2 lg:px-2 sp:mx-2 sp:px-2 py-1 ${!disabled ? 'bg-[#B40100] hover:bg-white hover:text-[#B40100]' : 'bg-gray-300'} ` } onClick={handleClick}><SlLogin className="mx-1"/>ログイン</button>
           </div>
         </div>
 

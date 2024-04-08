@@ -53,7 +53,7 @@ const NewsContent = () => {
   const nPages=Math.ceil(data.length/recordsPerPage);
 
   return (
-    <div className='w-full bg-gradient-to-t from-[#FD6E6A] to-red-500 pt-40 pb-20'>
+    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] sp:rounded-[20px] flex flex-col justify-center items-center pb-10'>
           <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407]'>ニュース</p>
           <div className='w-full flex flex-wrap px-10 justify-center'>

@@ -54,7 +54,7 @@ const TopNews = () => {
   }, []);
 
   return (
-    <div className='w-full bg-[#FD6E6A] pt-10'>
+    <div className='w-full bg-[#B40100] pt-10'>
       <div className='w-full bg-white rounded-t-[100px] flex flex-col justify-center items-center pb-10 sp:rounded-t-[20px] sp:pb-0'>
         <div ref={ref} className='sp:w-full sp:px-5'>
           <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407] sp:text-2xl'>ニュース</p>
