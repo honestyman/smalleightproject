@@ -47,7 +47,7 @@ const ColumnDetailContent = (props) => {
   return (
     <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] sp:rounded-[20px]'>
-        <p className='mx-10 pt-10 text-left ml-40 sp:mx-10'><Link to="/" className='bg-[#B40100] py-1 px-2 rounded text-white'>Top</Link> / <Link className='bg-[#B40100] py-1 px-2 rounded text-white' to="/column">コラム</Link> / {oneColumnData.title}</p>
+        <p className='mx-10 pt-10 text-left ml-40 sp:mx-10'><Link to="/" className='bg-[#FB2407] py-1 px-2 rounded text-white'>Top</Link> / <Link className='bg-[#B40100] py-1 px-2 rounded text-white' to="/column">コラム</Link> / {oneColumnData.title}</p>
         <div className='w-[full] flex justify-center pb-10 sp:rounded-[20px] sp:flex-wrap-reverse'>
           <div className='w-[75%] flex flex-col px-40 text-left sp:px-5 sp:w-full'>
             <h1 className='text-5xl font-bold mt-20 text-center sp:text-xl sp:mt-10'><span>{oneColumnData.title}</span></h1>

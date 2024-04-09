@@ -43,7 +43,7 @@ const NewsDetailContent = (props) => {
   return (
     <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
       <div className='w-full bg-white rounded-[100px] sp:rounded-[20px]'>
-        <p className='mx-10 pt-10'><Link to="/" className='bg-[#B40100] py-1 px-2 rounded text-white'>Top</Link> / <Link className='bg-[#B40100] py-1 px-2 rounded text-white' to="/news">ニュース</Link> / {oneNewsData.title}</p>
+        <p className='pt-10 ml-40 text-left'><Link to="/" className='bg-[#FB2407] py-1 px-2 rounded text-white'>Top</Link> / <Link className='bg-[#FB2407] py-1 px-2 rounded text-white' to="/news">ニュース</Link> / {oneNewsData.title}</p>
         <div className='w-full flex justify-center pb-10 sp:rounded-[20px] sp:flex-wrap-reverse'>
           <div className='w-[75%] flex flex-col px-20 text-left sp:px-5 sp:w-full'>
             <h1 className='text-3xl font-bold mt-20 text-center sp:text-xl sp:mt-10'><span>{oneNewsData.title}</span></h1>

@@ -31,7 +31,6 @@ const ColumnManage=()=>{
 
   useEffect(() => {
     setData(allColumnList)
-    console.log(allColumnList);
   },[allColumnList]);
 
   const deleteFunction = (id) => {
@@ -51,7 +50,7 @@ const ColumnManage=()=>{
     <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-10`}>
       <p className="text-2xl font-bold">コラム記事管理</p>
       <div className="w-full flex justify-end items-end px-20 pt-10">
-        <Link to={"company_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
+        <Link to={"column_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
       </div>
       <div className="flex flex-col mx-10 h-[70%] overflow-y-auto">
         <div className="inline-block min-w-full px-10">
@@ -67,9 +66,9 @@ const ColumnManage=()=>{
                       <p className="font-bold text-xl font-bold text-center sp:text-sm">{column.title}</p>
                       <div className="w-full flex justify-between px-5 py-3">
                         <div className="flex">
-                          {column.columncategories && column.columncategories.map((category, index)=>{
+                          {column.columncategories && column.columncategories.map((category, index1)=>{
                             return(
-                              <span className="mx-1 bg-gray-300 text-sm rounded px-2 py-1">{category.text}</span>
+                              <span key={index1} className="mx-1 bg-gray-300 text-sm rounded px-2 py-1">{category.text}</span>
                             );
                           })
                           }
