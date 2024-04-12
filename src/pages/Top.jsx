@@ -55,14 +55,13 @@ const Top = () => {
       <Header />
       <div className="w-full h-[800px] sp:h-[500px] bg-white rounded-sm">
         <div className="w-full h-full flex pt-20 justify-start items-end bg-gradient-to-t from-[#F4F8F9] to-[#F4F8F9]">
-          <div className="lg:w-full sp:w-full flex flex-col h-full justify-center px-20 sp:px-5">
+          <div className="w-full lg:w-full sp:w-full flex flex-col h-full justify-center px-20 sp:px-5">
             <div className="absolute sp:w-[30%] top-20 right-0">
               <img src={pattern} className="w-full" alt="" />
             </div>
-            <div className="flex flex-col items-start">
-              <img src={title} className="-mt-10 sp:mt-10" alt="title" />
+            <div className="w-full flex flex-col items-start">
+              <img src={title} className="w-[50%] -mt-10 sp:mt-10" alt="title" />
               <p className="text-[#B40100] text-2xl py-10 sp:text-base">小さいことの積み重ね。 末広がる。</p>
-
             </div>
             
             {/* <CanvasGraph/> */}
