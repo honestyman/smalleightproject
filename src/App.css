@@ -50,7 +50,7 @@ h1 {
    bottom: -10px;
    display: block;
    content: '';
-   border: 1em solid #d90606;
+   border: 1em solid #222963;
  }
  
  h1:before {
@@ -71,7 +71,7 @@ h1 {
    display: block;
    padding: 1rem 2rem;
    color: #fff;
-   background: #fa4141;
+   background: #191F4D;
  }
  
  h1 span:before,
@@ -83,7 +83,7 @@ h1 {
    height: 10px;
    content: '';
    border-style: solid;
-   border-color: #b70505 transparent transparent transparent;
+   border-color: #222963 transparent transparent transparent;
  }
  
  h1 span:before {

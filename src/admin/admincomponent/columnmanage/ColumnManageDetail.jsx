@@ -27,7 +27,7 @@ const ColumnManageDetail=()=>{
   return(
     <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center px-20 py-20 overflow-y-auto`}>
       <div className="flex flex-col w-full justify-center items-center pb-5">
-        <p className="text-2xl font-bold mb-5 mx-5">{oneColumnData.title}</p>
+        <p className="text-xl font-bold mb-5 mx-5">{oneColumnData.title}</p>
         {oneColumnData.thumbnail && <img className='w-[20%] rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${oneColumnData.thumbnail}`} />}
       </div>
        <div className="flex flex-col text-left mx-20 py-5">

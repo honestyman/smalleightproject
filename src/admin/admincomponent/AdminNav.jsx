@@ -35,7 +35,7 @@ const AdminNav=()=>{
   }
 
   return(
-    <div className="min-w-[300px] h-[900px] flex flex-col bg-white shadow-md items-start py-5">
+    <div className="min-w-[300px] h-[900px] flex flex-col bg-white shadow-md text-sm items-start py-5">
       <Link to={"/manage"} className={`w-full flex items-center px-5 py-2 rounded hover:bg-[#B40100] hover:text-white ${style==="/manage"?'bg-[#B40100] text-white':'none'}`} onClick={()=>{setChange("clientmanage")}}><FaRegUserCircle className='mr-1'/>クライアント管理</Link>
       <button onClick={changeCompanyBlock} className='w-full flex items-center px-5 py-2'><FaHome className='mr-1'/>会社管理</button>
       <div className={`w-full pl-5 ${companyblock}`} >

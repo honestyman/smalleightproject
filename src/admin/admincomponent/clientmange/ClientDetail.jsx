@@ -30,8 +30,8 @@ const ClientDetail=()=>{
 
   return(
     <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-10 overflow-y-auto`}>
-      <p className="text-2xl font-bold">クライアント詳細</p>
-      <div className="flex flex-col mx-20 py-10">
+      <p className="text-xl font-bold">クライアント詳細</p>
+      <div className="flex flex-col text-sm mx-20 py-10">
         <div className="flex justify-start items-center py-3">
           <label className="font-bold">お名前 : </label>
           <p className="mx-5">{oneClientData.name}</p>

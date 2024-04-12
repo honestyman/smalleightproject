@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import blackLogo from '../img/black_logo.webp';
-import title from '../img/title.webp';
+import title from '../img/title.png';
 
 const Footer = () => {
   

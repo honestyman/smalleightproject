@@ -47,8 +47,8 @@ const CompanyManage=()=>{
   const nPages=Math.ceil(data.length/recordsPerPage);
 
   return(
-    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-10`}>
-      <p className="text-2xl font-bold">会社管理</p>
+    <div className={`-webkit-fill-available h-[900px] bg-white text-sm shadow items-center py-10`}>
+      <p className="text-xl font-bold">会社管理</p>
       <div className="w-full flex justify-end items-end px-20 pt-10">
         <Link to={"company_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
       </div>
@@ -64,7 +64,7 @@ const CompanyManage=()=>{
                         <img className='w-full h-full rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${company.logo}`} />
                       </div>
                     </div>
-                    <p className='text-xl font-bold sp:text-xl sp:text-center sp:mt-3'>{company.name}</p>
+                    <p className='font-bold sp:mt-3'>{company.name}</p>
                   </div>
 
                   <p className='text-sm font-bold mt-2 sp:text-[12px]'>【PRタイトル】</p>

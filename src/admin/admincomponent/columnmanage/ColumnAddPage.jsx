@@ -287,10 +287,10 @@ const ColumnAddPage=()=>{
 
 
   return(
-    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center px-10 py-10 `}>
+    <div className={`-webkit-fill-available h-[900px] bg-white text-sm shadow items-center px-10 py-10 `}>
       <div className="w-full h-full pb-10 overflow-y-auto">
         <div className="flex w-full justify-center items-center">
-          <p className="text-2xl font-bold mx-5">コラム記事登録</p>
+          <p className="text-xl font-bold mx-5">コラム記事登録</p>
         </div>
         <div className="w-[800px] flex flex-col text-left mx-auto px-20 py-5">
           <div className="flex flex-col items-start py-2">
@@ -340,7 +340,7 @@ const ColumnAddPage=()=>{
 
         </div>
         <div className="w-full flex justify-center items-center">
-          <Link to="/manage/companymanage" className="flex items-center text-sm border px-2 py-1 mx-5 rounded-md hover:bg-[#B40100] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
+          <Link to="/manage/columnmanage" className="flex items-center text-sm border px-2 py-1 mx-5 rounded-md hover:bg-[#B40100] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
           <Link className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-5 px-10 py-1 hover:bg-white hover:text-black hover:border' onClick={handleClickAddColumn}><IoAddCircleOutline className="font-bold mr-2" />登録</Link>
         </div>
       </div>

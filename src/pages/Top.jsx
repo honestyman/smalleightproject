@@ -9,7 +9,7 @@ import TopService from "../component/top/TopService";
 import TopColumn from "../component/top/TopColumn";
 import Footer from "../component/Footer";
 import pattern from '../img/pattern.webp';
-import title from '../img/title.webp';
+import title from '../img/title.png';
 
 // import 'intersection-observer';
 // import CanvasGraph from "../component/top/CanvasGraph";
@@ -60,7 +60,7 @@ const Top = () => {
               <img src={pattern} className="w-full" alt="" />
             </div>
             <div className="w-full flex flex-col items-start">
-              <img src={title} className="w-[50%] -mt-10 sp:mt-10" alt="title" />
+              <img src={title} className="-mt-10 sp:mt-10" alt="title" />
               <p className="text-[#B40100] text-2xl py-10 sp:text-base">小さいことの積み重ね。 末広がる。</p>
             </div>
             

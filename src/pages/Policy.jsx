@@ -13,7 +13,7 @@ const Policy=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100]">
+      <div className="w-full bg-[#f4f8f9]">
         <PolicyContent/>
       </div>
       <Footer/>

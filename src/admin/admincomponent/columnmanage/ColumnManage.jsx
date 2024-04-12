@@ -47,12 +47,12 @@ const ColumnManage=()=>{
   const nPages=Math.ceil(data.length/recordsPerPage);
 
   return(
-    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-10`}>
-      <p className="text-2xl font-bold">コラム記事管理</p>
+    <div className="-webkit-fill-available h-[900px] bg-white shadow items-center py-10">
+      <p className="text-xl font-bold">コラム記事管理</p>
       <div className="w-full flex justify-end items-end px-20 pt-10">
         <Link to={"column_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
       </div>
-      <div className="flex flex-col mx-10 h-[70%] overflow-y-auto">
+      <div className="flex flex-col mx-10 h-[70%] text-sm overflow-y-auto">
         <div className="inline-block min-w-full px-10">
         {currentRecords && currentRecords.map((column, index)=>{
             return(
@@ -63,12 +63,12 @@ const ColumnManage=()=>{
                      {column.thumbnail && <img className='w-[80%] rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${column.thumbnail}`} />}
                     </div>
                     <div className="w-full">
-                      <p className="font-bold text-xl font-bold text-center sp:text-sm">{column.title}</p>
+                      <p className="font-bold font-bold text-center sp:text-sm">{column.title}</p>
                       <div className="w-full flex justify-between px-5 py-3">
                         <div className="flex">
                           {column.columncategories && column.columncategories.map((category, index1)=>{
                             return(
-                              <span key={index1} className="mx-1 bg-gray-300 text-sm rounded px-2 py-1">{category.text}</span>
+                              <span key={index1} className="mx-1 bg-gray-300 text-xs rounded px-2 py-1">{category.text}</span>
                             );
                           })
                           }

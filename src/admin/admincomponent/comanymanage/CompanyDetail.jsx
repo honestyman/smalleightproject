@@ -25,12 +25,12 @@ const CompanyDetail=()=>{
   },[oneCompany]);
 
   return(
-    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-20 overflow-y-auto`}>
+    <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center text-sm py-20 overflow-y-auto`}>
       <div className="flex w-full justify-center items-center">
         <div className="w-[60px] h-[60px] border p-1 rounded shadow">
           <img className='w-full h-full rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${oneCompany.logo}`} />
         </div>
-        <p className="text-2xl font-bold mx-5">{oneCompany.name}</p>
+        <p className="text-xl font-bold mx-5">{oneCompany.name}</p>
       </div>
       <div className="flex flex-col text-left mx-20 py-5">
         <div className="flex flex-col items-start py-2">

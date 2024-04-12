@@ -44,13 +44,13 @@ const ClientManage=()=>{
 
   return(
     <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center py-10`}>
-      <p className="text-2xl font-bold">クライアント管理</p>
+      <p className="text-xl font-bold">クライアント管理</p>
       <div className="flex flex-col mx-10 h-[75%] overflow-y-auto">
           <div className="inline-block min-w-full py-2">
               <table
-                className="min-w-full text-left border text-sm font-light text-surface dark:text-white">
+                className="min-w-full text-left border text-xs font-light text-surface dark:text-white">
                 <thead
-                  className="border-b border-neutral-200 text-center font-medium dark:border-white/10">
+                  className="border-b border-neutral-200 text-sm text-center font-medium dark:border-white/10">
                   <tr>
                     <th scope="col" className="px-6 py-4">詳細</th>
                     <th scope="col" className="px-6 py-4">No</th>
