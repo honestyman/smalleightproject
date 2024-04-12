@@ -38,15 +38,16 @@ const Header=()=>{
   }
 
   return(
-    <div className={`w-full h-24 pt-10 fixed pb-10 z-30 ${changeColor?'drop-shadow bg-white':'none'} `}>
+    <div className={`w-full h-20 pt-10 fixed z-30 drop-shadow bg-white`}>
       <div className="w-full flex flex-row justify-between">
-        <img src={changeColor?blackLogo:whiteLogo} className="w-[300px] -mt-5 ml-10 sp:w-[200px] sp:ml-5"/>        
-        <Link onClick={showNav}><TfiMenu className="mb-2 mr-5 text-3xl hidden lg:block sp:block" style={{ color: textColor }}/></Link>
+        <Link to={"/"}><img src={blackLogo} className="w-[200px] -mt-5 ml-10 sp:w-[150px] sp:h-[40px] sp:-mt-2 sp:ml-5"/></Link>   
+        <Link onClick={showNav}><TfiMenu className="mb-2 mr-5 text-3xl text-[#191F4D] hidden lg:block sp:block"/></Link>
         <Nav/>
       </div>
       <div className={`w-full text-center flex flex-col fixed bg-white shadow-md ${block}`}>
           <Link to={"/"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">サービス</Link>
-          <Link to={"/mitsuke"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ウェブマる!</Link>
+          {/* <Link to={"/mitsuke"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ウェブマる!</Link> */}
+          <Link to={"/tools"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">スモハチTools</Link>
           <Link to={"/news"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ニュース</Link>
           <Link to={"/column"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">コラム</Link>
           <Link to={"/business"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">事業概要</Link>

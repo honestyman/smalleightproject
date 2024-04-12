@@ -21,15 +21,16 @@ const Nav = () => {
     };
   }, []);
   return (
-    <div className="h-full text-center flex my-auto mr-10 lg:hidden sp:hidden" style={{ color: textColor }}>
-      <Link to={"/service"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">サービス</Link>
-      <Link to={"/mitsuke"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">Mitsuke</Link>
-      <Link to={"/news"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">ニュース</Link>
-      <Link to={"/column"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">コラム</Link>
-      <Link to={"/business"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">事業概要</Link>
-      <Link to={"/policy"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">プライバシーポリシー</Link>
-      <Link to={"/terms"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded">利用規約</Link>
-      <Link to={"/inquery"} className="mx-3 hover:text-[#B40100] hover:transition-colors hover:bg-white hover:px-2 hover:rounded"> お問い合わせ</Link>
+    <div className="h-full text-center text-[#191F4D] flex my-auto mr-5 lg:hidden sp:hidden">
+      <Link to={"/service"} className="mx-3 hover:font-bold">サービス</Link>
+      {/* <Link to={"/mitsuke"} className="mx-2 hover:font-bold">Mitsuke</Link> */}
+      <Link to={"/tools"} className="mx-3 hover:font-bold">スモハチTools</Link>
+      <Link to={"/news"} className="mx-3 hover:font-bold">ニュース</Link>
+      <Link to={"/column"} className="mx-3 hover:font-bold">コラム</Link>
+      <Link to={"/business"} className="mx-3 hover:font-bold">事業概要</Link>
+      <Link to={"/policy"} className="mx-3 hover:font-bold">プライバシーポリシー</Link>
+      <Link to={"/terms"} className="mx-3 hover:font-bold">利用規約</Link>
+      <Link to={"/inquery"} className="mx-3 hover:font-bold"> お問い合わせ</Link>
     </div>
   );
 

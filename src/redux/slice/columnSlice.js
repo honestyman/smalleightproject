@@ -35,6 +35,56 @@ export const getOneColumn = createAsyncThunk(
   }
 )
 
+export const addColumn = createAsyncThunk(
+  "post/addcolumns",
+  async (payload) => {
+    console.log(payload);
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API}/columns/addcolumn`,payload);
+      console.log("======>",res);
+      // return res.data;  
+    } catch (error) {
+      alert(error.response.data.message)
+      // console.error(error.response.data);
+    }
+    
+  }
+)
+
+export const deleteOneColumn = createAsyncThunk(
+  "onedelete/columns",
+  async (Id) => {
+    console.log(Id);
+    const res = await axios.delete(process.env.REACT_APP_API+"/columns/deleteonecolumn?id="+Id);
+    // console.log("--------",res.data);
+    return res.data;
+  }
+)
+
+export const addColumnThumbnail = createAsyncThunk(
+  "thumbnail/addcolumns",
+  async (thumbnail) => {
+      const formData=new FormData();
+      formData.append('file',thumbnail);
+      formData.append('fileName',thumbnail.name);
+      // console.log("111", formData)
+      const config={
+        headers:{
+          'content-type':'multipart/form-data',
+        },
+      };  
+      axios.post(process.env.REACT_APP_API+"/upload/add_columnthumbnail", formData, config)
+      .then((response) => {
+        return response.data;
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error uploading files: ", error);
+      });
+  }
+)
+
+
 export const columnSlice = createSlice({
   name: 'columns',
   initialState,

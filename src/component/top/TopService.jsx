@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import WOW from 'wow.js';
 import 'animate.css';
+import computer from '../../img/computer.webp';
+import coding from '../../img/coding.webp';
+import analytics from '../../img/analytics.webp';
+
 // import 'intersection-observer';
 
 const TopService = () => {
@@ -18,9 +22,9 @@ const TopService = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('wow', 'animate__animated', 'animate__slideInRight');
+          entry.target.classList.add('wow', 'animate__animated', 'animate__fadeIn');
         } else {
-          entry.target.classList.remove('wow', 'animate__animated', 'animate__slideInRight');
+          entry.target.classList.remove('wow', 'animate__animated', 'animate__fadeIn');
         }
       });
     });
@@ -33,53 +37,65 @@ const TopService = () => {
   }, []);
 
   return (
-    <div className='w-full bg-[#B40100] pb-10'>
-      <div className='w-full bg-white rounded-b-[100px] flex flex-col justify-center items-center pb-10 sp:rounded-b-[20px]'>
-        <div ref={ref} className='sp:w-full'>
-          <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407] sp:text-2xl sp:mt-10'>サービス</p>
-          <div className='w-full flex justify-center my-20 sp:px-2 sp:my-5'>
-            <div className='w-1/2'>
-              <div className='w-[500px] lg:w-[400px] sp:w-full flex flex-col justify-center items-center text-left float-right sp:float-none mx-10 sp:mx-0'>
-                <p className='text-2xl mb-5 bg-red-500 mx-auto sp:text-[16px] text-center sp:mb-0'>ウェブマる!のロゴ</p>
-                <p className='text-2xl font-bold my-5 text-center sp:text-[16px] sp:my-0'>WEBマーケティングに強い企業が見つかる</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>「売上を拡大させたい」「サービスの認知度を上げたい」</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>「WEBサイトを改善したい」</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>「社内でWEBマーケティング人材を育成したい」など</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>WEBマーケティングを通じて企業成長を図りたい企業さまを支援します。</p>
-                <Link to={"/mitsuke"} className='text-xl text-white border-2 rounded-md bg-[#B40100] px-5 py-1 mt-3 hover:bg-white hover:text-[#B40100] sp:text-sm'>詳細はこちら</Link>
+    <div className='w-full pb-10'>
+      <div className='w-full bg-[#f4f8f9] flex flex-col justify-center items-center'>
+        <div ref={ref} className='w-full sp:w-full'>
+          <p className='text-6xl font-bold mt-20 text-[#B40100] sp:text-2xl sp:mt-10'>SERVICE</p>
+          <div className='w-full flex sp:flex-wrap-reverse justify-center bg-[#f4f8f9] py-20 sp:px-2 sp:py-5'>
+            <div className='w-1/2 sp:w-full'>
+              <div className='w-[500px] lg:w-[400px] sp:w-full text-[#191F4D] flex flex-col justify-center items-center text-left float-right sp:float-none mx-10 sp:px-3 sp:mx-0'>
+                <p className='text-3xl font-bold my-5 text-center sp:text-[16px]'>スモハチTools</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>業務で役に立つWEBツールをご提供しています。 (随時追加)</p>
+                <br/>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・構造化データ マークアップツール</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・OGPタグ確認ツール</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・見出し (hタグ) 確認ツール</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・UTMパラメータ生成ツール</p>
+                <Link to={"/mitsuke"} className='text-[#191F4D] border border-[#191F4D] rounded-md bg-white px-5 py-1 mt-3 text-sm hover:bg-[#191F4D] hover:text-white sp:text-sm'>詳細はこちら</Link>
               </div>
             </div>
-            <div className='w-1/2 sp:pl-4 flex justify-center items-center'>
-              <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-left sp:float-none bg-red-500 mx-10 sp:mx-0'></div>
+            <div className='w-1/2 sp:w-full flex justify-start items-center sp:justify-center'>
+              <img src={computer} className='w-[400px] h-[300px] sp:w-[80%] sp:h-[200px] rounded-md float-left sp:float-none mx-10 sp:mx-0 hover:opacity-50 hover:scale-110' style={{boxShadow:"5px 10px 10px gray"}} alt="" />
+              {/* <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-left sp:float-none bg-red-500 mx-10 sp:mx-0'></div> */}
             </div>
           </div>
-          <div className='w-full flex justify-center my-20 sp:px-2 sp:my-5'>
-            <div className='w-1/2 sp:pr-4 flex justify-center items-center'>
-              <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-right sp:float-none bg-red-500 mx-10 sp:mx-0'></div>
+          <div className='w-full flex sp:flex-wrap bg-white justify-center py-20 sp:px-2 sp:py-5'>
+            <div className='w-1/2 sp:w-full flex justify-end items-center sp:justify-center sp:pb-5'>
+              <img src={analytics} className='w-[400px] h-[300px] sp:w-[80%] sp:h-[200px] rounded-md sp:float-none mx-10 sp:mx-0 hover:opacity-50 hover:scale-110' style={{boxShadow:"5px 10px 10px gray"}} alt="" />
+              {/* <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-right sp:float-none bg-red-500 mx-10 sp:mx-0'></div> */}
             </div>
-            <div className='w-1/2'>
-              <div className='w-[500px] lg:w-[400px] sp:w-full flex flex-col justify-center items-center text-left float-left sp:float-none mx-10 sp:mx-0'>
-                <p className='text-2xl font-bold my-5 text-center sp:text-[16px] sp:my-0'>WEBマーケティング支援</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>ウェブマるを通した企業紹介をはじめ、</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>WEB広告運用、SEO、データ収集/傾向分析などの</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>WEBマーケティング支援を行っています。</p>
-                <button className='text-xl text-white border-2 rounded-md bg-[#B40100] px-5 py-1 mt-3 hover:bg-white hover:text-[#B40100] sp:text-sm'>お問い合わせ</button>
+            <div className='w-1/2 sp:w-full'>
+              <div className='w-[500px] lg:w-[400px] text-[#191F4D] sp:w-full flex flex-col justify-center items-center text-center float-left sp:float-none mx-10 sp:px-3 sp:mx-0'>
+                <p className='text-2xl font-bold my-5 text-center sp:text-[16px] sp:my-0'>デジタルマーケティング支援</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>環境構築から施策実施、 ツール導入の支援など<br/>貴社の目達成のために併走いたします。</p><br/>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・WEB広告運用代行/ インハウス立ち上げ支援</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・CRO (コンバージョン率最適化)</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・SEO(検索エンジン最適化)/SEOツール導入支援</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・アクセス解析/効果分析</p>
+                <p className='my-2 sp:text-[12px] sp:my-0'>・GA4、GTM、GSC、 lookerstudio, Youtube等連携設定支援</p>
+
+                <button className='text-[#191F4D] border border-[#191F4D] rounded-md bg-white px-5 py-1 mt-3 text-sm hover:bg-[#191F4D] hover:text-white sp:text-sm'>お問い合わせ</button>
               </div>
             </div>
           </div>
 
-          <div className='w-full flex justify-center my-20 sp:px-2 sp:my-5'>
-            <div className='w-1/2'>
-              <div className='w-[500px] lg:w-[400px] sp:w-full flex flex-col justify-center items-center text-left float-right sp:float-none mx-10 sp:mx-0'>
-                <p className='text-2xl font-bold my-5 text-center sp:text-[16px] sp:my-0'>LPサイト制作支援</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>ウェブマるを通した企業紹介をはじめ、</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>LPやWEBサイトの改修・制作、</p>
-                <p className='text-xl my-2 sp:text-[12px] sp:my-0'>導線設計からUIUX改善などの支援を行っています。</p>
-                <button className='text-xl text-white border-2 rounded-md bg-[#B40100] px-5 py-1 mt-3 hover:bg-white hover:text-[#B40100] sp:text-sm'>詳細はこちら</button>
+          <div className='w-full flex sp:flex-wrap-reverse justify-center py-20 sp:px-2 sp:py-5'>
+            <div className='w-1/2 sp:w-full sp:py-5'>
+              <div className='w-[500px] lg:w-[400px] text-[#191F4D] sp:w-full flex flex-col justify-center items-center text-center float-right sp:float-none mx-10 sp:mx-0 sp:px-3'>
+                <p className='text-2xl font-bold my-5 text-center sp:text-[16px] sp:my-0'>LP・サイト等 制作支援</p>
+                <p className=' my-2 sp:text-[12px] sp:my-0'>LPO (ランディングページ最適化) からアプリ開発まで対応させていただきます。</p>
+                <br/>
+                <p className=' my-2 sp:text-[12px] sp:my-0'>・導線設計 UI/UX改善</p>
+                <p className=' my-2 sp:text-[12px] sp:my-0'>・HP及びLP制作</p>
+                <p className=' my-2 sp:text-[12px] sp:my-0'>・WordPress、ララベルなどのフレームワークを利用した<br/>WEBサイト制作</p>
+                <p className=' my-2 sp:text-[12px] sp:my-0'>・システム開発及びアップデート</p>
+                <p className=' my-2 sp:text-[12px] sp:my-0'>・FlutterやReact Nativeを利用したアプリ開発</p>
+                <button className='text-[#191F4D] border border-[#191F4D] rounded-md bg-white px-5 py-1 mt-3 text-sm hover:bg-[#191F4D] hover:text-white sp:text-sm'>詳細はこちら</button>
               </div>
             </div>
-            <div className='w-1/2 sp:pl-4 flex justify-center items-center'>
-              <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-left sp:float-none bg-red-500 mx-10 sp:mx-0'></div>
+            <div className='w-1/2 sp:w-full sp:pl-4 flex justify-start sp:justify-center items-center'>
+              <img src={coding} className='w-[400px] h-[300px] sp:w-[80%] sp:h-[200px] rounded-md float-left sp:float-none mx-10 sp:mx-0 hover:opacity-50 hover:scale-110' style={{boxShadow:"5px 10px 10px gray"}} alt="" />
+              {/* <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-left sp:float-none bg-red-500 mx-10 sp:mx-0'></div> */}
             </div>
           </div>
 

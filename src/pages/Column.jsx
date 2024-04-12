@@ -12,13 +12,15 @@ const Column=()=>{
   const [password, setPassword]=useState("")
 
   const navigate= useNavigate();
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return(
     <div className="w-100">
       <Header/>
       {/* <NewsContent/>  */}
-      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100]">
+      <div className="w-full">
         <ColumnContent/>
       </div>
       <Footer/>

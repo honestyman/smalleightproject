@@ -14,6 +14,10 @@ const NewsDetailContent = (props) => {
   const [contentsArray, setContentsArray] = useState([]);
 
   const { oneNewsData } = useSelector(state => state.news);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
 
   useEffect(() => {
     dispatch(getOneNews(props.newsId));

@@ -19,6 +19,10 @@ const ColumnDetailContent = (props) => {
     dispatch(getOneColumn(props.columnId));
   },[]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
+
   useEffect(()=>{
     console.log(oneColumnData);
   },[oneColumnData]);

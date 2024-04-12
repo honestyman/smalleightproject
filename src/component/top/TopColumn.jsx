@@ -42,7 +42,7 @@ const TopColumn = () => {
       if(window.innerWidth<=640){
         setRecordPerPage(1);
       }else{
-        setRecordPerPage(6)
+        setRecordPerPage(3)
       }
     };
 
@@ -71,9 +71,9 @@ const TopColumn = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('wow', 'animate__animated', 'animate__zoomIn');
+          entry.target.classList.add('wow', 'animate__animated', 'animate__fadeIn');
         } else {
-          entry.target.classList.remove('wow', 'animate__animated', 'animate__zoomIn');
+          entry.target.classList.remove('wow', 'animate__animated', 'animate__fadeIn');
         }
       });
     });
@@ -83,23 +83,27 @@ const TopColumn = () => {
   }, []);
 
   return (
-    <div className='w-full bg-[#B40100] pb-10'>
+    <div className='w-full bg-white pb-10'>
       <div className='w-full flex flex-col justify-center items-center pb-10 sp:pb-0'>
-        <div ref={ref} className='sp:w-full'>
-          <p className='text-4xl font-bold mt-10 mb-10 text-white sp:text-2xl sp:mt-0'>コラム</p>
-          <div className='w-full flex justify-center my-10 sp:my-5'>
+        <div ref={ref} className='w-full sp:w-full'>
+          <p className='text-6xl font-bold mt-10 mb-10 text-[#B40100] sp:text-2xl sp:mt-0'>コラム</p>
+          <div className='w-full flex flex-wrap justify-center py-10 sp:my-5 sp:py-2'>
             {currentRecords && currentRecords.map((column, index)=>{
               return(
-                <div key={index} className='flex flex-col justify-center items-center mx-10 lg:mx-5 sp:w-[50%]'>
-                  <div className='w-[250px] h-[250px] bg-white sp:w-200px sp:h-[200px]'></div>
-                  <p className='text-white mt-3'>{column.createdAt.slice(0,10)}</p>
-                  <p className='w-[300px] text-white mt-3'>{column.title}</p>
-                </div>  
+                <Link to={"/columndetail/"+column.id}>
+                  <div key={index} className='flex flex-col justify-start sp:justify-center items-center mx-5 px-10 lg:mx-5 sp:text-sm'>
+                    <div className='w-[200px] h-[200px] rounded-md sp:w-200px sp:h-[200px]'>
+                      {column.thumbnail && <img className='w-full rounded hover:opacity-50' src={`${process.env.REACT_APP_BASE_URL}/img/${column.thumbnail}`} />}
+                    </div>
+                    <p className='text-[#191F4D] mt-3'>{column.createdAt.slice(0,10)}</p>
+                    <p className='w-[200px] text-[#191F4D] mt-3'>{column.title}</p>
+                  </div>  
+                </Link>
               );
             })}
           </div>
           <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-          <button className='text-xl bg-white text-[#B40100] border-2 rounded-md px-5 py-1 mt-10 hover:bg-[#B40100] hover:text-white sp:text-sm'>もっと見る</button>
+          <Link to={"/column"}><button className='text-[#191F4D] border border-[#191F4D] rounded-md bg-white px-5 py-1 mt-10 text-sm hover:bg-[#191F4D] hover:text-white sp:text-sm'>もっと見る</button></Link>
         </div>
         
       </div>
