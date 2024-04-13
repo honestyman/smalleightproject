@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import blackLogo from '../img/black_logo.webp';
+// import blackLogo from '../img/black_logo.webp';
+import blackLogo from '../img/white_logo.png';
 import title from '../img/title.png';
 
 const Footer = () => {
@@ -20,7 +21,7 @@ const Footer = () => {
                 <p className='text-[#B40100] text-xl py-5 sp:text-sm'>小さいことの積み重ね。 末広がる。</p>
               </div>
             </div>
-            <Link onClick={goTop}><img src={blackLogo} className='w-[300px] my-10 sp:w-[150px] sp:my-5'/></Link>
+            <Link onClick={goTop}><img src={blackLogo} className='w-[200px] my-10 sp:w-[150px] sp:my-5'/></Link>
             <div className='w-full flex justify-center items-center'>
               <p className='mx-5 sp:mx-2'>アイコン1</p>
               <p className='mx-5 sp:mx-2'>アイコン2</p>

@@ -28,6 +28,28 @@
   color: #61dafb;
 }
 
+.zoom {
+  transition: transform .2s;
+  /* animation: zoom-in-zoom-out 1s ease infinite; */
+}
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+/* @keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+} */
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,67 +58,3 @@
     transform: rotate(360deg);
   }
 }
-
-h1 {
-  position: relative;
-   margin: 30px;
-   text-align: center;
- }
- 
- h1:before,
- h1:after {
-   position: absolute;
-   z-index: 0;
-   bottom: -10px;
-   display: block;
-   content: '';
-   border: 1em solid #222963;
- }
- 
- h1:before {
-   left: -30px;
-   border-left-width: 15px;
-   border-left-color: transparent;
- }
- 
- h1:after {
-   right: -30px;
-   border-right-width: 15px;
-   border-right-color: transparent;
- }
- 
- h1 span {
-   position: relative;
-   z-index: 1;
-   display: block;
-   padding: 1rem 2rem;
-   color: #fff;
-   background: #191F4D;
- }
- 
- h1 span:before,
- h1 span:after {
-   position: absolute;
-   bottom: -10px;
-   display: block;
-   width: 10px;
-   height: 10px;
-   content: '';
-   border-style: solid;
-   border-color: #222963 transparent transparent transparent;
- }
- 
- h1 span:before {
-   left: 0;
-   border-width: 10px 0 0 10px;
- }
- 
- h1 span:after {
-   right: 0;
-   border-width: 10px 10px 0 0;
- }
-
- .-webkit-fill-available{
-  width: -webkit-fill-available;
- }
-

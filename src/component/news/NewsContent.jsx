@@ -53,17 +53,28 @@ const NewsContent = () => {
   const nPages=Math.ceil(data.length/recordsPerPage);
 
   return (
-    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
-      <div className='w-full bg-white rounded-[100px] sp:rounded-[20px] flex flex-col justify-center items-center pb-10'>
-          <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407]'>ニュース</p>
-          <div className='w-full flex flex-wrap px-10 justify-center'>
+    <div className='w-full bg-white pt-20 pb-20'>
+      <div className='w-full flex flex-col justify-center items-center pb-10'>
+          <p className='text-4xl font-bold mt-20 mb-10 text-[#B40100]'>ニュース</p>
+          <div className='w-full flex flex-col items-center px-10 justify-center'>
+            {/* <div className='w-[900px] sp:w-full flex flex-row justify-center text-[#191F4D] font-bold mb-10 py-5 sp:mb-0 sp:py-2 sp:pr-3'>
+              <div className='w-[50%] text-left px-20 sp:px-5'>
+                <p className='mx-10 text-3xl sp:mx-2 sp:text-xl'>Date</p>
+              </div>
+              <div className='w-[50%] text-left'>
+                <p className='text-3xl sp:text-xl'>Title</p>
+              </div>
+            </div> */}
             {currentRecords && currentRecords.map((news, index) => {
               return(
                 <Link to={"/newsdetail/"+news.id} key={index}>
-                  <div className='flex flex-col justify-center items-center justify-between w-[400px] h-[400px] sp:w-[300px] shadow border rounded-md m-5 p-10'>
-                    <img className='w-[100%] h-[200px] rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${news.image}`} />
-                    <p className='mt-3'>{news.publishDate?news.publishDate.slice(0,10):""}</p>
-                    <p>{news.title}</p>
+                  <div className='w-[900px] sp:w-full flex flex-row justify-center text-[#191F4D] border-b border-black mb-5 py-5 hover:-mt-3 sp:py-2 sp:pr-3'>
+                    <div className='w-[50%] text-left px-20 sp:px-5'>
+                      <p className='mx-10 text-xl sp:mx-2 sp:text-sm'>{news.publishDate?news.publishDate.slice(0,10):""}</p>
+                    </div>
+                    <div className='w-[50%] text-left'>
+                      <p className='text-xl sp:text-sm'>{news.title}</p>
+                    </div>
                   </div>
                 </Link>
               );

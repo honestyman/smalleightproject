@@ -17,9 +17,9 @@ const BusinessContent = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('wow', 'animate__animated', 'animate__zoomIn');
+          entry.target.classList.add('wow', 'animate__animated', 'animate__fadeIn');
         } else {
-          entry.target.classList.remove('wow', 'animate__animated', 'animate__zoomIn');
+          entry.target.classList.remove('wow', 'animate__animated', 'animate__fadeIn');
         }
       });
     });
@@ -32,13 +32,13 @@ const BusinessContent = () => {
   }, []);
 
   return (
-    <div className='w-full bg-gradient-to-t from-[#B40100] to-red-700 pt-40 pb-20'>
-      <div className='w-full bg-white rounded-[100px] sp:rounded-[20px] flex flex-col justify-center items-center pb-10'>
-          <div className='py-10 '>
+    <div className='w-full bg-[#f4f8f9] pt-40'>
+      <div className='w-full bg-white flex flex-col justify-center items-center pb-20'>
+          <div className='w-full pt-10 pb-20 bg-[#f4f8f9]'>
            <GrowingText /> 
           </div>
           <div ref={ref} className='w-full flex flex-col items-center pt-10'>
-            <p className='text-4xl font-bold mt-20 mb-10 text-[#FB2407]'>事業概要</p>
+            <p className='text-4xl font-bold mt-20 mb-10 text-[#B40100]'>事業概要</p>
             <Link>
               <div className='w-[900px] flex flex-row justify-center border-b border-black mb-10 py-5'>
                 <div className='w-[50%] text-left px-20'>

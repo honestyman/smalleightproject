@@ -16,7 +16,7 @@ const News=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <div className="w-full bg-gradient-to-br from-[#FB2407] to-[#B40100]">
+      <div className="w-full">
         <NewsContent/> 
       </div>
       {/* <TopService/>

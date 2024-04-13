@@ -61,7 +61,7 @@ const Top = () => {
             </div>
             <div className="w-full flex flex-col items-start">
               <img src={title} className="-mt-10 sp:mt-10" alt="title" />
-              <p className="text-[#B40100] text-2xl py-10 sp:text-base">小さいことの積み重ね。 末広がる。</p>
+              <p className="text-[#B40100] text-[16px] py-10 sp:text-base">小さいことの積み重ね。 末広がる。</p>
             </div>
             
             {/* <CanvasGraph/> */}

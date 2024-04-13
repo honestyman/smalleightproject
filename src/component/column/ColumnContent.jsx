@@ -141,7 +141,7 @@ const ColumnContent = () => {
                 <p className='text-[#191F4D] text-xl font-bold mt-5'>スモハチ Tools</p>
                 <span className='my-5 lg:text-sm text-[#191F4D] sp:text-sm'>フリーのジェネレーターなど業務で<br/>役に立つWEBツールをご提供しています。</span>
                 <div ref={ref} className='w-full flex flex-col items-center'>
-                  <Link className='px-5 py-2 bg-white w-[200px] lg:w-[150px] rounded-md border shadow text-[#191F4D] lg:text-sm hover:border hover:text-white hover:bg-[#191F4D]'>スモハチToolsへ</Link>
+                  <Link className='px-5 py-2 bg-white w-[200px] lg:w-[150px] rounded-md border shadow text-[#191F4D] lg:text-sm hover:border hover:text-white hover:bg-[#191F4D]'>スモハチツールへ</Link>
                   {/* <Link to="/mitsuke" className='px-5 py-2 bg-[#191F4D] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#191F4D] hover:bg-white'>質問に答える(無料)</Link>
                   <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#191F4D] my-5 hover:bg-[#191F4D] hover:text-white'>ご掲載希望はこちら</Link> */}
                 </div>

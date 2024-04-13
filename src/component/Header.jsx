@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SlArrowDown } from "react-icons/sl";
 import { TfiMenu } from "react-icons/tfi";
-import whiteLogo from '../img/white_logo.webp';
-import blackLogo from '../img/black_logo.webp';
+// import whiteLogo from '../img/white_logo.webp';
+import blackLogo from '../img/white_logo.png';
 import Nav from "./Nav";
 
 
@@ -47,7 +47,7 @@ const Header=()=>{
       <div className={`w-full text-center flex flex-col fixed bg-white shadow-md ${block}`}>
           <Link to={"/"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">サービス</Link>
           {/* <Link to={"/mitsuke"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ウェブマる!</Link> */}
-          <Link to={"/tools"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">スモハチTools</Link>
+          <Link to={"/tools"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">スモハチツール</Link>
           <Link to={"/news"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ニュース</Link>
           <Link to={"/column"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">コラム</Link>
           <Link to={"/business"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">事業概要</Link>
