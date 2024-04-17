@@ -40,7 +40,22 @@ export const addColumn = createAsyncThunk(
   async (payload) => {
     console.log(payload);
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/columns/addcolumn`,payload);
+      const res = await axios.post(`${process.env.REACT_APP_API}/columns/addcolumn`, payload);
+      console.log("======>",res);
+      // return res.data;  
+    } catch (error) {
+      alert(error.response.data.message)
+      // console.error(error.response.data);
+    }
+    
+  }
+)
+
+export const updateColumn = createAsyncThunk(
+  "post/updatecolumns",
+  async (payload) => {
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API}/columns/updatecolumn`, payload);
       console.log("======>",res);
       // return res.data;  
     } catch (error) {
@@ -84,6 +99,51 @@ export const addColumnThumbnail = createAsyncThunk(
   }
 )
 
+export const addColumnFirstImage = createAsyncThunk(
+  "firstimage/addcolumns",
+  async (file) => {
+      const formData=new FormData();
+      formData.append('file',file);
+      formData.append('fileName',file.name);
+      // console.log("111", formData)
+      const config={
+        headers:{
+          'content-type':'multipart/form-data',
+        },
+      };  
+      axios.post(process.env.REACT_APP_API+"/upload/add_columnfirstimage", formData, config)
+      .then((response) => {
+        return response.data;
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error uploading files: ", error);
+      });
+  }
+)
+
+export const addColumnSecondImage = createAsyncThunk(
+  "secondimage/addcolumns",
+  async (file) => {
+      const formData=new FormData();
+      formData.append('file',file);
+      formData.append('fileName',file.name);
+      // console.log("111", formData)
+      const config={
+        headers:{
+          'content-type':'multipart/form-data',
+        },
+      };  
+      axios.post(process.env.REACT_APP_API+"/upload/add_columnsecondimage", formData, config)
+      .then((response) => {
+        return response.data;
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error uploading files: ", error);
+      });
+  }
+)
 
 export const columnSlice = createSlice({
   name: 'columns',

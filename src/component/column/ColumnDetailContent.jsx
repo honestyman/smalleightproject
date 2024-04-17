@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Link as MenuLink } from 'react-scroll';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { SlArrowRight } from "react-icons/sl";
 import { getOneColumn } from "../../redux/slice/columnSlice";
+import { TfiMenuAlt } from "react-icons/tfi";
+
 import computer from '../../img/computer.webp';
 
 
@@ -72,6 +76,41 @@ const ColumnDetailContent = (props) => {
               <p className='text-xl text-[#191F4D] font-bold mx-5 sp:text-sm'>{oneColumnData.createdAt?oneColumnData.createdAt.slice(0,10):""}</p>
             </div>
             <p className='my-10 leading-loose tracking-wider sp:text-xs'>{oneColumnData.description}</p>
+            <div className='bg-[#f4f8f9] p-10 flex flex-col'>
+              <div className='flex items-center justify-center text-2xl py-5 text-[#191F4D]'>
+                <TfiMenuAlt  className='mr-2'/>
+                <p>目次</p>
+              </div>
+              {
+                oneColumnData.columnfirstchildren && oneColumnData.columnfirstchildren.map((section1, index1)=>{
+                  return(
+                    <div key={index1}>
+                      <Link><MenuLink to={`h2_${section1.id}`} smooth={true} duration={500} className='flex text-xl font-bold text-[#191F4D] p-3 bg-[#f4f8f9] items-center sp:text-xl sp:pt-0'>
+                        <div className='rounded-full text-sm text-white p-2 bg-[#191F4D]'>
+                          <span>{index1<=9?`0${index1+1}`:index1+1}</span>
+                        </div>
+                        <h2 className='ml-2'>{section1.title}</h2>
+                      </MenuLink></Link>
+                      {/* <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section1.description}</p> */}
+                      {
+                        section1 && section1.columnsecondchildren.map((section2, index2)=>{
+                          return(
+                            <div key={index2}>
+                              <Link><MenuLink to={`h3_${section2.id}`} smooth={true} duration={500}>
+                                <div className='w-full py-2 pl-20'>
+                                  <h3 className='text-base font-bold sp:text-[16px]'>- {section2.title}</h3>
+                                </div>
+                              </MenuLink></Link>
+                              {/* <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section2.description}</p> */}
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  );
+                })
+              }
+            </div>
             <div className='w-full flex justify-center py-5'>
               {oneColumnData.thumbnail && <img className='rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${oneColumnData.thumbnail}`} alt='thumbnail'/>}
             </div>
@@ -87,6 +126,9 @@ const ColumnDetailContent = (props) => {
                         <h2 className='ml-2'>{section1.title}</h2>
                       </div>
                       <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section1.description}</p>
+                      <div className='w-full flex justify-center py-5'>
+                        {section1.image && <img className='rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${section1.image}`} alt='firstimage'/>}
+                      </div>
                       {
                         section1 && section1.columnsecondchildren.map((section2, index2)=>{
                           return(
@@ -95,6 +137,9 @@ const ColumnDetailContent = (props) => {
                                 <h3 className='text-xl font-bold sp:text-[16px]'>{section2.title}</h3>
                               </div>
                               <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section2.description}</p>
+                              <div className='w-full flex justify-center py-5'>
+                                {section2.image && <img className='rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${section2.image}`} alt='secondimage'/>}
+                              </div>
                             </div>
                           )
                         })

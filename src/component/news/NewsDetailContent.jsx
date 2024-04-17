@@ -69,7 +69,6 @@ const NewsDetailContent = (props) => {
                 </div>
               );
             })
-
             }
             
           </div>

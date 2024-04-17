@@ -29,6 +29,9 @@ import CompanyUpdatePage from './admin/admincomponent/comanymanage/CompanyUpdate
 import ColumnManage from './admin/admincomponent/columnmanage/ColumnManage.jsx';
 import ColumnManageDetail from './admin/admincomponent/columnmanage/ColumnManageDetail.jsx';
 import ColumnAddPage from './admin/admincomponent/columnmanage/ColumnAddPage.jsx';
+import ColumnUpdatePage from './admin/admincomponent/columnmanage/ColumnUpdatePage.jsx';
+import NewsManage from './admin/admincomponent/newsmanage/NewsManage.jsx';
+import NewsManageDetail from './admin/admincomponent/newsmanage/NewsManageDetail.jsx';
 
 function App() {
   return (
@@ -61,7 +64,11 @@ function App() {
             <Route path='companymanage/company_update/:id' element={<CompanyUpdatePage/>}/>
             <Route path='columnmanage' element={<ColumnManage/>}/>
             <Route path='columnmanage/column_detail/:id' element={<ColumnManageDetail/>}/>
+            <Route path='columnmanage/column_update/:id' element={<ColumnUpdatePage/>}/>
             <Route path='columnmanage/column_add' element={<ColumnAddPage/>}/>
+            <Route path='newsmanage' element={<NewsManage/>}/>
+            <Route path='newsmanage/news_detail/:id' element={<NewsManageDetail/>}/>
+
 
             {/* <Route path='subscription' element={<SubscriptionManage/>}/>
             <Route path='video' element={<VideoManage/>}/>

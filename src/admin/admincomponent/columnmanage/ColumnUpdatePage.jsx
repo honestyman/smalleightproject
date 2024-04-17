@@ -8,19 +8,18 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { SlArrowLeft } from "react-icons/sl";
 import { IoMdAdd } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { RxUpdate } from "react-icons/rx";
 
-import { Input, Select, Upload, Button, message, Tree } from "antd";
-import { UploadOutlined } from '@ant-design/icons';
+import { Input, Select, message} from "antd";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getCampaignList, getExpertiseList, getToolsList, getSolvedissueList, getPricesenceList, getStartDateList, getIndustryExperienceList, addCompany, addCompanyLogo } from "../../../redux/slice/companySlice";
 import TextArea from "antd/es/input/TextArea";
-import { addColumn, addColumnThumbnail, getColumnCategoryList, addColumnFirstImage, addColumnSecondImage } from "../../../redux/slice/columnSlice";
+import {getOneColumn, addColumnThumbnail, getColumnCategoryList, addColumnFirstImage, addColumnSecondImage, updateColumn } from "../../../redux/slice/columnSlice";
 
 
 // It's just a simple demo. You can use tree map to optimize update perf.
-const ColumnAddPage=()=>{
-
+const ColumnUpdatePage=()=>{
+  const Id=useParams().id;
   const dispatch = useDispatch();
 
   const [parentTitleValues, setParentTitleValues] = useState([]);
@@ -31,28 +30,168 @@ const ColumnAddPage=()=>{
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState();
+  const [currentThumnail, setCurrentThumbnail] = useState("");
   const [columnCategories, setColumnCategories] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const [parentImage, setParentImage] = useState([]);
   const [childrenImage, setChildrenImage] = useState([]);
   const [parentImageName, setParentImageName] = useState([]);
   const [childrenImageName, setChildrenImageName] = useState([]);
-  const [parentImagePreview, setParentImagePreview] = useState([]);
-  const [childImagePreview, setChildImagePreview] = useState([]);
 
-  const [parent, setParent]=useState("")
-  
+  const [flag, setFlag]=useState(false);
+  const [currentImageDisplay, setCurrentImageDisplay] = useState("block");
+
   const [validTitle, setValidTitle] = useState("");
   const [validDescription, setValidDescription] = useState("");
   const [validColumnCategory, setValidColumnCategory] = useState("");
   const [validThumbnail, setValidThumbnail] = useState("");
 
-  const { allColumnCategoryList } = useSelector(state => state.columns);
+  const { allColumnCategoryList, oneColumnData } = useSelector(state => state.columns);
 
   useEffect(() =>{
+    dispatch(getOneColumn(Id));
     dispatch(getColumnCategoryList())
   },[])
-  
+  useEffect(() =>{
+    console.log(oneColumnData);
+    setTitle(oneColumnData.title);
+    setDescription(oneColumnData.description);
+    setCurrentThumbnail(oneColumnData.thumbnail);
+    if(oneColumnData.columncategories){
+      let temp = [];
+      for(let i=0; i<oneColumnData.columncategories.length; i++){
+        temp.push(oneColumnData.columncategories[i].text);
+      }
+      setColumnCategories(temp);
+    }
+    if(oneColumnData.columnfirstchildren){
+      var tempParentTitle = [];
+      var tempParentContent = [];
+      var tempParentImageName = [];
+      var tempChildrenTitle = [];
+      var tempChildrenContent = [];
+      var tempChildrenImageName = [];
+      oneColumnData.columnfirstchildren.map((parent, index1)=>{
+        tempParentTitle = [...tempParentTitle, { key:(index1+1).toString(), value:parent.title }];
+        tempParentContent = [...tempParentContent, { key:(index1+1).toString(), value:parent.description }];
+        tempParentImageName = [...tempParentImageName, { key:(index1+1).toString(), image:parent.image }];
+        if(parent.columnsecondchildren){
+          parent.columnsecondchildren.map((child, index2)=>{
+            tempChildrenTitle = [...tempChildrenTitle, { key:`${(index1+1).toString()}-${(index2+1).toString()}`, value:child.title }];
+            tempChildrenContent = [...tempChildrenContent, { key:`${(index1+1).toString()}-${(index2+1).toString()}`, value:child.description }];
+            tempChildrenImageName = [...tempChildrenImageName, { key:`${(index1+1).toString()}-${(index2+1).toString()}`, image:child.image }];
+          })
+        }
+      })
+      setParentTitleValues(tempParentTitle);
+      setParentContentValues(tempParentContent);
+      setParentImageName(tempParentImageName);
+      setChildrenTitleValues(tempChildrenTitle);
+      setChildrenContentValues(tempChildrenContent);
+      setChildrenImageName(tempChildrenImageName);
+    }
+    setFlag(true);
+  },[oneColumnData])
+
+  useEffect(()=>{
+    // if(flag){
+      // console.log("filter", (parentTitleValues.filter(filterData => (filterData.key==='1'))).value)
+      if(oneColumnData.columnfirstchildren){
+        var data = [];
+        oneColumnData.columnfirstchildren.map((parent, index1)=>{
+        var children = [];
+          parent.columnsecondchildren && parent.columnsecondchildren.map((child, index2)=>{
+            children=[
+              ...children,
+               {
+                key: `${(index1+1).toString()}-${(index2+1).toString()}`, 
+                title: <div className="w-full flex flex-col pl-10 py-3">
+                          <div className="flex flex-col items-start py-2">
+                            <label className="font-bold mb-1">【現在小見出し】</label>
+                            <p>{(childrenTitleValues.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0] && (childrenTitleValues.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0].value}</p>
+                          </div>
+                          <div className="flex flex-col items-start py-2">
+                            <label className="font-bold mb-1">【現在コンテンツ】</label>
+                            <p>{(childrenContentValues.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0] && (childrenContentValues.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0].value}</p>
+                          </div>
+                          <div className="flex flex-col items-start py-2">
+                            { child.image && (childrenImageName.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0] && (
+                              <div className={`w-full flex border rounded-md p-1 mt-2 items-center`}>
+                                <img className="rounded" src={`${process.env.REACT_APP_BASE_URL}/img/${(childrenImageName.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0].image}`} alt="Preview" style={{ maxWidth: '100px' }} />
+                                <span className="mx-2">{(childrenImageName.filter(filterData => (filterData.key === `${(index1+1).toString()}-${(index2+1).toString()}`)))[0].image}</span>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="flex flex-col items-start py-2">
+                            <label className="font-bold mb-1">【小見出し】</label>
+                            <Input type="text"  onChange={(e)=>changeChildrenTitle(`${(index1+1).toString()}-${(index2+1).toString()}`, e.target.value)} />
+                          </div>
+                          <div className="flex flex-col items-start py-2">
+                            <label className="font-bold mb-1">【コンテンツ】</label>
+                            <TextArea type="text" onChange={(e)=>changeChildrenContent(`${(index1+1).toString()}-${(index2+1).toString()}`, e.target.value)}/>
+                          </div>
+                          <div className="flex flex-col items-start py-2">
+                            <input
+                              className="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] font-normal transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white file:dark:text-white"
+                              type="file"
+                              id="formFile"
+                              onChange={(e)=>getChildrenImage(`${(index1+1).toString()}-${(index2+1).toString()}`, e.target.files[0])} 
+                              />
+                          </div> 
+                      </div>,
+              }
+             ]
+            });
+          data = [
+            ...data,
+            {
+              key: (index1+1).toString(),
+              title: <div className="w-[90%] flex flex-col pt-2 pb-5">
+                        <div className="flex flex-col items-start py-2">
+                          <label className="font-bold mb-1">【現在中見出し】</label>
+                          <p>{(parentTitleValues.filter(filterData => (filterData.key === (index1+1).toString())))[0] && (parentTitleValues.filter(filterData => (filterData.key === (index1+1).toString())))[0].value}</p>
+                        </div>
+                        <div className="flex flex-col items-start py-2">
+                          <label className="font-bold mb-1">【現在コンテンツ】</label>
+                          <p>{(parentContentValues.filter(filterData => (filterData.key === (index1+1).toString())))[0] && (parentContentValues.filter(filterData => (filterData.key === (index1+1).toString())))[0].value}</p>
+                        </div>
+                        <div className="flex flex-col items-start py-2">
+                          {parent.image && (parentImageName.filter(filterData => (filterData.key === (index1+1).toString())))[0]&& (
+                            <div className={`w-full flex border rounded-md p-1 mt-2 items-center`}>
+                              <img className="rounded" src={`${process.env.REACT_APP_BASE_URL}/img/${(parentImageName.filter(filterData => (filterData.key === (index1+1).toString())))[0].image}`} alt="Preview" style={{ maxWidth: '100px' }} />
+                              <span className="mx-2">{(parentImageName.filter(filterData => (filterData.key === (index1+1).toString())))[0].image}</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex flex-col items-start py-2">
+                          <label className="font-bold mb-1">【中見出し】</label>
+                          <Input type="text" onChange={(e)=>changeParentTitle((index1+1).toString(), e.target.value)} />
+                        </div>
+                        <div className="flex flex-col items-start py-2">
+                          <label className="font-bold mb-1">【コンテンツ】</label>
+                          <TextArea type="text" onChange={(e)=>changeParentContent((index1+1).toString(), e.target.value)}/>
+                        </div>
+                        <div className="flex flex-col items-start py-2">
+                          <input
+                            className="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] font-normal transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white file:dark:text-white"
+                            type="file"
+                            id="formFile"
+                            onChange={(e)=>getParentImage((index1+1).toString(), e.target.files[0])} 
+                            />
+                        </div> 
+                     </div>,
+              children: children
+                // 
+              
+            } 
+          ] 
+        })
+        setTreeData(data);
+      }
+    // }
+  },[oneColumnData])
+
   const categoryData = () =>{
     const result=[];
     for(let i=0;i<allColumnCategoryList.length;i++){
@@ -103,8 +242,14 @@ const ColumnAddPage=()=>{
       message.error('アップロードできる画像はJPG/PNG/WEBPのみです！');
     }
     if(isJpgOrPng){
-      setParentImage(previousData => ([...(previousData.filter(filterData=>filterData.key!==key)), {key:key, image:file}]));
-      setParentImageName(previousData => ([...(previousData.filter(filterData=>filterData.key!==key)), {key:key, image:file.name}]));
+      setParentImage((previousData) => {
+        const data = previousData.filter(element => element.key != key);
+        return [...data, { key:key, image:file }];
+      });
+      setParentImageName((previousData) => {
+        const data = previousData.filter(element => element.key != key);
+        return [...data, { key:key, image:file.name }];
+      });
     }
   }
   const getChildrenImage = async(key, file) =>{
@@ -115,46 +260,68 @@ const ColumnAddPage=()=>{
       message.error('アップロードできる画像はJPG/PNG/WEBPのみです！');
     }
     if(isJpgOrPng){
-      setChildrenImage(previousData => ([...(previousData.filter(filterData=>filterData.key!==key)), {key:key, image:file}]));
-      setChildrenImageName(previousData => ([...(previousData.filter(filterData=>filterData.key!==key)), {key:key, image:file.name}]));
+      setChildrenImage((previousData) => {
+        const data = previousData.filter(element => element.key != key);
+        return [...data, { key:key, image:file }];
+      });
+      setChildrenImageName((previousData) => {
+        const data = previousData.filter(element => element.key != key);
+        return [...data, { key:key, image:file.name }];
+      });
     }
   }
 
   useEffect(()=>{
-    console.log("=======",childrenImageName);
-  },[childrenImageName])
+    console.log("=======",childrenImage);
+  },[childrenImage])
 
   // useEffect(() =>{
-  //   console.log(parentTitleValues)
+    
+  //   console.log("=====>",)
   // },[parentTitleValues])
+  useEffect(() =>{
+    console.log("child=====>",childrenTitleValues)
+  },[childrenTitleValues])
 
   useEffect(() =>{
-    console.log(parentImageName)
-  },[parentImageName])
+    console.log(parentImage)
+  },[parentImage])
 
   const changeParentTitle = (key, value)=>{
       if(value){
-        setParentTitleValues([...parentTitleValues, { key:key, value:value }])
+        setParentTitleValues((previousData) => {
+          const data = previousData.filter(element => element.key != key);
+          return [...data, { key, value }];
+        })
       }   
   }
   const changeParentContent = (key, value)=>{
     if(value){
-      setParentContentValues([...parentContentValues, { key:key, value:value }])
+      setParentContentValues((previousData) => {
+          const data = previousData.filter(element => element.key != key);
+          return [...data, { key, value }];
+      })
     }   
   }
 
   const changeChildrenTitle = (key, value)=>{
     if(value){
-      setChildrenTitleValues([...childrenTitleValues, { key:key, value:value }])
+      setChildrenTitleValues((previousData) => {
+        const data = previousData.filter(element => element.key != key);
+        return [...data, { key, value }];
+      })
     }
   }
   const changeChildrenContent = (key, value)=>{
     if(value){
-      setChildrenContentValues([...childrenContentValues, { key:key, value:value }])
+      setChildrenContentValues((previousData) => {
+        const data = previousData.filter(element => element.key != key);
+        return [...data, { key, value }];
+      })
     }
   }
 
-  const handleClickAddColumn =()=>{
+  const handleClickUpdateColumn =()=>{
     if(!title){
       setValidTitle("※この項目は必須入力項目です。")
     }else{
@@ -170,14 +337,10 @@ const ColumnAddPage=()=>{
     }else{
       setValidColumnCategory("")
     }
-    if(!thumbnail){
-      setValidThumbnail("※この項目は必須入力項目です。")
-    }else{
-      setValidThumbnail("")
-    }
 
-    if(title && description && columnCategories && thumbnail){
+    if(title && description && columnCategories){
       const payload={
+        id: Id,
         title: title,
         description: description,
         columnCategories: columnCategories,
@@ -198,11 +361,13 @@ const ColumnAddPage=()=>{
         }),
         secondImageName: childrenImageName.sort(function(a, b) {
           return a.key.localeCompare(b.key);
-        }),
-        thumbnail: thumbnail.name   
+        }), 
+      }
+      if(thumbnail){
+        payload.thumbnail = thumbnail.name;
       }
       if(payload){
-        dispatch(addColumn(payload)).then(()=>{
+        dispatch(updateColumn(payload)).then(()=>{
           alert("正確に登録されています！");  
           if(thumbnail){
              dispatch(addColumnThumbnail(thumbnail));
@@ -393,7 +558,7 @@ const ColumnAddPage=()=>{
     <div className={`-webkit-fill-available h-[900px] bg-white text-sm shadow items-center px-10 py-10 `}>
       <div className="w-full h-full pb-10 overflow-y-auto">
         <div className="flex w-full justify-center items-center">
-          <p className="text-xl font-bold mx-5">コラム記事登録</p>
+          <p className="text-xl font-bold mx-5">コラム記事更新</p>
         </div>
         <div className="w-[800px] flex flex-col text-left mx-auto px-20 py-5">
           <div className="flex flex-col items-start py-2">
@@ -433,6 +598,12 @@ const ColumnAddPage=()=>{
                   <span className="mx-2">{thumbnail.name}</span>
                 </div>
               )}
+              {currentThumnail && (
+                <div className={`w-full flex border rounded-md p-1 mt-2 items-center ${thumbnail?'hidden':'block'}`}>
+                  <img className="rounded" src={`${process.env.REACT_APP_BASE_URL}/img/${currentThumnail}`} alt="Preview" style={{ maxWidth: '50px' }} />
+                  <span className="mx-2">{currentThumnail}</span>
+                </div>
+              )}
           </div>
           <div className="flex flex-col items-start py-2">
             <button className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-5 px-5 py-1 hover:bg-white hover:text-black hover:border' onClick={() => handleAddParent()}><IoAddCircleOutline className="font-bold mr-2" />中見出し追加</button>
@@ -444,11 +615,11 @@ const ColumnAddPage=()=>{
         </div>
         <div className="w-full flex justify-center items-center">
           <Link to="/manage/columnmanage" className="flex items-center text-sm border px-2 py-1 mx-5 rounded-md hover:bg-[#B40100] hover:text-white"><SlArrowLeft className='mx-1' /> 前に戻る</Link>
-          <Link className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-5 px-10 py-1 hover:bg-white hover:text-black hover:border' onClick={handleClickAddColumn}><IoAddCircleOutline className="font-bold mr-2" />登録</Link>
+          <Link className='flex items-center text-sm text-white rounded-md bg-yellow-300 mx-5 px-10 py-1 hover:bg-white hover:text-black hover:border' onClick={handleClickUpdateColumn}><RxUpdate className="font-bold mr-2" />更新</Link>
         </div>
       </div>
     </div>
   );
   
 };
-export default ColumnAddPage;
+export default ColumnUpdatePage;

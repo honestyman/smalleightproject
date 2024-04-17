@@ -56,6 +56,9 @@ const ColumnManageDetail=()=>{
                   <p>{section1.title}</p>
                   <label className="font-bold">【コンテンツ】</label>
                   <p>{section1.description}</p>
+                  <div className="w-full flex flex-col w-full justify-center items-center pb-5">
+                     {section1.image && <img className='w-[20%] rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${section1.image}`} />}
+                  </div>
                   {
                     section1 && section1.columnsecondchildren.map((section2, index2)=>{
                       return(
@@ -64,6 +67,9 @@ const ColumnManageDetail=()=>{
                           <p>{section2.title}</p>
                           <label className="font-bold">【コンテンツ】</label>
                           <p>{section2.description}</p>
+                          <div className="w-full flex flex-col w-full justify-center items-center pb-5">
+                            {section2.image && <img className='w-[20%] rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${section2.image}`} />}
+                          </div>
                         </div>
                       )
                     })

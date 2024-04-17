@@ -35,8 +35,8 @@ const Footer = () => {
               <Link className="my-2 hover:font-bold">ニュース</Link>
               <Link className="my-2 hover:font-bold">コラム</Link>
               <Link className="my-2 hover:font-bold">事業概要</Link>
-              <Link className="my-2 hover:font-bold">プライバシーポリシー</Link>
-              <Link className="my-2 hover:font-bold">利用規約</Link>
+              <Link to={"/policy"} className="my-2 hover:font-bold">プライバシーポリシー</Link>
+              <Link to={"/terms"} className="my-2 hover:font-bold">利用規約</Link>
               <Link className="my-2 hover:font-bold">お問い合わせ</Link>
             </div>
           </div>
