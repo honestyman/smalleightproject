@@ -32,6 +32,11 @@ import ColumnAddPage from './admin/admincomponent/columnmanage/ColumnAddPage.jsx
 import ColumnUpdatePage from './admin/admincomponent/columnmanage/ColumnUpdatePage.jsx';
 import NewsManage from './admin/admincomponent/newsmanage/NewsManage.jsx';
 import NewsManageDetail from './admin/admincomponent/newsmanage/NewsManageDetail.jsx';
+import NewsAddPage from './admin/admincomponent/newsmanage/NewsAddPage.jsx';
+import Tools from './pages/Tools.jsx';
+import ToolsContent from './component/tools/ToolsContent.jsx';
+import CreateUTMTool from './component/tools/CreateUTMTool.jsx';
+import NewsUpdatePage from './admin/admincomponent/newsmanage/NewsUpdatePage.jsx';
 
 function App() {
   return (
@@ -68,23 +73,15 @@ function App() {
             <Route path='columnmanage/column_add' element={<ColumnAddPage/>}/>
             <Route path='newsmanage' element={<NewsManage/>}/>
             <Route path='newsmanage/news_detail/:id' element={<NewsManageDetail/>}/>
+            <Route path='newsmanage/news_add' element={<NewsAddPage/>}/>
+            <Route path='newsmanage/news_update/:id' element={<NewsUpdatePage/>}/>
 
-
-            {/* <Route path='subscription' element={<SubscriptionManage/>}/>
-            <Route path='video' element={<VideoManage/>}/>
-            <Route path='add_video' element={<AddVideo/>}/>
-            <Route path='update_video/:id' element={<UpdateVideo/>}/>
-            <Route path='sound' element={<SoundManage/>}/>
-            <Route path='add_sound' element={<AddSound/>}/>
-            <Route path='update_sound/:id' element={<UpdateSound/>}/>
-            <Route path='coin' element={<CoinManage/>}/>
-            <Route path='tag' element={<TagManage/>}/>
-            <Route path='add_tag' element={<AddTag/>}/>
-            <Route path='update_tag/:id' element={<UpdateTag/>}/>
-            <Route path='notification' element={<NotificationManage/>}/>
-            <Route path='add_notification' element={<AddNotification/>}/>
-            <Route path='update_notification/:id' element={<UpdateNotification/>}/> */}
           </Route> 
+          <Route path='/tools' element={<Tools/>}>
+            <Route index element={<ToolsContent/>}/>
+            <Route path='create_param' element={<CreateUTMTool/>}/>
+            
+          </Route>
         </Routes>
       </Router>
     </div>

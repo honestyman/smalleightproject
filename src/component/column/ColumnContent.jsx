@@ -105,14 +105,14 @@ const ColumnContent = () => {
       <div className='w-full flex flex-col justify-center items-center pb-20 '>
           <div className='w-full flex sp:flex-wrap-reverse'>
             <div className='w-[75%] sp:w-full flex flex-col'>
-              <p className='text-4xl font-bold mt-10 text-[#B40100] sp:text-2xl'>コラム一覧</p>
+              <h1 className='text-4xl font-bold mt-10 text-[#B40100] sp:text-2xl'>コラム一覧</h1>
               <p className='text-xl text-[#191F4D] mt-5 sp:text-sm'>SmallEightのプログやコラム記事を掲載しています。</p>
               <div className='w-full sp:w-full flex flex-wrap justify-start px-10 my-5'>
                 {currentRecords && currentRecords.map((column, index)=>{
                   return(
                     <Link key={index} to={"/columndetail/"+column.id}>
                       <div className='flex flex-col justify-center items-center mx-10 mt-10 px-5'>
-                          <div className='w-[200px] h-[200px] rounded-md bg-[#191F4D]'>
+                          <div className='w-[200px] h-[200px] rounded-md border'>
                             {column.thumbnail && <img className='w-full rounded hover:opacity-50' src={`${process.env.REACT_APP_BASE_URL}/img/${column.thumbnail}`} />}
                           </div>
                           <p className='mt-3'>{column.createdAt.slice(0,10)}</p>
@@ -138,10 +138,10 @@ const ColumnContent = () => {
               <div className='w-full flex flex-col items-center bg-white px-10 py-10 border rounded-xl shadow-md lg:px-3 lg:py-5 sp:px-5 sp:py-10'>
                 {/* <div className='w-[100px] h-[100px] bg-red-500'></div> */}
                 <img src={computer} className='w-[80%] lg:w-full sp:w-full sp:h-[150px] rounded-md shadow-md float-left sp:float-none mx-10 sp:mx-0 hover:opacity-50 hover:scale-110' alt="" />
-                <p className='text-[#191F4D] text-xl font-bold mt-5'>スモハチ Tools</p>
+                <p className='text-[#191F4D] text-xl font-bold mt-5'>スモハチツール</p>
                 <span className='my-5 lg:text-sm text-[#191F4D] sp:text-sm'>フリーのジェネレーターなど業務で<br/>役に立つWEBツールをご提供しています。</span>
                 <div ref={ref} className='w-full flex flex-col items-center'>
-                  <Link className='px-5 py-2 bg-white w-[200px] lg:w-[150px] rounded-md border shadow text-[#191F4D] lg:text-sm hover:border hover:text-white hover:bg-[#191F4D]'>スモハチツールへ</Link>
+                  <Link to={"/tools"} className='px-5 py-2 bg-white w-[200px] lg:w-[150px] rounded-md border shadow text-[#191F4D] lg:text-sm hover:border hover:text-white hover:bg-[#191F4D]'>スモハチツールへ</Link>
                   {/* <Link to="/mitsuke" className='px-5 py-2 bg-[#191F4D] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#191F4D] hover:bg-white'>質問に答える(無料)</Link>
                   <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#191F4D] my-5 hover:bg-[#191F4D] hover:text-white'>ご掲載希望はこちら</Link> */}
                 </div>

@@ -64,7 +64,7 @@ const TopNews = () => {
                 <Link to={"/newsdetail/"+news.id} key={index}>
                   <div className='w-[800px] sp:w-full flex flex-row justify-center text-[#191F4D] border-b border-black mb-5 py-5 hover:font-bold sp:py-2 sp:pr-3'>
                     <div className='w-[50%] text-left px-20 sp:px-5'>
-                      <p className='mx-10 text-sm sp:mx-2 sp:text-sm'>{news.publishDate?news.publishDate.slice(0,10):""}</p>
+                      <p className='mx-10 text-sm sp:mx-2 sp:text-sm'>{news.createdAt?news.createdAt.slice(0,10):""}</p>
                     </div>
                     <div className='w-[50%] text-left'>
                       <p className='text-sm sp:text-sm'>{news.title}</p>

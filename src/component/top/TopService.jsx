@@ -51,11 +51,11 @@ const TopService = () => {
                 <p className='my-2 sp:text-[12px] sp:my-0'>・OGPタグ確認ツール</p>
                 <p className='my-2 sp:text-[12px] sp:my-0'>・見出し (hタグ) 確認ツール</p>
                 <p className='my-2 sp:text-[12px] sp:my-0'>・UTMパラメータ生成ツール</p>
-                <Link to={"/mitsuke"} className='text-[#191F4D] border border-[#191F4D] rounded-md bg-white px-5 py-1 mt-3 text-sm hover:bg-[#191F4D] hover:text-white sp:text-sm'>使ってみる</Link>
+                <Link to={"/tools"} className='text-[#191F4D] border border-[#191F4D] rounded-md bg-white px-5 py-1 mt-3 text-sm hover:bg-[#191F4D] hover:text-white sp:text-sm'>使ってみる</Link>
               </div>
             </div>
             <div className='w-1/2 sp:w-full flex justify-start items-center sp:justify-center'>
-              <div className='w-[400px] h-[300px] overflow-hidden sp:w-[80%] sp:h-[200px] rounded-md absolute float-left sp:float-none mx-10 sp:mx-0' style={{boxShadow:"5px 10px 10px gray"}}>
+              <div className='w-[400px] h-[300px] overflow-hidden sp:w-[80%] sp:h-[200px] rounded-md absolute float-left sp:float-none mx-10 sp:mx-0 sp:relative' style={{boxShadow:"5px 10px 10px gray"}}>
                <img src={computer} className='w-full h-full rounded-md zoom' alt="" />
               </div>
               {/* <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-left sp:float-none bg-red-500 mx-10 sp:mx-0'></div> */}
@@ -63,7 +63,7 @@ const TopService = () => {
           </div>
           <div className='w-full flex sp:flex-wrap bg-white justify-center py-20 sp:px-2 sp:py-5'>
             <div className='w-1/2 sp:w-full flex justify-end items-center sp:justify-center sp:pb-5'>
-              <div className='w-[400px] h-[300px] overflow-hidden sp:w-[80%] sp:h-[200px] rounded-md absolute float-left sp:float-none mx-10 sp:mx-0' style={{boxShadow:"5px 10px 10px gray"}}>
+              <div className='w-[400px] h-[300px] overflow-hidden sp:w-[80%] sp:h-[200px] rounded-md absolute float-left sp:float-none mx-10 sp:mx-0 sp:relative' style={{boxShadow:"5px 10px 10px gray"}}>
                 <img src={analytics} className='w-full h-full rounded-md zoom' alt="" />
               </div>
               {/* <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-right sp:float-none bg-red-500 mx-10 sp:mx-0'></div> */}
@@ -98,7 +98,7 @@ const TopService = () => {
               </div>
             </div>
             <div className='w-1/2 sp:w-full sp:pl-4 flex justify-start sp:justify-center items-center'>
-              <div className='w-[400px] h-[300px] overflow-hidden sp:w-[80%] sp:h-[200px] rounded-md absolute float-left sp:float-none mx-10 sp:mx-0' style={{boxShadow:"5px 10px 10px gray"}}>
+              <div className='w-[400px] h-[300px] overflow-hidden sp:w-[80%] sp:h-[200px] rounded-md absolute float-left sp:float-none mx-10 sp:mx-0 sp:relative' style={{boxShadow:"5px 10px 10px gray"}}>
                 <img src={coding} className='w-full h-full rounded-md zoom' alt="" />
               </div>
               {/* <div className='w-[400px] sp:w-full h-[300px] sp:h-[150px] float-left sp:float-none bg-red-500 mx-10 sp:mx-0'></div> */}

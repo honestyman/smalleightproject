@@ -92,7 +92,7 @@ const TopColumn = () => {
               return(
                 <Link to={"/columndetail/"+column.id}>
                   <div key={index} className='flex flex-col justify-start sp:justify-center items-center mx-5 px-10 lg:mx-5 sp:text-sm'>
-                    <div className='w-[200px] h-[200px] rounded-md sp:w-200px sp:h-[200px]'>
+                    <div className='w-[200px] h-[200px] border rounded-md sp:w-200px sp:h-[200px]'>
                       {column.thumbnail && <img className='w-full rounded' src={`${process.env.REACT_APP_BASE_URL}/img/${column.thumbnail}`} />}
                     </div>
                     <p className='text-[#191F4D] mt-3'>{column.createdAt.slice(0,10)}</p>

@@ -10,16 +10,22 @@ import TopColumn from "../component/top/TopColumn";
 import Footer from "../component/Footer";
 import pattern from '../img/pattern.webp';
 import title from '../img/title.png';
+import titleFirst from '../img/title_first.png';
+import titleSecond from '../img/title_second.png';
 
 // import 'intersection-observer';
 // import CanvasGraph from "../component/top/CanvasGraph";
-// import WOW from 'wow.js';
-// import 'animate.css';
+import WOW from 'wow.js';
+import 'animate.css';
 
 const Top = () => {
 
   const navigate = useNavigate();
-  // const ref = useRef(null);
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+
+  const [titleDisplay, setTitleDisplay] = useState('hidden');
 
   const param=useParams();
   useEffect(() => {
@@ -29,26 +35,57 @@ const Top = () => {
     }
   }, [param]);
 
-  // useEffect(() => {
-  //   const wow = new WOW({
-  //     offset: 50,
-  //     mobile: false,
-  //     duration: 1000,
-  //   });
-  //   wow.init();
+  useEffect(()=>{
+    setTimeout(()=>{
+      setTitleDisplay('block');
+    }, 3000)
+  })
 
-  //   const observer = new IntersectionObserver((entries) => {
-  //     entries.forEach((entry) => {
-  //       if (entry.isIntersecting) {
-  //         entry.target.classList.add('wow', 'animate__animated', 'animate__zoomIn');
-  //       } else {
-  //         entry.target.classList.remove('wow', 'animate__animated', 'animate__zoomIn');
-  //       }
-  //     });
-  //   });
+  useEffect(() => {
+    const wow = new WOW({
+      offset: 50,
+      mobile: false,
+      duration: 1000,
+    });
+    wow.init();
 
-  //   observer.observe(ref.current);
-  // }, []);
+    const observer1 = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('wow', 'animate__animated', 'animate__fadeInRight');
+        } else {
+          entry.target.classList.remove('wow', 'animate__animated', 'animate__fadeInRight');
+        }
+      });
+    });
+
+    const observer2 = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setTimeout(()=>{
+            entry.target.classList.add('wow', 'animate__animated', 'animate__fadeInUp');
+          }, 3000)
+        } else {
+          entry.target.classList.remove('wow', 'animate__animated', 'animate__fadeInUp');
+        }
+      });
+    });
+    const observer3 = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setTimeout(()=>{
+            entry.target.classList.add('wow', 'animate__animated', 'animate__fadeIn');
+          }, 3000)
+        } else {
+          entry.target.classList.remove('wow', 'animate__animated', 'animate__fadeIn');
+        }
+      });
+    });
+
+    observer1.observe(ref1.current);
+    observer2.observe(ref2.current);
+    observer3.observe(ref3.current);
+  }, []);
   
   return (
     <div className="w-100">
@@ -60,7 +97,14 @@ const Top = () => {
               <img src={pattern} className="w-full" alt="" />
             </div>
             <div className="w-full flex flex-col items-start">
-              <img src={title} className="-mt-10 sp:mt-10" alt="title" />
+              <div ref={ref1}>
+                <div ref={ref2}>
+                  <img src={titleFirst} className="-mt-10 sp:mt-10" alt="titleFirst" />
+                </div>
+              </div>
+              <div ref={ref3}>
+                  <img src={titleSecond} className={`sp:-mt-3 ${titleDisplay}`} alt="titleSecond" />
+              </div>
               <p className="text-[#B40100] text-[16px] py-10 sp:text-base">小さいことの積み重ね。 末広がる。</p>
             </div>
             

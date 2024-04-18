@@ -2,11 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Header from "../component/Header";
 
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "../component/Footer";
-import NewsContent from "../component/news/NewsContent";
+import ToolsContent from "../component/tools/ToolsContent";
+import ToolsNav from "../component/tools/ToolNav";
 
-const News=()=>{
+const Tools=()=>{
   const [name, setName]=useState("")
   const [password, setPassword]=useState("")
 
@@ -18,14 +19,13 @@ const News=()=>{
   return(
     <div className="w-100">
       <Header/>
-      <div className="w-full">
-        <NewsContent/> 
+      <div className="w-full flex">
+        <ToolsNav/>
+        <Outlet/> 
       </div>
-      {/* <TopService/>
-      <TopColumn/> */}
       <Footer/>
     </div>
   );
   
 };
-export default News;
+export default Tools;

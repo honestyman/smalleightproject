@@ -28,7 +28,7 @@ const NewsManageDetail=()=>{
     <div className={`-webkit-fill-available h-[900px] bg-white shadow items-center px-20 py-20 overflow-y-auto`}>
       <div className="flex flex-col w-full justify-center items-center pb-5">
         <p className="text-xl font-bold mb-5 mx-5">{oneNewsData.title}</p>
-        {oneNewsData.image && <img className='w-[60%] rounded hover:opacity-50 hover:scale-110' src={`${process.env.REACT_APP_BASE_URL}/img/${oneNewsData.image}`} />}
+        {oneNewsData.image && <img className='w-[60%] rounded' src={`${process.env.REACT_APP_BASE_URL}/img/${oneNewsData.image}`} />}
       </div>
         <div className="flex flex-col items-start px-5 py-2">
           <label className="font-bold">【登録日】</label>

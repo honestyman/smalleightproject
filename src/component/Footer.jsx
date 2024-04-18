@@ -30,14 +30,16 @@ const Footer = () => {
           </div>
           <div className='w-[30%]'>
             <div className='flex flex-col float-left text-[#191F4D] sp:text-sm'>
-              <Link className="my-2 hover:font-bold">サービス</Link>
-              <Link className="my-2 hover:font-bold">Mitsuke</Link>
-              <Link className="my-2 hover:font-bold">ニュース</Link>
-              <Link className="my-2 hover:font-bold">コラム</Link>
-              <Link className="my-2 hover:font-bold">事業概要</Link>
-              <Link to={"/policy"} className="my-2 hover:font-bold">プライバシーポリシー</Link>
-              <Link to={"/terms"} className="my-2 hover:font-bold">利用規約</Link>
-              <Link className="my-2 hover:font-bold">お問い合わせ</Link>
+              <Link to={"/service"} className="my-2 hover:font-bold sp:my-1">サービス</Link>
+              {/* <Link className="my-2 hover:font-bold">Mitsuke</Link>
+               */}
+              <Link to={"/tools"} className="my-2 hover:font-bold sp:my-1">スモハチツール</Link>
+              <Link to={"/news"} className="my-2 hover:font-bold sp:my-1">ニュース</Link>
+              <Link to={"/column"} className="my-2 hover:font-bold sp:my-1">コラム</Link>
+              <Link to={"/business"} className="my-2 hover:font-bold sp:my-1">事業概要</Link>
+              <Link to={"/policy"} className="my-2 hover:font-bold sp:my-1">プライバシーポリシー</Link>
+              <Link to={"/terms"} className="my-2 hover:font-bold sp:my-1">利用規約</Link>
+              <Link to={"/inquery"} className="my-2 hover:font-bold sp:my-1">お問い合わせ</Link>
             </div>
           </div>
         </div>

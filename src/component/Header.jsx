@@ -45,14 +45,14 @@ const Header=()=>{
         <Nav/>
       </div>
       <div className={`w-full text-center flex flex-col fixed bg-white shadow-md ${block}`}>
-          <Link to={"/"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">サービス</Link>
+          <Link to={"/service"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">サービス</Link>
           {/* <Link to={"/mitsuke"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ウェブマる!</Link> */}
           <Link to={"/tools"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">スモハチツール</Link>
           <Link to={"/news"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">ニュース</Link>
           <Link to={"/column"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">コラム</Link>
           <Link to={"/business"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">事業概要</Link>
-          <Link to={"/policy"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">プライバシーポリシー</Link>
-          <Link to={"/terms"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">利用規約</Link>
+          {/* <Link to={"/policy"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">プライバシーポリシー</Link>
+          <Link to={"/terms"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2">利用規約</Link> */}
           <Link to={"/inquery"} className="py-3 hover:text-[#B40100] hover:transition-colors hover:bg-[#B40100] hover:text-white hover:px-2"> お問い合わせ</Link>
         </div>
     </div>

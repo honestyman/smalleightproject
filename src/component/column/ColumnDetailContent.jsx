@@ -76,8 +76,8 @@ const ColumnDetailContent = (props) => {
               <p className='text-xl text-[#191F4D] font-bold mx-5 sp:text-sm'>{oneColumnData.createdAt?oneColumnData.createdAt.slice(0,10):""}</p>
             </div>
             <p className='my-10 leading-loose tracking-wider sp:text-xs'>{oneColumnData.description}</p>
-            <div className='bg-[#f4f8f9] p-10 flex flex-col'>
-              <div className='flex items-center justify-center text-2xl py-5 text-[#191F4D]'>
+            <div className='bg-[#f4f8f9] p-10 flex flex-col sp:p-5'>
+              <div className='flex items-center justify-center text-2xl sp:text-xl py-5 text-[#191F4D]'>
                 <TfiMenuAlt  className='mr-2'/>
                 <p>目次</p>
               </div>
@@ -89,7 +89,7 @@ const ColumnDetailContent = (props) => {
                         <div className='rounded-full text-sm text-white p-2 bg-[#191F4D]'>
                           <span>{index1<=9?`0${index1+1}`:index1+1}</span>
                         </div>
-                        <h2 className='ml-2'>{section1.title}</h2>
+                        <h2 className='ml-2 sp:text-base'>{section1.title}</h2>
                       </MenuLink></Link>
                       {/* <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section1.description}</p> */}
                       {
@@ -97,8 +97,8 @@ const ColumnDetailContent = (props) => {
                           return(
                             <div key={index2}>
                               <Link><MenuLink to={`h3_${section2.id}`} smooth={true} duration={500}>
-                                <div className='w-full py-2 pl-20'>
-                                  <h3 className='text-base font-bold sp:text-[16px]'>- {section2.title}</h3>
+                                <div className='w-full py-2 pl-20 sp:pl-10'>
+                                  <h3 className='text-base font-bold sp:text-sm'>- {section2.title}</h3>
                                 </div>
                               </MenuLink></Link>
                               {/* <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section2.description}</p> */}
@@ -119,11 +119,11 @@ const ColumnDetailContent = (props) => {
                 oneColumnData.columnfirstchildren && oneColumnData.columnfirstchildren.map((section1, index1)=>{
                   return(
                     <div key={index1} id={`h2_${section1.id}`}>
-                      <div className='flex text-2xl font-bold text-[#191F4D] p-5 bg-[#f4f8f9] items-center sp:text-xl sp:pt-0'>
+                      <div className='flex text-2xl font-bold text-[#191F4D] px-5 py-2 bg-[#f4f8f9] items-center sp:text-xl sp:pt-0'>
                         <div className='rounded-full text-sm text-white p-3 bg-[#191F4D]'>
                             <SlArrowRight />
                         </div>
-                        <h2 className='ml-2'>{section1.title}</h2>
+                        <h2 className='ml-2 sp:text-xl'>{section1.title}</h2>
                       </div>
                       <p className='my-10 leading-loose tracking-wider sp:text-xs'>{section1.description}</p>
                       <div className='w-full flex justify-center py-5'>
@@ -157,7 +157,7 @@ const ColumnDetailContent = (props) => {
                 <p className='text-[#191F4D] text-xl font-bold mt-5'>スモハチツール</p>
                 <span className='my-5 lg:text-sm text-[#191F4D] sp:text-sm'>フリーのジェネレーターなど業務で<br/>役に立つWEBツールをご提供しています。</span>
                 <div ref={ref} className='w-full flex flex-col items-center'>
-                  <Link className='px-5 py-2 bg-white w-[200px] lg:w-[150px] rounded-md border shadow text-[#191F4D] lg:text-sm hover:border hover:text-white hover:bg-[#191F4D]'>スモハチツールへ</Link>
+                  <Link to={"/tools"} className='px-5 py-2 bg-white w-[200px] lg:w-[150px] rounded-md border shadow text-[#191F4D] lg:text-sm hover:border hover:text-white hover:bg-[#191F4D]'>スモハチツールへ</Link>
                   {/* <Link to="/mitsuke" className='px-5 py-2 bg-[#191F4D] w-[200px] lg:w-[150px] rounded-full text-white hover:border hover:text-[#191F4D] hover:bg-white'>質問に答える(無料)</Link>
                   <Link to="/mitsuke/partner" className='px-5 py-2 border-2 w-[200px] lg:w-[150px] rounded-full text-[#191F4D] my-5 hover:bg-[#191F4D] hover:text-white'>ご掲載希望はこちら</Link> */}
                 </div>

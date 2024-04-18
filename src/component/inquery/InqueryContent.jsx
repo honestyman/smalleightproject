@@ -64,7 +64,7 @@ const InqueryContent = () => {
   return (
     <div className='w-full bg-bg-[#f4f8f9] pt-20 pb-20'>
       <div className='w-full bg-white flex flex-col justify-center items-center pb-10'>
-          <p className='text-4xl font-bold mt-20 mb-10 text-[#B40100] sp:text-2xl'>お問い合わせ</p>
+          <h1 className='text-4xl font-bold mt-20 mb-10 text-[#B40100] sp:text-2xl'>お問い合わせ</h1>
           <div className={`w-[50%] sp:w-full text-[#191F4D] sp:px-10 sp:text-sm flex flex-col mx-auto`}>
             <div className='w-full flex flex-col my-5'>
               <div className='w-full flex'>

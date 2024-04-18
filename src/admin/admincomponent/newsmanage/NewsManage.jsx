@@ -12,7 +12,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../../../component/Pagination';
 import { Select } from "antd";
-import { getNewsList } from "../../../redux/slice/newsSlice";
+import { deleteOneNews, getNewsList } from "../../../redux/slice/newsSlice";
 
 const NewsManage=()=>{
   const dispatch = useDispatch();
@@ -34,10 +34,10 @@ const NewsManage=()=>{
   },[allNewsList]);
 
   const deleteFunction = (id) => {
-    // dispatch(deleteOneColumn(id)).then(() => {
-    //   dispatch(getColumnList());
-    //   setCurrentPage(1);
-    // })
+    dispatch(deleteOneNews(id)).then(() => {
+      dispatch(getNewsList());
+      setCurrentPage(1);
+    })
   }
 
   const indexOfLastRecord = currentPage*recordsPerPage;
@@ -49,7 +49,7 @@ const NewsManage=()=>{
     <div className="-webkit-fill-available h-[900px] bg-white shadow items-center py-10">
       <p className="text-xl font-bold">ニュース管理</p>
       <div className="w-full flex justify-end items-end px-20 pt-10">
-        <Link to={"column_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
+        <Link to={"news_add"} className='flex items-center text-sm text-white rounded-md bg-blue-700 mx-2 px-10 py-1 hover:bg-white hover:text-black hover:border'><IoAddCircleOutline className="font-bold mr-2" />新規登録</Link>
       </div>
       <div className="flex flex-col mx-10 h-[70%] text-sm overflow-y-auto">
         <div className="inline-block min-w-full px-10">
